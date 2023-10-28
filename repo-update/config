@@ -10,8 +10,8 @@
 
 sources=()
 inclusion_list="./inclusions.dat"
-target_root_base="/home/thall/dotfiles/"
-emacs_target_root="/home/thall/dotfiles/emacs/"
+target_root_base="${HOME}/dotfiles/"
+emacs_target_root="${HOME}/dotfiles/emacs/"
 
 
 # MSG STRINGS
@@ -24,7 +24,9 @@ diff_eq_msg="[INFO] Nothing to do: Files up to date."
 
 function read_paths() {
     if [ -e "$inclusion_list" ]; then
-	mapfile -t paths < "$inclusion_list"
+	while IFS= read -r line; do
+	    paths+=("$(eval echo "$line")")
+	done < "$inclusion_list"
     else
 	printf '[ERROR] Could not find inclusion list `%s`\n' "$inclusion_list"
 	exit 1
@@ -36,7 +38,7 @@ function verify_paths() {
 	if [ -e "$path" ]; then
 	    printf 'OK: `%s`\n' "$path"
 	else
-	    printf '[ERROR] Failed to verify file: `%s\`\n' "$path"
+	    printf '[ERROR] Failed to verify file: `%s`\n' "$path"
 	fi
     done
 
