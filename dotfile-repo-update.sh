@@ -9,6 +9,15 @@
 # TODO: Logging, maybe?
 # TODO: Make it work with lists of files
 #
+# 1. Parse external inclusion list
+# 2. Read paths and names into vars
+# 3. Read from external config (probably hardcoded to start)
+#   - target root dir
+#   - target file names
+# 4. Make funcs for path construction
+# 5. ?
+#
+#
 # thall.
 # <thall@thallheim.com>
 
