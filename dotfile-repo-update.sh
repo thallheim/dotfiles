@@ -1,25 +1,27 @@
 #!/bin/bash
 
-# For keeping my dotfile repo mostly in order (and not submoduled)
-# 
-# Uses `diff` and `stat` for comparisons.
-# `diff` is used as like a bool return. Its normal output is
-# redirected to /dev/null for now.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-# TODO: Logging, maybe?
-# TODO: Make it work with lists of files
-#
-# 1. Parse external inclusion list
-# 2. Read paths and names into vars
-# 3. Read from external config (probably hardcoded to start)
-#   - target root dir
-#   - target file names
-# 4. Make funcs for path construction
-# 5. ?
-#
-#
-# thall.
-# <thall@thallheim.com>
+#       For keeping my dotfile repo mostly in order (and not submoduled)
+#       
+#       Uses `diff` and `stat` for comparisons.
+#       `diff` is used as like a bool return. Its normal output is
+#       redirected to /dev/null for now.
+#      
+#       TODO: Logging, maybe?
+#       TODO: Make it work with lists of files
+#      
+#       1. Parse external inclusion list
+#       2. Read paths and names into vars
+#       3. Read from external config (probably hardcoded to start)
+#         - target root dir
+#         - target file names
+#       4. Make funcs for path construction
+#       5. ?
+#      
+#      
+#       thall.
+#       <thall@thallheim.com>
 
 
 # VARIABLES
