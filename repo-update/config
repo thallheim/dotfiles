@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# 'Config' for repo updater script
+#
+# thall.
+
+
+
+# VARIABLES/ARRAYS
+
+sources=()
+inclusion_list="./inclusions.dat"
+target_root_base="/home/thall/dotfiles/"
+emacs_target_root="/home/thall/dotfiles/emacs/"
+
+
+# MSG STRINGS
+copied_msg="[INFO] Source is newer. Target updated."
+error_target_newer="[ERROR] Target file is newer: Exiting..."
+warn_src_trgt_eq="[INFO] Nothing to do: Source and target have identical modification times."
+diff_eq_msg="[INFO] Nothing to do: Files up to date."
+
+# HELPERS
+
+function read_paths() {
+    if [ -e "$inclusion_list" ]; then
+	mapfile -t paths < "$inclusion_list"
+    else
+	printf '[ERROR] Could not find inclusion list `%s`\n' "$inclusion_list"
+	exit 1
+    fi
+}
+
+function verify_paths() {
+    for path in "${paths[@]}"; do
+	if [ -e "$path" ]; then
+	    printf 'OK: `%s`\n' "$path"
+	else
+	    printf '[ERROR] Failed to verify file: `%s\`\n' "$path"
+	fi
+    done
+
+
+}
