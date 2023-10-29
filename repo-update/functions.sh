@@ -54,7 +54,20 @@ function inclusion_list_exists() {
 }
 
 function check_target_paths() {
-    "TODO: Not implemented"
+    "TODO: Not finished"
+    local path="$1"
+    # exists and is a dir
+    if [ -e "$path" ] && [ -d "$path" ]; then
+	printf "[ERROR] Path exists, but is a directory\n"
+	exit 1
+    # exists and isn't a dir
+    elif [ -e "$path" ] && [ ! -d "$path" ]; then
+	return 0
+    # doesn't exist
+    else
+	printf "[ERROR] The path doesn't exist.\n"
+	exit 1
+    fi
 }
 
 function read_inc_list() {
