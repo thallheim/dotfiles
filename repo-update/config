@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# 'Config' for repo updater script
+# 'Config' for the dotfile repo updater script. Also contains helper functions
+# for the time being.
 #
 # thall.
 
