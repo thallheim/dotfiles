@@ -1,12 +1,15 @@
 # thallheim dotfiles
 
-Note: At init-time only does one specific file. Lists are next.
+Note: Subject to breaking changes without warning.
 
 
 # TODO
 
-- [ ] List input handling
-
+- [x] List input handling
+- [ ] Rewrite pre-op file checks
+- [ ] Allow multiple inclusion sources
+- [ ] Allow verbosity flag
+- [ ] Write help string(s)
 
 # CHANGELOG
 
