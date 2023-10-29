@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# 'Config' for the dotfile repo updater script. Also contains helper functions
-# for the time being.
+# Helper functions and string for the config repo updater script.
 #
-# thall.
-
+#
+# thall. <thall@thallheim.com>
 
 
 # VARIABLES/ARRAYS
