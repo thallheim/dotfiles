@@ -2,15 +2,16 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
+#       TODO: Proper description
 #       For keeping my dotfile repo mostly in order (and not submoduled).
+#       Also actually updated. 
 #       
 #      
 #       TODO: Logging, maybe?
-#       TODO: Make it work with lists of files
 #      
-#       1. Make funcs for path construction
-#       2. Reimplement file checks
-#       3. 
+#       1. Reimplement path checks
+#       2. Reimplement age checks
+#       3. Reimplement copy ops
 #      
 #      
 #       thall.
@@ -31,14 +32,6 @@ else
     echo "It's bwoken."
 fi
 
-# 1. Check src index exists
-# 2. Check src paths valid
-# 3. Create destination paths
-# 4. Read inclusion file(s)
-#   1. while read -r line; do into array
-#   2. for-loop array, copying files
-#   3. report
-#   
 
 # CHECK: diff
 #if diff "$emacs_target_filepath" "$emacs_file_src" &>/dev/null; then
