@@ -19,13 +19,26 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 source "config"
+error_detected=0
 
+inclusion_list_exists || error_detected=1
+read_inc_list || error_detected=1
+verify_src_paths || error_detected=1
 
-read_paths
-verify_paths
-printf 'Woo!\n'
+if [ "$error_detected" -eq 0 ]; then
+    echo "It wörks!"
+else
+    echo "It's bwoken."
+fi
 
-
+# 1. Check src index exists
+# 2. Check src paths valid
+# 3. Create destination paths
+# 4. Read inclusion file(s)
+#   1. while read -r line; do into array
+#   2. for-loop array, copying files
+#   3. report
+#   
 
 # CHECK: diff
 #if diff "$emacs_target_filepath" "$emacs_file_src" &>/dev/null; then
