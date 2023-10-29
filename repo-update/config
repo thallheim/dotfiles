@@ -10,8 +10,8 @@
 # VARIABLES/ARRAYS
 
 paths=()
-inclusion_list="./inclusions.dat"
-target_root_base="${HOME}/dotfiles/"
+inc_list="./inclusions.dat"
+target_root="${HOME}/dotfiles/"
 emacs_target_root="${HOME}/dotfiles/emacs/"
 
 
