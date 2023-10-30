@@ -6,7 +6,7 @@
 # thall. <thall@thallheim.com>
 
 
-# VARIABLES/ARRAYS
+# GLOBALS
 
 input_paths=()
 inc_list="./inclusions.dat"
