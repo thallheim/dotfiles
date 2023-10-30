@@ -2,7 +2,7 @@
 
 Personal dotfiles.
 
-Only implemented for Emacs while the updater script is unfinished.
+Only implemented for Emacs (and only partially) while the updater script is unfinished.
 
 *Subject to breaking changes without warning*
 
@@ -14,6 +14,7 @@ Only implemented for Emacs while the updater script is unfinished.
  - [ ] Time first or diff first?
 - [ ] Allow multiple inclusion sources
 - [ ] Allow verbosity flag
+- [ ] Allow flag to display full paths (i.e 'don't strip slugs')
 - [ ] Write help string(s)
 
 # CHANGELOG
