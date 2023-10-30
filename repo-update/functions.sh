@@ -42,19 +42,10 @@ src_paths_ok=false
 # HELPERS
 
 function strip_home_slug() {
-    local home_slug="$HOME"
-    local input=("$@")
-    local stripped=""
-
-    for string in "${input[@]}"; do
-	if [[ $string == $home_slug* ]]; then
-	    stripped+="${string#$home_slug}"
-	    echo "$stripped"
-	else
-	    stripped+="$string"
-	    echo "$string"
-	fi
-    done
+    local slug="$HOME""/"
+    local input="$1"
+    local result="${input//${slug}}"
+    printf "%s\n" "${result}"
 }
 
 function inclusion_list_exists() {
