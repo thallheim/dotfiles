@@ -61,7 +61,7 @@ function inclusion_list_exists() {
     if [[ -e "$inc_list" ]]; then
 	return 0
     else
-	printf "$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"" Could not read inclusion list:\n%s\n " "$inc_list"
+	printf "$red_cross""$error_label"" Could not read inclusion list:\n%s\n " "$inc_list"
 	return 1
     fi
 }
@@ -71,14 +71,15 @@ function check_target_paths() {
     local path="$1"
     # exists and is a dir
     if [ -e "$path" ] && [ -d "$path" ]; then
-	printf "$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"" Path exists, but is a directory\n"
+	printf "$error_label"" Path exists, but is a directory\n"
 	exit 1
     # exists and isn't a dir
     elif [ -e "$path" ] && [ ! -d "$path" ]; then
 	return 0
     # doesn't exist
     else
-	printf "$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"" The path doesn't exist.\n"
+	printf "$error_label"" Invalid path: "
+	printf "%s\n" "${path}"
 	exit 1
     fi
 }
@@ -89,7 +90,8 @@ function read_inc_list() {
 	    input_paths+=("$(eval echo "$line")")
 	done < "$inc_list"
     else
-	printf "$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"" Could not find inclusion list:\n'%s'\n" "$inc_list"
+	printf "$error_label"" Could not find inclusion list:\n"
+	printf "%s\n" "${inc_list}"
 	exit 1
     fi
 }
@@ -101,9 +103,9 @@ function verify_src_paths() {
     for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
 	    result=("$(strip_home_slug "$path")")
-	    printf "$green""\xE2\x9C\x93""$reset""$info_label"" %s\n" "${result[@]}"
+	    printf "$green_checkmark"" $info_label"" %s\n" "${result[@]}"
 	else
-	    printf "%s File not found: " "${error_label}"
+	    printf "$red_cross"" %s File not found: " "${error_label}"
 	    printf "'%s'\n" "${path}"
 	fi
     done
