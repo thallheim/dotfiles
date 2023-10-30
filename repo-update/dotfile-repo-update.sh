@@ -19,7 +19,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-source "config"
+source "./functions.sh"
 error_detected=0
 
 inclusion_list_exists || error_detected=1
