@@ -20,15 +20,18 @@ green=$(tput setaf 2)
 yellow=$(tput setaf 3)
 blue=$(tput setaf 4)
 cyan=$(tput setaf 6)
-reset=$(tput sgr0
+reset=$(tput sgr0)
 
 # MSG STRINGS
+cross="$red""\xE2\x9D\x8C""$reset"
+checkmark="$green""\xE2\x9C\x93""$reset"
+error_label="$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"
+info_label="[$cyan""INFO""$reset""]"
+warn_label="[$yellow""WARN""$reset""]"
 info_copied_msg='[\[$blue\]INFO\[$reset\]] Source is newer. Target updated.'
 error_target_newer="$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"" Target file is newer: Exiting..."
 warn_src_trgt_eq="[INFO] Nothing to do: Source and target have identical modification times."
 info_diff_eq_msg="[INFO] Nothing to do: Files up to date."
-
-)
 
 
 # CHECKS
@@ -97,9 +100,10 @@ function verify_src_paths() {
     for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
 	    result=("$(strip_home_slug "$path")")
-	    printf "$green""\xE2\x9C\x93""$reset"" [$cyan""INFO""$reset""]"" %s\n" "${result[@]}"
+	    printf "$green""\xE2\x9C\x93""$reset""$info_label"" %s\n" "${result[@]}"
 	else
-	    printf "$red""\xE2\x9D\x8C""$reset"" [$red""ERROR""$reset""]"" File not found: '%s'\n" "$path"
+	    printf "%s File not found: " "${error_label}"
+	    printf "'%s'\n" "${path}"
 	fi
     done
 
