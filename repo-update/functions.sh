@@ -15,10 +15,10 @@ emacs_target_root="${HOME}/dotfiles/emacs/"
 
 
 # MSG STRINGS
-copied_msg="[INFO] Source is newer. Target updated."
+info_copied_msg="[INFO] Source is newer. Target updated."
 error_target_newer="[ERROR] Target file is newer: Exiting..."
 warn_src_trgt_eq="[INFO] Nothing to do: Source and target have identical modification times."
-diff_eq_msg="[INFO] Nothing to do: Files up to date."
+info_diff_eq_msg="[INFO] Nothing to do: Files up to date."
 
 # CHECKS
 inc_list_ok=false
@@ -27,19 +27,17 @@ src_paths_ok=false
 # HELPERS
 
 function strip_home_slug() {
-    # Call with 'result=$(strip_home_slug "$path")
     local home_slug="$HOME"
-    local input="$1"
+    local input=("$@")
     local stripped=""
-    for string in "$input"; do
+
+    for string in "${input[@]}"; do
 	if [[ $string == $home_slug* ]]; then
-	    stripped+=("${string#$home_slug}")
+	    stripped+="${string#$home_slug}"
 	    echo "$stripped"
-	    return 0
 	else
-	    stripped+=("$string")
+	    stripped+="$string"
 	    echo "$string"
-	    return 0
 	fi
     done
 }
@@ -82,13 +80,16 @@ function read_inc_list() {
 }
 
 function verify_src_paths() {
+    local result=""
     printf "[INFO] Verifying sources\n"
     for path in "${paths[@]}"; do
 	if [ -e "$path" ]; then
-	    printf "[INFO] OK: %s\n" "$path"
+	    result=("$(strip_home_slug "$path")")
+	    printf "[INFO] OK: %s\n" "${result[@]}"
 	else
 	    printf "[ERROR] Requested file not found:\n'%s'\n" "$path"
 	    
 	fi
     done
+#    printf "[INFO] OK: %s\n" "${result[@]}"
 }
