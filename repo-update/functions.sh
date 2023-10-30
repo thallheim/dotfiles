@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Helper functions and string for the config repo updater script.
+# Helper functions and strings for the config repo updater script.
 #
 #
 # thall. <thall@thallheim.com>
@@ -8,7 +8,7 @@
 
 # VARIABLES/ARRAYS
 
-paths=()
+input_paths=()
 inc_list="./inclusions.dat"
 target_root="${HOME}/dotfiles/"
 emacs_target_root="${HOME}/dotfiles/emacs/"
@@ -71,7 +71,7 @@ function check_target_paths() {
 function read_inc_list() {
     if [ -e "$inc_list" ]; then
 	while IFS= read -r line; do
-	    paths+=("$(eval echo "$line")")
+	    input_paths+=("$(eval echo "$line")")
 	done < "$inc_list"
     else
 	printf "[ERROR] Could not find inclusion list:\n'%s'\n" "$inc_list"
@@ -82,7 +82,7 @@ function read_inc_list() {
 function verify_src_paths() {
     local result=""
     printf "[INFO] Verifying sources\n"
-    for path in "${paths[@]}"; do
+    for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
 	    result=("$(strip_home_slug "$path")")
 	    printf "[INFO] OK: %s\n" "${result[@]}"
