@@ -41,9 +41,9 @@ error_fatal=0
 
 # HELPERS
 function strip_home_slug() {
-    local slug="$HOME""/"
+    local slug="$HOME"
     local input="$1"
-    local result="${input/${slug}}"
+    local result="${input/${slug}/\~}"
     printf "%s\n" "${result}"
 }
 
@@ -83,11 +83,12 @@ function verify_src_paths() {
 
     for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
-	    path_stripped=("$(strip_home_slug "$path")")
+	    local path_stripped=("$(strip_home_slug "$path")")
 	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	else
+	    local notfound_stripped=("$(strip_home_slug "$path")")
 	    # TODO: Shove any error(s) into an array
-	    exit_nonfatal "File not found: " "'${path}'"
+	    exit_nonfatal "File not found: " "'${notfound_stripped}'"
 	fi
     done
 }
