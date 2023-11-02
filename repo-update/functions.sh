@@ -112,22 +112,21 @@ function exit_nonfatal() {
     printf "\t%s %s %s\n" "  -" "$1" "$2"
 
     # Check whether to display error counter
-    if [ "$arg1" = "-ec" ]; then
-	print_error_count
-    fi
+#    if [ "$arg1" = "-ec" ]; then
+#	print_error_count
+#    fi
     exit_done
 }
 
-
 function exit_fatal() {
-    # Print error, increment error counter
+
+    # Print error, increment error counter (and if it's been called)
     printf "$red_cross $error_label "
     printf "%s %s\n" "$1" "$2"
     ((error_fatal++))
 
-    # Check whether to display error counter
-    if [ "$arg1" = "-ec" ]; then
-	print_error_count
-    fi
+#    if [ "$arg1" = "-ec" ]; then
+#	print_error_count
+#    fi
     exit 1
 }
