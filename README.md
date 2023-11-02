@@ -10,12 +10,16 @@ Only implemented for Emacs (and only partially) while the updater script is unfi
 # TODO
 
 - [x] List input handling
-- [/] Rewrite pre-op file checks
- - [ ] Time first or diff first?
+- [ ] Nested list input handling
+- [x] Rewrite pre-op file checks
+   - [ ] Time first or diff first?
+   - [ ] Ask whether to proceed if not all sources could be verified
 - [ ] Allow multiple inclusion sources
-- [ ] Allow verbosity flag
+- [x] Allow error verbosity flag
+- [ ] Transform absolute paths from `verify_src_paths` (i.e 'home/blah/..' -> '~/..')
 - [ ] Allow flag to display full paths (i.e 'don't strip slugs')
 - [ ] Write help string(s)
+- [ ] 'Proper' arg parsing. getopt?
 
 # CHANGELOG
 
