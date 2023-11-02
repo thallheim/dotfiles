@@ -61,7 +61,7 @@ function strip_home_slug() {
 #    else
 #	printf "$error_label"" Invalid path: "
 #	printf "%s\n" "${path}"
-#	let "error_fatal++"
+#	((error_fatal++))
 #    fi
 #}
 
@@ -99,7 +99,6 @@ function print_error_count() {
     printf "\n"
     printf " %s Fatal:\t%d\n" '-' "$error_fatal"
     printf " %s Non-fatal:\t%d\n" '-' "$error_nonfatal"
-    printf "\n"
 }
 
 function exit_done() {
@@ -109,7 +108,7 @@ function exit_done() {
 
 function exit_nonfatal() {
 
-    let "error_nonfatal++"
+    ((error_nonfatal++))
     printf "$warn_triangle $warn_label ${bold}Finished, but encountered non-fatal error(s):\n${end_bold}"
     printf "\t%s %s %s\n" "  -" "$1" "$2"
 
@@ -125,7 +124,7 @@ function exit_fatal() {
     # Print error, increment error counter
     printf "$red_cross $error_label "
     printf "%s %s\n" "$1" "$2"
-    let "error_fatal++"
+    ((error_fatal++))
 
     # Check whether to display error counter
     if [ "$arg1" = "-ec" ]; then
