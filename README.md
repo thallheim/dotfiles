@@ -9,6 +9,7 @@ Only implemented for Emacs (and only partially) while the updater script is unfi
 
 # TODO
 
+- [ ] Allow dry-run
 - [x] List input handling
 - [ ] Nested list input handling
 - [x] Rewrite pre-op file checks
@@ -17,7 +18,7 @@ Only implemented for Emacs (and only partially) while the updater script is unfi
 - [ ] Allow multiple inclusion sources
 - [ ] Allow flag to display full paths (i.e 'don't strip slugs')
 - [ ] Write help string(s)
-- [ ] 'Proper' arg parsing. getopt?
+- [ ] 'Proper' arg parsing. getopt? Just `shift` & `case`?
 - [x] Allow error verbosity flag
 	- [ ] Rework after 'proper' arg parsing is implemented
 - [x] Transform absolute paths from `verify_src_paths` (i.e 'home/blah/..' -> '~/..')
