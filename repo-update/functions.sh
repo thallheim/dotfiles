@@ -85,7 +85,7 @@ function verify_src_paths() {
     for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
 	    path_stripped=("$(strip_home_slug "$path")")
-	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
+	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped}"
 	    verified_paths+="${result[@]}"
 	else
 	    # TODO: Shove any error(s) into an array
