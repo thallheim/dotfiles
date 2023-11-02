@@ -79,14 +79,12 @@ function read_inc_list() {
 
 function verify_src_paths() {
     local result=""
-    local verified_paths=()
     printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
 
     for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
 	    path_stripped=("$(strip_home_slug "$path")")
-	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped}"
-	    verified_paths+="${result[@]}"
+	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	else
 	    # TODO: Shove any error(s) into an array
 	    exit_nonfatal "File not found: " "'${path}'"
