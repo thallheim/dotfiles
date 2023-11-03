@@ -8,10 +8,6 @@ true
 # thall. <thall@thallheim.com>
 
 
-# ARGV
-#arg1="$1"
-
-
 # GLOBALS
 input_paths=()
 #inc_list="${HOME}/dotfiles/repo-update/TESTING_AND_SUCH_MMMKAY"
@@ -22,22 +18,18 @@ inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 
 # COLOURS
 # Using `tput`. Named colours are:
-# black, red, green, yellow, blue, cyan, plus 'reset'
+# [black, red, green, yellow, blue, cyan, plus 'reset']
 # shellcheck source=./colours.sh
 source "./colours.sh"
 
 
 # "ICONS" (UTF-8) & LABELS/MSG STRINGS
-# red_cross, green_checkmark, info_arrow
-# error_label, info_label, warn_label
-# info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg
+# [red_cross, green_checkmark, info_arrow],[error_label, info_label, warn_label]
+# [info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg]
 source "./labels_strings_styles.sh"
 
-
-# ERROR FLAGS
-# UNUSED: opt_print_error_details=false
-#error_nonfatal=0
-#error_fatal=0
+# ERROR HANDLERS & FLAGS
+source "./errors.sh"
 
 
 # HELPERS
@@ -50,14 +42,12 @@ function strip_home_slug() {
 
 # Get, and cd to, script's dir in case it's called from elsewhere
 function cd_own_dir(){
-    local script_dir=""
-    script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    cd "$script_dir" || exit_fatal "DIR CHANGE FAILED"
+    local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    cd "$dir" || exit_fatal "DIR CHANGE FAILED"
 }
 
 get_own_dir() {
-    local dir=""
-    dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     printf "%s" "$dir"
 }
 
