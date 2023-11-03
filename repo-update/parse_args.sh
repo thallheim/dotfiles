@@ -17,9 +17,12 @@ flag_verbose=false
 flag_status=false
 flag_help=false
 
-
-while [ "$#" -gt 0 ]; do
-    case "$1" in
+function parse_args() {
+    while [ "$#" -gt 0 ]; do
+	case "$1" in
+	-t | --test)
+	    printf "yo\n"
+	    ;;
 	-h | --help)
 	    flag_help=true
 	    printf "H"
@@ -39,7 +42,8 @@ while [ "$#" -gt 0 ]; do
 	*)
 	    exit_fatal "Invalid option: $1"
 	    ;;
-    esac
-    shift
-done
+	esac
+
+    done
+}
 

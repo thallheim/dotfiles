@@ -30,5 +30,7 @@ source "./functions.sh"
 # TODO: Remove: Debug only
 #printf "ARGV[1] PASSED = \t%s\n\n" "$arg1"
 
+source "./parse_args.sh"
+parse_args
 read_inc_list
 verify_src_paths
