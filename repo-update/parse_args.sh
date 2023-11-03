@@ -21,7 +21,8 @@ function parse_args() {
     while [ "$#" -gt 0 ]; do
 	case "$1" in
 	-t | --test)
-	    printf "yo\n"
+	    printf "TESTING YO\n"
+	    exit_done
 	    ;;
 	-h | --help)
 	    flag_help=true
@@ -30,14 +31,13 @@ function parse_args() {
 	    ;;
 	-v | --verbose)
 	    flag_verbose=true
-	    printf "V"
-	    exit_done
-	    #shift
+	    warn "TODO: Verbosity not implemented"
+	    #exit_done
+	    shift
 	    ;;
 	-s | --status)
 	    flag_status=true
-	    printf "S\n"
-	    exit_fatal "TODO: STATUS not implemented"
+	    exit_fatal "TODO: Status not implemented"
 	    ;;
 	*)
 	    exit_fatal "Invalid option: $1"
