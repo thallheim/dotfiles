@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=1091,2154,2059 # 'source-path=SCRIPTDIR' isn't working
+true
 
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #
@@ -20,17 +22,14 @@
 #
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
-# Get, and cd to, script's dir in case it's called from elsewhere
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$script_dir"
-
-
 source "./functions.sh"
-# TODO: Remove: Debug only
-#printf "ARGV[1] PASSED = \t%s\n\n" "$arg1"
-
 source "./parse_args.sh"
-parse_args
+
+
+# Get, and cd to, script's dir in case it's called from somewhere else
+cd_own_dir
+
+
+parse_args "$@"
 read_inc_list
 verify_src_paths

@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=1091,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
+true
 
 # Helper functions etc. for the dotfile repo updater script.
 #
@@ -21,6 +23,7 @@ inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 # COLOURS
 # Using `tput`. Named colours are:
 # black, red, green, yellow, blue, cyan, plus 'reset'
+# shellcheck source=./colours.sh
 source "./colours.sh"
 
 
@@ -43,6 +46,19 @@ function strip_home_slug() {
     local input="$1"
     local result="${input/${slug}/\~}"
     printf "%s\n" "${result}"
+}
+
+# Get, and cd to, script's dir in case it's called from elsewhere
+function cd_own_dir(){
+    local script_dir=""
+    script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    cd "$script_dir" || exit_fatal "DIR CHANGE FAILED"
+}
+
+get_own_dir() {
+    local dir=""
+    dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    printf "%s" "$dir"
 }
 
 #function check_target_paths() {
@@ -78,13 +94,13 @@ function read_inc_list() {
 function verify_src_paths() {
     local result=""
     printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
-
     for path in "${input_paths[@]}"; do
 	if [ -e "$path" ]; then
 	    local path_stripped=("$(strip_home_slug "$path")")
 	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	else
-	    local notfound_stripped=("$(strip_home_slug "$path")")
+	    local notfound_stripped=""
+	    notfound_stripped="$(strip_home_slug "$path")"
 	    # TODO: Shove any error(s) into an array
 	    exit_nonfatal "File not found: " "'${notfound_stripped}'"
 	fi
@@ -92,7 +108,7 @@ function verify_src_paths() {
 }
 
 function print_error_count() {
-    local err_count="$(($error_fatal + $error_nonfatal))"
+    local err_count="$((error_fatal + error_nonfatal))"
 
     printf "\nErrors total:\t%d""$err_count"
     printf "\n"
@@ -100,8 +116,12 @@ function print_error_count() {
     printf " %s Non-fatal:\t%d\n" '-' "$error_nonfatal"
 }
 
+function warn() {
+    printf "$warn_triangle $warn_label %s\n" "$1"
+}
+
 function exit_done() {
-    printf "\n$info_arrow"" $info_label""$bold"" Done. Exiting...\n""$end_bold"
+    printf "\n$info_arrow $info_label ${bold}Done. Exiting...\n${end_bold}"
     exit 0
 }
 
