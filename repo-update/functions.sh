@@ -7,7 +7,7 @@
 
 
 # ARGV
-arg1="$1"
+#arg1="$1"
 
 
 # GLOBALS
@@ -19,14 +19,12 @@ inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 
 
 # COLOURS
-#
 # Using `tput`. Named colours are:
 # black, red, green, yellow, blue, cyan, plus 'reset'
 source "./colours.sh"
 
 
 # "ICONS" (UTF-8) & LABELS/MSG STRINGS
-#
 # red_cross, green_checkmark, info_arrow
 # error_label, info_label, warn_label
 # info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg
@@ -35,8 +33,8 @@ source "./labels_strings_styles.sh"
 
 # ERROR FLAGS
 # UNUSED: opt_print_error_details=false
-error_nonfatal=0
-error_fatal=0
+#error_nonfatal=0
+#error_fatal=0
 
 
 # HELPERS
