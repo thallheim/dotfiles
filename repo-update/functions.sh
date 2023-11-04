@@ -11,10 +11,13 @@ true
 # GLOBALS
 input_paths=()
 input_paths_validated=()
+dst_dirs_validated=()
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 # UNUSED: target_root="${HOME}/dotfiles/"
 # UNUSED: target_root_emacs="${HOME}/dotfiles/emacs/"
 
+# CHECKS
+src_paths_ok=false
 
 # COLOURS
 # Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
@@ -84,6 +87,7 @@ function verify_src_paths() {
     printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
     for path in "${input_paths[@]}"; do
 	if [ -r "$path" ]; then
+	    input_paths_validated+=("$path")
 	    local path_stripped=("$(strip_home_slug "$path")")
 	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	else
@@ -92,31 +96,36 @@ function verify_src_paths() {
 	    # TODO: Shove any error(s) into an array
 	    exit_nonfatal "File not found: " "'${notfound_stripped}'"
 	fi
+	src_paths_ok=true
     done
 }
 
 verify_dst_paths() {
-    if [ -e "${input_paths[0]}" ]; then
-	#printf "[DBG] %s\n" "Paths exist: do not read inclusion list"
+    if [ -e "${input_paths_validated[0]}" ]; then
+	printf "[DBG] %s\n" "Paths exist: do not read inclusion list"
 	return
     else
-	#printf "[DBG] %s\n" "No paths: read inclusion list"
+	printf "[DBG] %s\n" "No paths: read inclusion list"
 	read_inc_list
+	
     fi
-    # Validate the paths
-    for path in "${input_paths[@]}"; do
-	if [ -r "$path" ]; then
-	    input_paths_validated+=("$path")
-	    #printf "[DBG] Validated:  %s\n" "$path"
 
-	else
-	    ((error_nonfatal++))
-	    warn "Invalid path" "${path}"
+    if [ ! src_paths_ok == true ]; then
+	verify_src_paths
+	src_paths_ok=true
+    else
+	return
+    fi
+
+    for path in "${input_paths_validated[@]}"; do
+	local dir=$(dirname ${path})
+	if [[ ! " ${input_paths_validated[@]} " =~ " $dir " ]]; then
+	    dst_dirs_validated+=("$dir")
 	fi
     done
 
-    for path in "${input_paths_validated[@]}"; do
-    printf "[DBG]: %s\n" "$path"
+    for dir in "${dst_dirs_validated[@]}"; do
+    printf "[DBG] Valid dir: %s\n" "$dir"
     done
     exit_done
 }
