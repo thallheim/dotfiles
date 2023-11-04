@@ -9,6 +9,8 @@ Only implemented for Emacs (and only partially) while the updater script is unfi
 
 # TODO
 
+- [ ] Decide what needs refactoring into a settings file
+- [ ] Do `pushd` & `popd` on start and end of run
 - [ ] Allow dry-run
 - [x] List input handling
 - [ ] Nested list input handling
