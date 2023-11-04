@@ -12,7 +12,7 @@ function print_error_count() {
 }
 
 function warn() {
-    printf "$warn_triangle $warn_label %s\n" "$1"
+    printf "$warn_triangle $warn_label %s: %s\n" "$1" "$2"
 }
 
 function exit_done() {
