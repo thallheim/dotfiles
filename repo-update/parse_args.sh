@@ -21,8 +21,8 @@ function parse_args() {
     while [ "$#" -gt 0 ]; do
 	case "$1" in
 	-t | --test)
-	    printf "TESTING YO\n"
-	    exit_done
+	    verify_dst_paths
+	    shift
 	    ;;
 	-h | --help)
 	    flag_help=true

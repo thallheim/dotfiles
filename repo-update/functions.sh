@@ -10,15 +10,14 @@ true
 
 # GLOBALS
 input_paths=()
-#inc_list="${HOME}/dotfiles/repo-update/TESTING_AND_SUCH_MMMKAY"
+input_paths_validated=()
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 # UNUSED: target_root="${HOME}/dotfiles/"
-# UNUSED: emacs_target_root="${HOME}/dotfiles/emacs/"
+# UNUSED: target_root_emacs="${HOME}/dotfiles/emacs/"
 
 
 # COLOURS
-# Using `tput`. Named colours are:
-# [black, red, green, yellow, blue, cyan, plus 'reset']
+# Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
 # shellcheck source=./colours.sh
 source "./colours.sh"
 
@@ -82,10 +81,9 @@ function read_inc_list() {
 }
 
 function verify_src_paths() {
-    local result=""
     printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
     for path in "${input_paths[@]}"; do
-	if [ -e "$path" ]; then
+	if [ -r "$path" ]; then
 	    local path_stripped=("$(strip_home_slug "$path")")
 	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	else
@@ -96,4 +94,31 @@ function verify_src_paths() {
 	fi
     done
 }
+
+verify_dst_paths() {
+    if [ -e "${input_paths[0]}" ]; then
+	#printf "[DBG] %s\n" "Paths exist: do not read inclusion list"
+	return
+    else
+	#printf "[DBG] %s\n" "No paths: read inclusion list"
+	read_inc_list
+    fi
+    # Validate the paths
+    for path in "${input_paths[@]}"; do
+	if [ -r "$path" ]; then
+	    input_paths_validated+=("$path")
+	    #printf "[DBG] Validated:  %s\n" "$path"
+
+	else
+	    ((error_nonfatal++))
+	    warn "Invalid path" "${path}"
+	fi
+    done
+
+    for path in "${input_paths_validated[@]}"; do
+    printf "[DBG]: %s\n" "$path"
+    done
+    exit_done
+}
+
 

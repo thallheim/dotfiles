@@ -13,23 +13,23 @@ true
 #       will not be read. TODO: Work out why.
 #       
 #      
-#       TODO: Logging, maybe?
 #      
-#      
-#      
-#       thall.
-#       <thall@thallheim.com>
+#       thall.						
+#
 #
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 source "./functions.sh"
 source "./parse_args.sh"
 
-
 # Get, and cd to, script's dir in case it's called from somewhere else
 cd_own_dir
-
 
 parse_args "$@"
 read_inc_list
 verify_src_paths
+# TODO: Check and/or create dst dirs
+
+# TODO: Copy the lot
+
+# TODO: 
