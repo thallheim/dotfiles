@@ -48,30 +48,14 @@ function cd_own_dir(){
     cd "$dir" || exit_fatal "DIR CHANGE FAILED"
 }
 
-get_own_dir() {
+# In case it's needed later
+function get_own_dir() {
     local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     printf "%s" "$dir"
 }
 
-#function check_target_paths() {
-#    "TODO: Not finished"
-#    local path="$1"
-#    # exists and is a dir
-#    if [ -e "$path" ] && [ -d "$path" ]; then
-#	printf "$error_label"" Path exists, but is a directory\n"
-#	error_fatal=1
-#    # exists and isn't a dir
-#    elif [ -e "$path" ] && [ ! -d "$path" ]; then
-#	return 0
-#    # doesn't exist
-#    else
-#	printf "$error_label"" Invalid path: "
-#	printf "%s\n" "${path}"
-#	((error_fatal++))
-#    fi
-#}
-
-function read_inc_list() {
+# Check that the inclusion list exists and read it into input_paths[]
+function get_src_paths() {
     if [ -e "$inc_list" ]; then
 	while IFS= read -r line; do
 	    input_paths+=("$(eval echo "$line")")
