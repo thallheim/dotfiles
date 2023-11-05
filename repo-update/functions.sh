@@ -13,7 +13,7 @@ input_paths=()
 input_paths_validated=()
 dst_dirs_validated=()
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
-dst_root="${HOME}/dotfiles/"
+dst_root="${HOME}/dotfiles"
 # UNUSED: dst_root_emacs="${HOME}/dotfiles/emacs/"
 
 # FLAGS
@@ -96,4 +96,11 @@ function verify_dst_root_perms() {
 	exit_fatal "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
     fi
     return
+}
+
+
+function copy_all() {
+    for file in "${input_paths_validated[@]}"; do
+	cp -R "$file" "${dst_root}/temp/"
+    done
 }

@@ -23,13 +23,13 @@ function parse_args() {
 	-v | --verbose)
 	    flag_verbose=true
 	    warn "TODO: Verbosity not implemented"
-	    #exit_done
 	    shift
 	    ;;
 	-t | --test)
 	    get_src_paths
 	    verify_src_paths
 	    verify_dst_root_perms
+	    copy_all
 	    shift
 	    ;;
 	-h | --help)
