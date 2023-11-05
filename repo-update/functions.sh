@@ -67,51 +67,32 @@ function get_src_paths() {
     fi
 }
 
+# Verify src files are readable
 function verify_src_paths() {
     printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
     for path in "${input_paths[@]}"; do
 	if [ -r "$path" ]; then
 	    input_paths_validated+=("$path")
-	    local path_stripped=("$(strip_home_slug "$path")")
-	    printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
+	    #local path_stripped=("$(strip_home_slug "$path")")
+	    #printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	else
 	    local notfound_stripped=""
 	    notfound_stripped="$(strip_home_slug "$path")"
 	    # TODO: Shove any error(s) into an array
-	    exit_nonfatal "File not found: " "'${notfound_stripped}'"
+	    warn "${bold}File not found${end_bold}" "'${notfound_stripped}'"
 	fi
 	src_paths_ok=true
     done
 }
 
-verify_dst_paths() {
-    if [ -e "${input_paths_validated[0]}" ]; then
-	printf "[DBG] %s\n" "Paths exist: do not read inclusion list"
-	return
+# Verify dst root is writable
+function verify_dst_root_perms() {
+    if [ -w "$dst_root" ]; then
+	dst_root_writable=true
+	# DEBUG:
+	info "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
     else
-	printf "[DBG] %s\n" "No paths: read inclusion list"
-	read_inc_list
-	
+	exit_fatal "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
     fi
-
-    if [ ! src_paths_ok == true ]; then
-	verify_src_paths
-	src_paths_ok=true
-    else
-	return
-    fi
-
-    for path in "${input_paths_validated[@]}"; do
-	local dir=$(dirname ${path})
-	if [[ ! " ${input_paths_validated[@]} " =~ " $dir " ]]; then
-	    dst_dirs_validated+=("$dir")
-	fi
-    done
-
-    for dir in "${dst_dirs_validated[@]}"; do
-    printf "[DBG] Valid dir: %s\n" "$dir"
-    done
-    exit_done
+    return
 }
-
-
