@@ -2,6 +2,22 @@
 # shellcheck disable=1091,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
 true
 
+function info() {
+    if [ "$#" -gt 1 ]; then
+	printf "$info_label %s: %s\n" "$1" "$2"
+    elif [ "$#" -eq 1 ]; then
+	printf "${info_arrow} ${info_label} %s\n" "$1"
+    fi
+}
+
+function warn() {
+    if [ "$#" -gt 1 ]; then
+	printf "$warn_triangle $warn_label %s: %s\n" "$1" "$2"
+    elif [ "$#" -eq 1 ]; then
+	printf "$warn_triangle $warn_label %s\n" "$1"
+    fi
+}
+
 function print_error_count() {
     local err_count="$((error_fatal + error_nonfatal))"
 
@@ -9,10 +25,6 @@ function print_error_count() {
     printf "\n"
     printf " %s Fatal:\t%d\n" '-' "$error_fatal"
     printf " %s Non-fatal:\t%d\n" '-' "$error_nonfatal"
-}
-
-function warn() {
-    printf "$warn_triangle $warn_label %s: %s\n" "$1" "$2"
 }
 
 function exit_done() {
