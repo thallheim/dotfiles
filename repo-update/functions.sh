@@ -13,20 +13,21 @@ input_paths=()
 input_paths_validated=()
 dst_dirs_validated=()
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
-# UNUSED: target_root="${HOME}/dotfiles/"
-# UNUSED: target_root_emacs="${HOME}/dotfiles/emacs/"
+dst_root="${HOME}/dotfiles/"
+# UNUSED: dst_root_emacs="${HOME}/dotfiles/emacs/"
 
-# CHECKS
+# FLAGS
 src_paths_ok=false
+dst_root_writable=false
 
 # COLOURS
 # Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
-# shellcheck source=./colours.sh
 source "./colours.sh"
 
 
 # "ICONS" (UTF-8) & LABELS/MSG STRINGS
-# [red_cross, green_checkmark, info_arrow],[error_label, info_label, warn_label]
+# [red_cross, green_checkmark, info_arrow]
+# [error_label, info_label, warn_label]
 # [info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg]
 source "./labels_strings_styles.sh"
 
