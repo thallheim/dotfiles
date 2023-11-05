@@ -9,6 +9,7 @@ Only implemented for Emacs (and only partially) while the updater script is unfi
 
 # TODO
 
+- [ ] Main copy ops
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Do `pushd` & `popd` on start and end of run
 - [ ] Allow dry-run
@@ -20,7 +21,6 @@ Only implemented for Emacs (and only partially) while the updater script is unfi
 - [ ] Allow multiple inclusion sources
 - [ ] Allow flag to display full paths (i.e 'don't strip slugs')
 - [ ] Write help string(s)
-- [ ] 'Proper' arg parsing. getopt? Just `shift` & `case`?
 - [x] Allow error verbosity flag
 	- [ ] Rework after 'proper' arg parsing is implemented
 - [x] Transform absolute paths from `verify_src_paths` (i.e 'home/blah/..' -> '~/..')
