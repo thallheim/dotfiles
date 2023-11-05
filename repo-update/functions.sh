@@ -13,7 +13,7 @@ input_paths=()
 input_paths_validated=()
 dst_dirs_validated=()
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
-dst_root="${HOME}/dotfiles"
+dst_root="${HOME}/dotfiles/temp/"
 # UNUSED: dst_root_emacs="${HOME}/dotfiles/emacs/"
 
 # FLAGS
@@ -93,14 +93,24 @@ function verify_dst_root_perms() {
 	# DEBUG:
 	info "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
     else
-	exit_fatal "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
+	exit_fatal "${bold}Destination path writable:${end_bold} ${dst_root_writable}" "$dst_root"
     fi
-    return
 }
 
+function dirtest() {
+    mkdir -p -v "${dst_root}"
+}
 
 function copy_all() {
+    if [ "$dst_root_writable" == true ]; then
+	printf "create dst root\n"
+	mkdir -p -v "${dst_root}"
+    else
+	printf "no need to create dst root\n"
+    fi
     for file in "${input_paths_validated[@]}"; do
-	cp -R "$file" "${dst_root}/temp/"
+	#printf "file: %s\n" "$file"
+	cp -r "$file" "${dst_root}"
     done
+    #echo "YOOO\n" >> "${dst_root}/YO.txt"
 }

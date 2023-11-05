@@ -32,6 +32,11 @@ function parse_args() {
 	    copy_all
 	    shift
 	    ;;
+	-d | --dirtest)
+	    dirtest
+	    shift
+	    ;;
+
 	-h | --help)
 	    flag_help=true
 	    printf "H"
