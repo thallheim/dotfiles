@@ -39,8 +39,9 @@ source "./errors.sh"
 function strip_home_slug() {
     local slug="$HOME"
     local input="$1"
-    local result="${input/${slug}/\~}"
-    printf "%s\n" "${result}"
+    local slug_stripped="${input/${slug}}"
+    local result="${slug_stripped#\/}"
+    printf "%s" "${result}"
 }
 
 # Get, and cd to, script's dir in case it's called from elsewhere
@@ -97,8 +98,33 @@ function verify_dst_root_perms() {
     fi
 }
 
-function dirtest() {
-    mkdir -p -v "${dst_root}"
+function get_dst_dirs() {
+    for path in "${input_paths_validated[@]}"; do
+	local file stripped=""
+	local result=""
+	local pre_stripped=""
+
+	file_stripped="$(dirname $path)"
+	home_stripped="$(strip_home_slug "${file_stripped}")"
+	result="$file_stripped"
+#	if [[ ! "$result" = "~" ]]; then
+#	    if [[ ! "$result" =~ "q"  ]]; then
+#	    printf "To create: %s\n" "$result"
+#	    dst_dirs_validated+=("$result")
+#	    fi
+#	fi
+	printf "To create: %s\n" "$result"
+	dst_dirs_validated+=("$result")
+    done
+}
+
+function mk_dst_dirs() {
+    for path in "${dst_dirs_validated[@]}"; do
+	local dir=""
+	dir="$path"
+	#mkdir -p "${dst_root}/${dir}"
+	printf "[DBG] Dir create: %s \n" "${dst_root}${dir}"
+    done
 }
 
 function copy_all() {

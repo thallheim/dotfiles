@@ -29,11 +29,13 @@ function parse_args() {
 	    get_src_paths
 	    verify_src_paths
 	    verify_dst_root_perms
-	    copy_all
+	    get_dst_dirs
+	    mk_dst_dirs
+	    #copy_all
 	    shift
 	    ;;
 	-d | --dirtest)
-	    dirtest
+	    mk_dst_dirs
 	    shift
 	    ;;
 
