@@ -28,7 +28,6 @@ function parse_args() {
 	-t | --test)
 	    get_src_paths
 	    verify_src_paths
-	    verify_dst_root_perms
 	    get_dst_dirs
 	    mk_dst_dirs
 	    #copy_all

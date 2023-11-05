@@ -109,7 +109,8 @@ function verify_src_paths() {
     done
 }
 
-# Verify dst root is writable
+# TODO: Remove, probably. Feels mighty redundant.
+# Verify dst root is writable 
 function verify_dst_root_perms() {
     if [ -w "$dst_root" ]; then
 	dst_root_writable=true
@@ -120,6 +121,7 @@ function verify_dst_root_perms() {
     fi
 }
 
+# Get folder structure from validated input paths
 function get_dst_dirs() {
     for path in "${input_paths_validated[@]}"; do
 	#printf "RAW PATH: %s\n" "${path}"
@@ -130,7 +132,7 @@ function get_dst_dirs() {
 	if [[ ! "$file_stripped" = "${HOME}" ]]; then
 	    result="$file_stripped"
 	    dst_dirs_validated+=("$result")
-	    printf "To create: %s\n" "$result"
+	    printf "Folder structure valid: %s\n" "$result"
 	else
 	    warn "[DBG] Ignore directory" "$file_stripped"
 	fi
@@ -139,22 +141,26 @@ function get_dst_dirs() {
     #dst_dirs_validated=("$(filter_duplicate_dst_dirs "${dst_dirs_validated[@]}")")
 }
 
+# Check if dst dirs exist and create as necessary
 function mk_dst_dirs() {
+    if [[ ! -d "$dst_root" ]]; then
+	mkdir -p -v "${dst_root}"
+	# TODO: DEBUG/VERBOSE:
+	printf "created dst root\n"
+    else
+	printf "dst root exists\n"
+    fi
+ 
     for path in "${dst_dirs_validated[@]}"; do
 	local dir=""
 	dir="$(strip_home_slug "$path")"
-	#mkdir -p "${dst_root}/${dir}"
+	mkdir -p "${dst_root}${dir}"
 	printf "[DBG] Dir create: %s \n" "${dst_root}${dir}"
     done
 }
 
 function copy_all() {
-    if [ "$dst_root_writable" == true ]; then
-	printf "create dst root\n"
-	mkdir -p -v "${dst_root}"
-    else
-	printf "no need to create dst root\n"
-    fi
+    
     for file in "${input_paths_validated[@]}"; do
 	#printf "file: %s\n" "$file"
 	cp -r "$file" "${dst_root}"
