@@ -15,25 +15,27 @@ Short	Long		Descr.
 
 flag_verbose=false
 flag_status=false
-flag_help=false
+export flag_help=false
 
 function parse_args() {
     while [ "$#" -gt 0 ]; do
 	case "$1" in
+	-v | --verbose)
+	    flag_verbose=true
+	    warn "TODO: Verbosity not implemented"
+	    #exit_done
+	    shift
+	    ;;
 	-t | --test)
-	    verify_dst_paths
+	    get_src_paths
+	    verify_src_paths
+	    verify_dst_root_perms
 	    shift
 	    ;;
 	-h | --help)
 	    flag_help=true
 	    printf "H"
 	    exit_done
-	    ;;
-	-v | --verbose)
-	    flag_verbose=true
-	    warn "TODO: Verbosity not implemented"
-	    #exit_done
-	    shift
 	    ;;
 	-s | --status)
 	    flag_status=true
