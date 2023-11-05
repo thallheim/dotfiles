@@ -12,6 +12,7 @@ true
 input_paths=()
 input_paths_validated=()
 dst_dirs_validated=()
+home_slug="${HOME}"
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 dst_root="${HOME}/dotfiles/temp/"
 # UNUSED: dst_root_emacs="${HOME}/dotfiles/emacs/"
@@ -56,7 +57,24 @@ function get_own_dir() {
     printf "%s" "$dir"
 }
 
-# Check that the inclusion list exists and read it into input_paths[]
+# TODO: Fix
+# Says on the tin. Doesn't work, though :)
+filter_duplicate_dst_dirs() {
+    duplicates=()
+    declare -A uniques=()
+
+    for thing in "${@}"; do
+	# If thing is not in the array, add and mark it as seen
+	if [[ -z ${uniques["$thing"]} ]]; then
+	    uniques["$thing"]=1
+	else
+	    # If thing is already in array, add it to duplicates array
+	    duplicates+=("$thing")
+	fi
+  done
+}
+
+# Verify the inclusion list exists and read it into input_paths[]
 function get_src_paths() {
     if [ -e "$inc_list" ]; then
 	while IFS= read -r line; do
@@ -73,15 +91,19 @@ function get_src_paths() {
 function verify_src_paths() {
     printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
     for path in "${input_paths[@]}"; do
-	if [ -r "$path" ]; then
+	if [[ -r "$path" ]]; then
 	    input_paths_validated+=("$path")
-	    #local path_stripped=("$(strip_home_slug "$path")")
+	    # TODO: VERBOSE:
 	    #printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
+	    local path_stripped=""
+	    path_stripped="$(strip_home_slug "$path")"
+	    printf "Src valid: %s\n" "${path_stripped}"
 	else
-	    local notfound_stripped=""
-	    notfound_stripped="$(strip_home_slug "$path")"
-	    # TODO: Shove any error(s) into an array
-	    warn "${bold}File not found${end_bold}" "'${notfound_stripped}'"
+	    local notfound=""
+	    local result=""
+	    notfound="$(strip_home_slug "$path")"
+	    result="${notfound/${home_slug}/~}"
+	    warn "${bold}File not found${end_bold}" "'${result}'"
 	fi
 	src_paths_ok=true
     done
@@ -91,7 +113,7 @@ function verify_src_paths() {
 function verify_dst_root_perms() {
     if [ -w "$dst_root" ]; then
 	dst_root_writable=true
-	# DEBUG:
+	# VERBOSE?:
 	info "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
     else
 	exit_fatal "${bold}Destination path writable:${end_bold} ${dst_root_writable}" "$dst_root"
@@ -100,28 +122,27 @@ function verify_dst_root_perms() {
 
 function get_dst_dirs() {
     for path in "${input_paths_validated[@]}"; do
-	local file stripped=""
+	#printf "RAW PATH: %s\n" "${path}"
+	local file_stripped=""
 	local result=""
-	local pre_stripped=""
+	file_stripped="$(dirname "$path")"
 
-	file_stripped="$(dirname $path)"
-	home_stripped="$(strip_home_slug "${file_stripped}")"
-	result="$file_stripped"
-#	if [[ ! "$result" = "~" ]]; then
-#	    if [[ ! "$result" =~ "q"  ]]; then
-#	    printf "To create: %s\n" "$result"
-#	    dst_dirs_validated+=("$result")
-#	    fi
-#	fi
-	printf "To create: %s\n" "$result"
-	dst_dirs_validated+=("$result")
+	if [[ ! "$file_stripped" = "${HOME}" ]]; then
+	    result="$file_stripped"
+	    dst_dirs_validated+=("$result")
+	    printf "To create: %s\n" "$result"
+	else
+	    warn "[DBG] Ignore directory" "$file_stripped"
+	fi
     done
+    # TODO: Later
+    #dst_dirs_validated=("$(filter_duplicate_dst_dirs "${dst_dirs_validated[@]}")")
 }
 
 function mk_dst_dirs() {
     for path in "${dst_dirs_validated[@]}"; do
 	local dir=""
-	dir="$path"
+	dir="$(strip_home_slug "$path")"
 	#mkdir -p "${dst_root}/${dir}"
 	printf "[DBG] Dir create: %s \n" "${dst_root}${dir}"
     done
