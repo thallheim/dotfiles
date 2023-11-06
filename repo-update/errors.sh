@@ -2,11 +2,19 @@
 # shellcheck disable=1091,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
 true
 
-function info() {
+function info_arrow() {
     if [ "$#" -gt 1 ]; then
-	printf "$info_label %s: %s\n" "$1" "$2"
+	printf "${info_arrow} $info_label ${bold}%s${end_bold}: %s\n" "$1" "$2"
     elif [ "$#" -eq 1 ]; then
-	printf "${info_arrow} ${info_label} %s\n" "$1"
+	printf "${info_arrow} ${info_label} ${bold}%s${end_bold}\n" "$1"
+    fi
+}
+
+function info_checkmark() {
+    if [ "$#" -gt 1 ]; then
+	printf "${green_checkmark} $info_label %s: %s\n" "$1" "$2"
+    elif [ "$#" -eq 1 ]; then
+	printf "${green_checkmark} ${info_label} %s\n" "$1"
     fi
 }
 
