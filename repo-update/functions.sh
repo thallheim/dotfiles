@@ -12,7 +12,6 @@ true
 input_paths=()
 input_paths_validated=()
 dst_dirs_validated=()
-home_slug="${HOME}"
 inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
 dst_root="${HOME}/dotfiles/temp/"
 # UNUSED: dst_root_emacs="${HOME}/dotfiles/emacs/"
@@ -102,7 +101,7 @@ function verify_src_paths() {
 	    local notfound=""
 	    local result=""
 	    notfound="$(strip_home_slug "$path")"
-	    result="${notfound/${home_slug}/~}"
+	    result="${notfound/${HOME}/~}"
 	    warn "${bold}[DBG] File not found${end_bold}" "'${result}'"
 	fi
 	src_paths_ok=true
