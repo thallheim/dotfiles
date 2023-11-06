@@ -89,7 +89,7 @@ function get_src_paths() {
 
 # Verify src files are readable
 function verify_src_paths() {
-    printf "$info_arrow"" $info_label""$bold"" Verifying sources\n""$end_bold"
+    info_arrow "Verifying sources"
     for path in "${input_paths[@]}"; do
 	if [[ -r "$path" ]]; then
 	    input_paths_validated+=("$path")
@@ -97,13 +97,13 @@ function verify_src_paths() {
 	    #printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	    local path_stripped=""
 	    path_stripped="$(strip_home_slug "$path")"
-	    printf "Src valid: %s\n" "${path_stripped}"
+	    info_checkmark "Source valid" "${path_stripped}"
 	else
 	    local notfound=""
 	    local result=""
 	    notfound="$(strip_home_slug "$path")"
 	    result="${notfound/${home_slug}/~}"
-	    warn "${bold}File not found${end_bold}" "'${result}'"
+	    warn "${bold}[DBG] File not found${end_bold}" "'${result}'"
 	fi
 	src_paths_ok=true
     done
@@ -131,10 +131,15 @@ function get_dst_dirs() {
 
 	if [[ ! "$file_stripped" = "${HOME}" ]]; then
 	    result="$file_stripped"
-	    dst_dirs_validated+=("$result")
-	    printf "Folder structure valid: %s\n" "$result"
+	    
+	    #for dir in "${dst_dirs_validated[@]}"; do
+	    if ! [[ "${dst_dirs_validated[*]}" =~ "${result}" ]]; then
+		dst_dirs_validated+=("$result")
+		printf "Folder structure valid: %s\n" "$result"
+	    fi
+	    #done
 	else
-	    warn "[DBG] Ignore directory" "$file_stripped"
+	    info_arrow "[DBG] Ignore directory" "$file_stripped"
 	fi
     done
     # TODO: Later
@@ -144,18 +149,20 @@ function get_dst_dirs() {
 # Check if dst dirs exist and create as necessary
 function mk_dst_dirs() {
     if [[ ! -d "$dst_root" ]]; then
-	mkdir -p -v "${dst_root}"
+	mkdir -p "${dst_root}"
 	# TODO: DEBUG/VERBOSE:
-	printf "created dst root\n"
+	info_arrow "Created destination root folder\n"
     else
-	printf "dst root exists\n"
+	info_checkmark "Destination root directory exists"
+	#printf "$green_checkmark"" $info_label"" Destination root directory exists\n"
     fi
  
     for path in "${dst_dirs_validated[@]}"; do
 	local dir=""
 	dir="$(strip_home_slug "$path")"
 	mkdir -p "${dst_root}${dir}"
-	printf "[DBG] Dir create: %s \n" "${dst_root}${dir}"
+	#printf "[DBG] Dir create: %s \n" "${dst_root}${dir}"
+	info_arrow "[DBG] Dir create" "${dst_root}${dir}"
     done
 }
 
