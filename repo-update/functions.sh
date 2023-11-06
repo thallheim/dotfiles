@@ -166,10 +166,19 @@ function mk_dst_dirs() {
 }
 
 function copy_all() {
-    
-    for file in "${input_paths_validated[@]}"; do
-	#printf "file: %s\n" "$file"
-	cp -r "$file" "${dst_root}"
+    for src in "${input_paths_validated[@]}"; do
+        # Double-check src is a file before copying
+	if [[ -f "$src" ]]; then
+            local dst="${dst_root}/$(strip_home_slug "$src")"
+            if [[ -d "$(dirname "$dst")" ]]; then
+		# Double-check dst is a dir before copying
+                cp "$src" "$dst"
+                info_checkmark "Copied file: $src to $dst"
+            else
+                printf "Destination directory %s does not exist for %s" "$(dirname "$dst")" "$src"
+            fi
+        else
+            warn "Source file does not exist or is not a regular file" "$src"
+        fi
     done
-    #echo "YOOO\n" >> "${dst_root}/YO.txt"
 }

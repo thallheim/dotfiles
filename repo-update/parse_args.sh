@@ -30,7 +30,7 @@ function parse_args() {
 	    verify_src_paths
 	    get_dst_dirs
 	    mk_dst_dirs
-	    #copy_all
+	    copy_all
 	    shift
 	    ;;
 	-d | --dirtest)
