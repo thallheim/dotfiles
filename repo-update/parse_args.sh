@@ -3,19 +3,17 @@
 
 source "./functions.sh"
 
-flag_verbose=false
-flag_status=false
+export flag_status=false
 
 function parse_args() {
     while [ "$#" -gt 0 ]; do
 	case "$1" in
 	-v | --verbose)
 	    flag_verbose=true
-	    warn "TODO: Verbosity not implemented"
 	    shift
 	    ;;
 
-	-r | --run)
+	-u | --update)
 	    get_src_paths
 	    verify_src_readable
 	    get_dst_dirs
@@ -25,12 +23,8 @@ function parse_args() {
 	    ;;
 
 	-t | --test)
-	    get_src_paths
-	    verify_src_readable
-	    get_dst_dirs
-	    mk_dst_dirs
-	    copy_all
-	    shift
+	    echo "test :)"
+	    exit_done
 	    ;;
 
 	-h | --help)
