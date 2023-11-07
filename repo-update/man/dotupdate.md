@@ -11,6 +11,16 @@ dotupdate - basic dotfile repo updater
 # SYNOPSIS
 **dotupdate** [*OPTION*]...
 
+# OPTIONS
+**-h**
+: show help message
+
+**-u**
+: update; generate new 'dotupdate.1'
+
+**-v**
+: show version
+
 # DESCRIPTION
 *Note:* Not for use in production!
 
