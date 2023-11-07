@@ -29,7 +29,14 @@ source "./labels_strings_styles.sh"
 source "./errors.sh"
 
 
-# HELPERS
+# FUNCTIONS
+
+#Defined in `labels_strings_styles.sh`
+function show_help() {
+    printf "${usage}"
+    printf "${opts}"
+}
+
 function strip_home_slug() {
     local input="$1"
     local slug_stripped="${input/${HOME}}"
