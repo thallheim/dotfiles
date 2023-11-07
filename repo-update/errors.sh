@@ -19,11 +19,13 @@ function info_checkmark() {
 }
 
 function warn() {
-    if [ "$#" -gt 1 ]; then
-	printf "$warn_triangle $warn_label %s: %s\n" "$1" "$2"
-    elif [ "$#" -eq 1 ]; then
+       if [ "$#" -eq 1 ]; then
 	printf "$warn_triangle $warn_label %s\n" "$1"
-    fi
+       elif [ "$#" -eq 2 ]; then
+	   printf "$warn_triangle $warn_label %s: %s\n" "$1" "$2"
+       elif [ "$#" -eq 3 ]; then
+	   printf "$warn_triangle $warn_label %s %s:\n" "$1" "$2" "$3"
+      fi
 }
 
 function print_error_count() {
