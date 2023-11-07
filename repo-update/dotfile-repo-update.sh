@@ -19,10 +19,15 @@ true
 #
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+
+function cd_own_dir(){
+    local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    cd "$dir" || exit_fatal "DIR CHANGE FAILED"
+}; cd_own_dir
+
 source "./functions.sh"
 source "./parse_args.sh"
 
-cd_own_dir
 parse_args "$@"
 
 
