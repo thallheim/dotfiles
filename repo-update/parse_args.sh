@@ -1,11 +1,10 @@
 #!/bin/bash
 # shellcheck disable=1091,2154
 
-source "./functions.sh"; source "./help.sh"
+source "./functions.sh"
 
 flag_verbose=false
 flag_status=false
-export flag_help=false
 
 function parse_args() {
     while [ "$#" -gt 0 ]; do

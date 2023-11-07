@@ -63,12 +63,6 @@ function shorten_slug() {
     
 }
 
-# Get, and cd to, script's dir in case it's called from elsewhere
-function cd_own_dir(){
-    local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    cd "$dir" || exit_fatal "DIR CHANGE FAILED"
-}
-
 # In case it's needed later
 function get_own_dir() {
     local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
