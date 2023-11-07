@@ -2,30 +2,38 @@
 
 Personal dotfiles.
 
-Only implemented for Emacs (and only partially) while the updater script is unfinished.
+Only implemented for Emacs (and only partially) while the updater script is
+unfinished.
 
 *Subject to breaking changes without warning*
 
 
 # TODO
 
-- [ ] Main copy ops
+*Roughly* by order of priority.
+
 - [ ] Decide what needs refactoring into a settings file
-- [ ] Do `pushd` & `popd` on start and end of run
-- [ ] Allow dry-run
-- [x] List input handling
-- [ ] Nested list input handling
+- [ ] Allow multiple inclusion sources
+	- [ ] Nested list input handling (i.e "per-app" lists and dir trees)
+- [ ] Write newer/older check for copy ops
 - [x] Rewrite pre-op file checks
    - [ ] Time first or diff first?
    - [ ] Ask whether to proceed if not all sources could be verified
-- [ ] Allow multiple inclusion sources
-- [ ] Allow flag to display full paths (i.e 'don't strip slugs')
+	   - *With flag; default off?*
+	   - [ ] Add to user settings when that's working
 - [ ] Write help string(s)
-- [x] Allow error verbosity flag
+- [ ] Allow flag to display full paths (i.e 'don't strip slugs')
+	- Not too sure about this one. TBD.
+- [/] Allow error verbosity flag
 	- [ ] Rework after 'proper' arg parsing is implemented
-- [x] Transform absolute paths from `verify_src_paths` (i.e 'home/blah/..' -> '~/..')
+- [ ] Let user keep a machine/account-local ignore file that matches against
+the include list, suppressing warnings about those files not being on the local
+machine
+- [ ] Do `pushd` & `popd` on start and end of run
+	- Try to find out if it'll ever be necessary first.
+- [x] Main copy ops
 
 # CHANGELOG
 
-*- 0.0.1
-  Init
+##### 0.0.1
+	Init
