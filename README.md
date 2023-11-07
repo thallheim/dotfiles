@@ -12,18 +12,19 @@ unfinished.
 
 *Roughly* in order of priority.
 
-- [ ] Allow output verbosity (bool)
+- [x] Allow output verbosity (bool)
+	- Min. viable implemented
 - [ ] Decide what needs refactoring into a settings file
+- [ ] Write newer/older check for copy ops
 - [ ] Allow multiple inclusion sources
 	- [ ] Nested list input handling (i.e "per-app" lists and dir trees)
-- [ ] Write newer/older check for copy ops
 - [x] Rewrite pre-op file checks
    - [ ] Time first or diff first?
    - [ ] Ask whether to proceed if not all sources could be verified
 	   - *With flag; default off?*
 	   - [ ] Add to user settings when that's working
 - [x] Write help string(s)
-	- [**Started**]
+	- [**In progress**]
 - [ ] Rename and fork off updater & man generator
 - [ ] Allow error verbosity levels
 	- [ ] Rework after 'proper' arg parsing is implemented
@@ -31,7 +32,7 @@ unfinished.
 the include list, suppressing warnings about those files not being on the local
 machine
 - [ ] Do `pushd` & `popd` on start and end of run
-	- Try to find out if it'll ever be necessary first.
+	- Try to find out if it'll ever be necessary first. *Upd.:* Probably not :)
 - [x] Main copy ops
 
 # CHANGELOG
