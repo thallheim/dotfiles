@@ -12,14 +12,12 @@ dst_root="${HOME}/dotfiles/temp/"
 
 # FLAGS
 src_paths_ok=false
-dst_root_writable=false
 
-# COLOURS
-# Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
+# COLOURS - Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
 source "./colours.sh"
 
 
-# "ICONS" (UTF-8) & LABELS/MSG STRINGS
+# "ICONS" (UTF-8) & LABELS/MSG/HELP STRINGS
 # [red_cross, green_checkmark, info_arrow]
 # [error_label, info_label, warn_label]
 # [info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg]
@@ -109,8 +107,8 @@ function verify_src_readable() {
 	# Make sure at least one src file is readable, otherwise just exit
 	# TODO: Implement the actual check
 	if [[ ! "${#input_paths_validated[@]}" -gt 0 ]]; then
-	    exit_fatal "Failed to read sources. Check permissions if files are known good."
 	    src_paths_ok=false
+	    exit_fatal "Failed to read sources. Check permissions if files are known good."
 	fi
     done
 }
