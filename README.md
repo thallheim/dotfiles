@@ -12,6 +12,7 @@ unfinished.
 
 *Roughly* in order of priority.
 
+- [ ] Allow output verbosity (bool)
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Allow multiple inclusion sources
 	- [ ] Nested list input handling (i.e "per-app" lists and dir trees)
@@ -21,8 +22,9 @@ unfinished.
    - [ ] Ask whether to proceed if not all sources could be verified
 	   - *With flag; default off?*
 	   - [ ] Add to user settings when that's working
-- [ ] Write help string(s)
-- [ ] Allow output verbosity (bool)
+- [x] Write help string(s)
+	- [**Started**]
+- [ ] Rename and fork off updater & man generator
 - [ ] Allow error verbosity levels
 	- [ ] Rework after 'proper' arg parsing is implemented
 - [ ] Let user keep a machine/account-local ignore file that matches against
