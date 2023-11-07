@@ -2,7 +2,7 @@
 
 Personal dotfiles.
 
-Only implemented for Emacs (and only partially) while the updater script is
+Only implemented for Emacs and tmux (and only partially) while the updater script is
 unfinished.
 
 *Subject to breaking changes without warning*
@@ -10,7 +10,7 @@ unfinished.
 
 # TODO
 
-*Roughly* by order of priority.
+*Roughly* in order of priority.
 
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Allow multiple inclusion sources
@@ -22,9 +22,8 @@ unfinished.
 	   - *With flag; default off?*
 	   - [ ] Add to user settings when that's working
 - [ ] Write help string(s)
-- [ ] Allow flag to display full paths (i.e 'don't strip slugs')
-	- Not too sure about this one. TBD.
-- [/] Allow error verbosity flag
+- [ ] Allow output verbosity (bool)
+- [ ] Allow error verbosity levels
 	- [ ] Rework after 'proper' arg parsing is implemented
 - [ ] Let user keep a machine/account-local ignore file that matches against
 the include list, suppressing warnings about those files not being on the local
