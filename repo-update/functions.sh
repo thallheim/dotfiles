@@ -37,11 +37,31 @@ source "./errors.sh"
 
 # HELPERS
 function strip_home_slug() {
-    local slug="$HOME"
     local input="$1"
-    local slug_stripped="${input/${slug}}"
+    local slug_stripped="${input/${HOME}}"
     local result="${slug_stripped#\/}"
     printf "%s" "${result}"
+}
+
+function strip_slug() {
+    local input="$1"
+    local result=""
+
+    if [[ $input == ${HOME}\/* ]]; then
+	local subst="~"
+	sed -r "s#${HOME}#${subst}#" <<< "$input"
+    fi
+}
+
+function shorten_slug() {
+    local input="$1"
+    local result=""
+
+    if [[ $input == ${HOME}* ]]; then
+	local subst="~"
+	sed -r "s#${HOME}#${subst}#" <<< "$input"
+    fi
+    
 }
 
 # Get, and cd to, script's dir in case it's called from elsewhere
@@ -56,30 +76,11 @@ function get_own_dir() {
     printf "%s" "$dir"
 }
 
-# TODO: Fix
-# Says on the tin. Doesn't work, though :)
-filter_duplicate_dst_dirs() {
-    duplicates=()
-    declare -A uniques=()
-
-    for thing in "${@}"; do
-	# If thing is not in the array, add and mark it as seen
-	if [[ -z ${uniques["$thing"]} ]]; then
-	    uniques["$thing"]=1
-	else
-	    # If thing is already in array, add it to duplicates array
-	    duplicates+=("$thing")
-	fi
-  done
-}
-
 # Verify the inclusion list exists and read it into input_paths[]
 function get_src_paths() {
     if [ -e "$inc_list" ]; then
 	while IFS= read -r line; do
 	    input_paths+=("$(eval echo "$line")")
-	    # TODO: Remove: Debug only
-	    #printf "[DBG]: %s\n" "$line"
 	done < "$inc_list"
     else
 	exit_fatal "Could not read inclusion list: " "$inc_list"
@@ -87,37 +88,30 @@ function get_src_paths() {
 }
 
 # Verify src files are readable
-function verify_src_paths() {
+function verify_src_readable() {
     info_arrow "Verifying sources"
     for path in "${input_paths[@]}"; do
 	if [[ -r "$path" ]]; then
 	    input_paths_validated+=("$path")
-	    # TODO: VERBOSE:
-	    #printf "$green_checkmark"" $info_label"" %s\n" "${path_stripped[@]}"
 	    local path_stripped=""
-	    path_stripped="$(strip_home_slug "$path")"
-	    info_checkmark "Source valid" "${path_stripped}"
+	    path_stripped="$(shorten_slug "$path")"
+	    # TODO: VERBOSE:
+	    info_checkmark "Valid" "${path_stripped}"
 	else
 	    local notfound=""
 	    local result=""
-	    notfound="$(strip_home_slug "$path")"
+	    notfound="$(shorten_slug "$path")"
 	    result="${notfound/${HOME}/~}"
-	    warn "${bold}[DBG] File not found${end_bold}" "'${result}'"
+	    warn "${bold}File not found${end_bold}" "'${result}'"
 	fi
-	src_paths_ok=true
+	
+	# Make sure at least one src file is readable, otherwise just exit
+	# TODO: Implement the actual check
+	if [[ ! "${#input_paths_validated[@]}" -gt 0 ]]; then
+	    exit_fatal "Failed to read sources. Check permissions if files are known good."
+	    src_paths_ok=false
+	fi
     done
-}
-
-# TODO: Remove, probably. Feels mighty redundant.
-# Verify dst root is writable 
-function verify_dst_root_perms() {
-    if [ -w "$dst_root" ]; then
-	dst_root_writable=true
-	# VERBOSE?:
-	info "${bold}Destination path writable:${end_bold} ${dst_root_writable}"
-    else
-	exit_fatal "${bold}Destination path writable:${end_bold} ${dst_root_writable}" "$dst_root"
-    fi
 }
 
 # Get folder structure from validated input paths
@@ -128,21 +122,20 @@ function get_dst_dirs() {
 	local result=""
 	file_stripped="$(dirname "$path")"
 
+	# If it's not the home folder itself, process it
 	if [[ ! "$file_stripped" = "${HOME}" ]]; then
 	    result="$file_stripped"
 	    
-	    #for dir in "${dst_dirs_validated[@]}"; do
+	    # Only add the path if it isn't already in the array
 	    if ! [[ "${dst_dirs_validated[*]}" =~ "${result}" ]]; then
 		dst_dirs_validated+=("$result")
-		printf "Folder structure valid: %s\n" "$result"
+		# TODO: Debug
+		#printf "Folder structure valid: %s\n" "$result"
 	    fi
-	    #done
-	else
-	    info_arrow "[DBG] Ignore directory" "$file_stripped"
+	#else
+	#    info_arrow "[DBG] Ignore directory" "$file_stripped"
 	fi
     done
-    # TODO: Later
-    #dst_dirs_validated=("$(filter_duplicate_dst_dirs "${dst_dirs_validated[@]}")")
 }
 
 # Check if dst dirs exist and create as necessary
@@ -150,7 +143,7 @@ function mk_dst_dirs() {
     if [[ ! -d "$dst_root" ]]; then
 	mkdir -p "${dst_root}"
 	# TODO: DEBUG/VERBOSE:
-	info_arrow "Created destination root folder\n"
+	info_arrow "Created destination root folder"
     else
 	info_checkmark "Destination root directory exists"
 	#printf "$green_checkmark"" $info_label"" Destination root directory exists\n"
@@ -160,8 +153,7 @@ function mk_dst_dirs() {
 	local dir=""
 	dir="$(strip_home_slug "$path")"
 	mkdir -p "${dst_root}${dir}"
-	#printf "[DBG] Dir create: %s \n" "${dst_root}${dir}"
-	info_arrow "[DBG] Dir create" "${dst_root}${dir}"
+	info_arrow "[DBG] Dir create" "${dst_root/${HOME}/\~}${dir}"
     done
 }
 
