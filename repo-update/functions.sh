@@ -12,10 +12,10 @@ dst_root="${HOME}/dotfiles/temp/"
 
 # FLAGS
 src_paths_ok=false
+export flag_verbose=false
 
 # COLOURS - Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
 source "./colours.sh"
-
 
 # "ICONS" (UTF-8) & LABELS/MSG/HELP STRINGS
 # [red_cross, green_checkmark, info_arrow]
@@ -75,6 +75,10 @@ function get_src_paths() {
 	while IFS= read -r line; do
 	    input_paths+=("$(eval echo "$line")")
 	done < "$inc_list"
+	# VERBOSE
+	if [[ $flag_verbose == true ]]; then
+	   info_checkmark "Inclusion list OK" "Found ${#input_paths[@]} entries"
+	fi
     else
 	exit_fatal "Could not read inclusion list: " "$inc_list"
     fi
@@ -88,14 +92,16 @@ function verify_src_readable() {
 	    input_paths_validated+=("$path")
 	    local path_stripped=""
 	    path_stripped="$(shorten_slug "$path")"
-	    # TODO: VERBOSE:
-	    info_checkmark "Valid" "${path_stripped}"
+	    # VERBOSE:
+	    if [[ $flag_verbose == true ]]; then
+		info_checkmark "Valid" "${path_stripped}"
+	    fi
 	else
 	    local notfound=""
 	    local result=""
 	    notfound="$(shorten_slug "$path")"
 	    result="${notfound/${HOME}/~}"
-	    warn "${bold}File not found${end_bold}" "'${result}'"
+	    warn "${bold}Source file not found${end_bold}" "'${result}'"
 	fi
 	
 	# Make sure at least one src file is readable, otherwise just exit
@@ -109,6 +115,9 @@ function verify_src_readable() {
 
 # Get folder structure from validated input paths
 function get_dst_dirs() {
+    if [[ $flag_verbose == true ]]; then
+	info_arrow "Validate source dir structures"
+    fi
     for path in "${input_paths_validated[@]}"; do
 	#printf "RAW PATH: %s\n" "${path}"
 	local file_stripped=""
@@ -122,11 +131,12 @@ function get_dst_dirs() {
 	    # Only add the path if it isn't already in the array
 	    if ! [[ ${dst_dirs_validated[*]} =~ ${result} ]]; then
 		dst_dirs_validated+=("$result")
-		# TODO: Debug
-		#printf "Folder structure valid: %s\n" "$result"
+		# VERBOSE
+		if [[ $flag_verbose == true ]]; then
+		    info_checkmark "Valid dir structure" "$(shorten_slug "${result}")"
+		fi
 	    fi
-	#else
-	#    info_arrow "[DBG] Ignore directory" "$file_stripped"
+
 	fi
     done
 }
@@ -135,32 +145,46 @@ function get_dst_dirs() {
 function mk_dst_dirs() {
     if [[ ! -d "$dst_root" ]]; then
 	mkdir -p "${dst_root}"
-	# TODO: DEBUG/VERBOSE:
-	info_arrow "Created destination root folder"
+	# VERBOSE
+	if [[ $flag_verbose == true ]]; then
+	    info_arrow "Created destination root directory"; fi
     else
-	info_checkmark "Destination root directory exists"
-	#printf "$green_checkmark"" $info_label"" Destination root directory exists\n"
+	# VERBOSE
+	if [[ $flag_verbose == true ]]; then
+	    info_checkmark "Destination root directory exists"; fi
     fi
  
+    # Create destination dirs
+    if [[ $flag_verbose == true ]]; then
+	info_arrow "Create destination directories"; fi
+
     for path in "${dst_dirs_validated[@]}"; do
 	local dir=""
 	dir="$(strip_home_slug "$path")"
 	mkdir -p "${dst_root}${dir}"
-	info_arrow "[DBG] Dir create" "${dst_root/${HOME}/\~}${dir}"
+	# VERBOSE
+	if [[ $flag_verbose == true ]]; then
+	    info_checkmark "Created" "${dst_root/${HOME}/\~}${dir}"; fi
     done
 }
 
 function copy_all() {
+    # VERBOSE
+    if [[ $flag_verbose == true ]]; then
+	info_arrow "Copying files"; fi
+
     for src in "${input_paths_validated[@]}"; do
         # Double-check src is a file before copying
 	if [[ -f "$src" ]]; then
 	    local dst=""
             dst="${dst_root}$(strip_home_slug "$src")"
+	    # Double-check dst is a dir before copying
             if [[ -d "$(dirname "$dst")" ]]; then
-		# Double-check dst is a dir before copying
                 cp "$src" "$dst"
-                # TODO: DEBUG/VERBOSE
-		printf "$green_checkmark $info_label""Copy: %s ${cyan}->${reset} %s\n" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
+                # VERBOSE
+		if [[ $flag_verbose == true ]]; then
+		    printf "$green_checkmark $info_label""Copy: %s ${cyan}->${reset} %s\n" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
+		fi
             else
 		warn "Skipped file '%s': Destination directory doesn't exist (%s)" "$src" "$(dirname "$dst")" 
             fi
