@@ -22,7 +22,7 @@ dotupdate - basic dotfile repo updater
 : show version
 
 # DESCRIPTION
-*Note:* Not for use in production!
+*Note*: Not for use in production!
 
 **dotupdate** is a utility that tries to help keep a dotfile repo updated, by
 turning it into a mini-monolith.  It keeps simple newline-delimited lists of
@@ -31,3 +31,10 @@ where it recreates the folder structures of any (valid & readable) source files
 it's been given. This requires no user interaction beyond deciding which files
 are to be included. Defaults to warning before overwriting a newer file with an
 older one.
+
+# AUTHORS
+Written by thallheim <thall@thallheim.com>
+
+# SEE ALSO
+- Full sources at: <https://github.com/thallheim/dotfiles/tree/main/repo-update>
+- Pandoc manual at: <https://pandoc.org/MANUAL.html>
