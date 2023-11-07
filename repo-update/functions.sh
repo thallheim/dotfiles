@@ -1,12 +1,6 @@
 #!/bin/bash
-# shellcheck disable=1091,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
+# shellcheck disable=1001,1091,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
 true
-
-# Helper functions etc. for the dotfile repo updater script.
-#
-#
-# thall. <thall@thallheim.com>
-
 
 # GLOBALS
 input_paths=()
