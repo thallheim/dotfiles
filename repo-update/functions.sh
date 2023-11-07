@@ -128,7 +128,7 @@ function get_dst_dirs() {
 	    result="$file_stripped"
 	    
 	    # Only add the path if it isn't already in the array
-	    if ! [[ "${dst_dirs_validated[*]}" =~ "${result}" ]]; then
+	    if ! [[ ${dst_dirs_validated[*]} =~ ${result} ]]; then
 		dst_dirs_validated+=("$result")
 		# TODO: Debug
 		#printf "Folder structure valid: %s\n" "$result"
