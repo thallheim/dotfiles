@@ -15,6 +15,9 @@ dst_root="${HOME}/dotfiles/temp/"
 src_paths_ok=false
 export flag_verbose=false
 
+# HELPERS
+source "./helpers.sh"
+
 # COLOURS
 # Defined in `colours_labels_strings.sh`
 # Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
@@ -28,7 +31,6 @@ source "./colours_labels_strings.sh"
 
 # ERROR HANDLERS & FLAGS
 source "./info_errors.sh"
-
 
 # FUNCTIONS
 
