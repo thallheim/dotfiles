@@ -26,4 +26,4 @@ export info_diff_eq_msg="$info_label"" Nothing to do: Files up to date."
 # Help/Usage strings
 export usage="${green}Usage:${reset}\n\t dotupdate.sh [OPTION]\n\n\t (!)\tNote: Clustered short options ('-xyz') not yet supported; pass\n\t\tas '-x -y -z'\n\n"
 
-export opts="\tShort\tLong\t\tDescr.\n\t¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n\t-h\t --help\t\tShow help.\n\t-s\t --status\tShow time of last execution; List files that have since changed.\n\t-v\t --verbose\tVerbose-mode; Always print error summary.\n\n"
+export opts="\tShort\tLong\t\tDescr.\n\t¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n\t-h\t --help\t\tShow help.\n\t-s\t --status\tShow time of last execution; List files that have since changed.\n\t-v\t --verbose\tVerbose-mode; Always print error summary.\n\t\t --version\tShow version number.\n"
