@@ -15,14 +15,16 @@ dst_root="${HOME}/dotfiles/temp/"
 src_paths_ok=false
 export flag_verbose=false
 
-# COLOURS - Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
-source "./colours.sh"
+# COLOURS
+# Defined in `colours_labels_strings.sh`
+# Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
+
 
 # "ICONS" (UTF-8) & LABELS/MSG/HELP STRINGS
 # [red_cross, green_checkmark, info_arrow]
 # [error_label, info_label, warn_label]
 # [info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg]
-source "./labels_strings_styles.sh"
+source "./colours_labels_strings.sh"
 
 # ERROR HANDLERS & FLAGS
 source "./errors.sh"
@@ -30,35 +32,7 @@ source "./errors.sh"
 
 # FUNCTIONS
 
-#Defined in `labels_strings_styles.sh`
-function show_help() {
-    printf "${usage}"
-    printf "${opts}"
-}
 
-function strip_home_slug() {
-    local input="$1"
-    local slug_stripped="${input/${HOME}}"
-    local result="${slug_stripped#\/}"
-    printf "%s" "${result}"
-}
-
-function strip_slug() {
-    local input="$1"; local result=""
-
-    if [[ $input == ${HOME}\/* ]]; then
-	local subst="~"
-	sed -r "s#${HOME}#${subst}#" <<< "$input"; fi
-}
-
-function shorten_slug() {
-    local input="$1"; local result=""
-
-    if [[ $input == ${HOME}* ]]; then
-	local subst="~"
-	sed -r "s#${HOME}#${subst}#" <<< "$input"; fi
-    
-}
 
 # In case it's needed later
 function get_own_dir() {
