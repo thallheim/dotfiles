@@ -74,7 +74,7 @@ function get_src_paths() {
 	done < "$inc_list"
 	# VERBOSE
 	if [[ $flag_verbose == true ]]; then
-	   info_checkmark "Inclusion list OK" "Found ${#input_paths[@]} entries"; fi
+	   info_checkmark "Inclusion list OK" "${#input_paths[@]} entries to validate"; fi
     else
 	exit_fatal "Could not read inclusion list: " "$inc_list"
     fi
@@ -90,7 +90,7 @@ function verify_src_readable() {
 	    path_stripped="$(shorten_slug "$path")"
 	    # VERBOSE:
 	    if [[ $flag_verbose == true ]]; then
-		info_checkmark "Valid" "${path_stripped}"; fi
+		info_checkmark "  Valid" "${path_stripped}"; fi
 	else
 	    local notfound=""
 	    local result=""
@@ -109,8 +109,8 @@ function verify_src_readable() {
 
 # Get folder structure from validated input paths
 function get_dst_dirs() {
-    if [[ $flag_verbose == true ]]; then
-	info_arrow "Validate source dir structures"; fi
+    info_arrow "Validating source dir structures"
+
     for path in "${input_paths_validated[@]}"; do
 	#printf "RAW PATH: %s\n" "${path}"
 	local file_stripped=""; local result=""
@@ -125,7 +125,7 @@ function get_dst_dirs() {
 		dst_dirs_validated+=("$result")
 		# VERBOSE
 		if [[ $flag_verbose == true ]]; then
-		    info_checkmark "Valid dir structure" "$(shorten_slug "${result}")"; fi
+		    info_checkmark "  Valid" "$(shorten_slug "${result}")"; fi
 	    fi
 	fi
     done
@@ -135,18 +135,13 @@ function get_dst_dirs() {
 function mk_dst_dirs() {
     if [[ ! -d "$dst_root" ]]; then
 	mkdir -p "${dst_root}"
-	# VERBOSE
-	if [[ $flag_verbose == true ]]; then
-	    info_arrow "Created destination root directory"; fi
+	info_arrow "Created destination root directory"
     else
-	# VERBOSE
-	if [[ $flag_verbose == true ]]; then
-	    info_checkmark "Destination root directory exists"; fi
+	info_checkmark "Destination root directory exists"
     fi
  
     # Create destination dirs
-    if [[ $flag_verbose == true ]]; then
-	info_arrow "Create destination directories"; fi
+    info_arrow "Creating destination directories"
 
     for path in "${dst_dirs_validated[@]}"; do
 	local dir=""
@@ -154,14 +149,13 @@ function mk_dst_dirs() {
 	mkdir -p "${dst_root}${dir}"
 	# VERBOSE
 	if [[ $flag_verbose == true ]]; then
-	    info_checkmark "Created" "${dst_root/${HOME}/\~}${dir}"; fi
+	    info_checkmark "  Created" "${dst_root/${HOME}/\~}${dir}"; fi
     done
 }
 
 function copy_all() {
     # VERBOSE
-    if [[ $flag_verbose == true ]]; then
-	info_arrow "Copying files"; fi
+    info_arrow "Copying files"
 
     for src in "${input_paths_validated[@]}"; do
         # Double-check src is a file before copying
