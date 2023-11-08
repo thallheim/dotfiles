@@ -3,50 +3,42 @@
 
 source "./functions.sh"
 
+
 export flag_status=false
 
 function parse_args() {
-    while [ "$#" -gt 0 ]; do
-	case "$1" in
-	-v | --verbose)
-	    flag_verbose=true
-	    shift
-	    ;;
+    while getopts "vuths" FLAG; do
+	case "$FLAG" in
+	v)
+	    flag_verbose=true; printf "%s\n" "${flag_verbose}"; shift;;
 
-	-u | --update)
+	u)
 	    get_src_paths
 	    verify_src_readable
 	    get_dst_dirs
 	    mk_dst_dirs
-	    copy_all
-	    shift
-	    ;;
+	    copy_all;;
 
-	-t | --test)
+	t)
 	    echo "test :)"
-	    exit_done
-	    ;;
+	    exit_done;;
 
-	-h | --help)
+	h)
 	    show_help
-	    return 0
-	    ;;
+	    return 0;;
 
-	-s | --status)
+	s)
 	    flag_status=true
-	    exit_fatal "TODO: Status not implemented"
-	    ;;
-	--version)
+	    exit_fatal "TODO: Status not implemented";;
+	V)
 	    # TODO: Flesh out
 	    printf "dotupdate %s\n\nWritten by thallheim.\n" "${version}"
-	    exit 0
-	    ;;
+	    exit 0;;
 
 	*)
-	    printf "${red_cross} ${error_label} %s\n" "Unknown option: $1"
+	    printf "${red_cross} ${error_label} %s\n" "Unknown option: $FLAG"
 	    show_help	    
-	    return 1
-	    ;;
+	    return 1;;
 	esac
 
     done
