@@ -36,6 +36,11 @@ function parse_args() {
 	    flag_status=true
 	    exit_fatal "TODO: Status not implemented"
 	    ;;
+	--version)
+	    # TODO: Flesh out
+	    printf "dotupdate %s\n\nWritten by thallheim.\n" "${version}"
+	    exit 0
+	    ;;
 
 	*)
 	    printf "${red_cross} ${error_label} %s\n" "Unknown option: $1"
