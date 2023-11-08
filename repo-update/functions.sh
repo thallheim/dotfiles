@@ -3,6 +3,7 @@
 true
 
 # GLOBALS
+export version="0.0.1"
 input_paths=()
 input_paths_validated=()
 dst_dirs_validated=()
@@ -43,23 +44,19 @@ function strip_home_slug() {
 }
 
 function strip_slug() {
-    local input="$1"
-    local result=""
+    local input="$1"; local result=""
 
     if [[ $input == ${HOME}\/* ]]; then
 	local subst="~"
-	sed -r "s#${HOME}#${subst}#" <<< "$input"
-    fi
+	sed -r "s#${HOME}#${subst}#" <<< "$input"; fi
 }
 
 function shorten_slug() {
-    local input="$1"
-    local result=""
+    local input="$1"; local result=""
 
     if [[ $input == ${HOME}* ]]; then
 	local subst="~"
-	sed -r "s#${HOME}#${subst}#" <<< "$input"
-    fi
+	sed -r "s#${HOME}#${subst}#" <<< "$input"; fi
     
 }
 
@@ -77,8 +74,7 @@ function get_src_paths() {
 	done < "$inc_list"
 	# VERBOSE
 	if [[ $flag_verbose == true ]]; then
-	   info_checkmark "Inclusion list OK" "Found ${#input_paths[@]} entries"
-	fi
+	   info_checkmark "Inclusion list OK" "Found ${#input_paths[@]} entries"; fi
     else
 	exit_fatal "Could not read inclusion list: " "$inc_list"
     fi
@@ -94,8 +90,7 @@ function verify_src_readable() {
 	    path_stripped="$(shorten_slug "$path")"
 	    # VERBOSE:
 	    if [[ $flag_verbose == true ]]; then
-		info_checkmark "Valid" "${path_stripped}"
-	    fi
+		info_checkmark "Valid" "${path_stripped}"; fi
 	else
 	    local notfound=""
 	    local result=""
@@ -108,20 +103,17 @@ function verify_src_readable() {
 	# TODO: Implement the actual check
 	if [[ ! "${#input_paths_validated[@]}" -gt 0 ]]; then
 	    src_paths_ok=false
-	    exit_fatal "Failed to read sources. Check permissions if files are known good."
-	fi
+	    exit_fatal "Failed to read sources. Check permissions if files are known good."; fi
     done
 }
 
 # Get folder structure from validated input paths
 function get_dst_dirs() {
     if [[ $flag_verbose == true ]]; then
-	info_arrow "Validate source dir structures"
-    fi
+	info_arrow "Validate source dir structures"; fi
     for path in "${input_paths_validated[@]}"; do
 	#printf "RAW PATH: %s\n" "${path}"
-	local file_stripped=""
-	local result=""
+	local file_stripped=""; local result=""
 	file_stripped="$(dirname "$path")"
 
 	# If it's not the home folder itself, process it
@@ -133,10 +125,8 @@ function get_dst_dirs() {
 		dst_dirs_validated+=("$result")
 		# VERBOSE
 		if [[ $flag_verbose == true ]]; then
-		    info_checkmark "Valid dir structure" "$(shorten_slug "${result}")"
-		fi
+		    info_checkmark "Valid dir structure" "$(shorten_slug "${result}")"; fi
 	    fi
-
 	fi
     done
 }
