@@ -1,19 +1,24 @@
 # thallheim dotfiles
 
-Personal dotfiles.
+dotfiles repo. Also houses its updater script for now.
 
-Only implemented for Emacs and tmux (and only partially) while the updater script is
-unfinished.
+The updater script is very unfinished and will not get its own repo until
+some things I consider essential are in place; ditto the man page helper.
 
-*Subject to breaking changes without warning*
+**Subject to breaking changes without warning**. If you do want to use it
+yourself in its current form, I'd simply download the whole source tree
+(`repo-update/`) and chuck it wherever, for now. Packaging won't happen
+for a while, if ever.
 
 
 
 # TODO
 
-*Roughly* in order of priority.
+*Roughly* in order of priority:
 
 - [ ] Add a function to check the error arrays at the end of all runs
+- [ ] (Maybe) Implement a small error stack just in case it becom untrivial
+later
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Write newer/older check for copy ops
 - [ ] Allow multiple inclusion sources
