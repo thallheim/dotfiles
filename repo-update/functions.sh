@@ -173,13 +173,13 @@ function copy_all() {
                 cp "$src" "$dst"
                 # VERBOSE
 		if [[ $flag_verbose == true ]]; then
-		    printf "$green_checkmark $info_label""Copy: %s ${cyan}->${reset} %s\n" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
+		    printf "$green_checkmark $info_label""  %s ${cyan}->${reset} %s\n" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
 		fi
             else
 		warn "Skipped file '%s': Destination directory doesn't exist (%s)" "$src" "$(dirname "$dst")" 
             fi
         else
-            warn "Source file does not exist or is not a regular file" "$src"
+            error_fatal "Source file does not exist or is not a regular file" "$src"
         fi
     done
 }
