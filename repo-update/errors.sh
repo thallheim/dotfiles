@@ -4,27 +4,27 @@ true
 
 function info_arrow() {
     if [ "$#" -gt 1 ]; then
-	printf "${info_arrow} $info_label ${bold}%s${end_bold}: %s\n" "$1" "$2"
+	printf "${info_arrow} $info_label${bold}%s${end_bold}: %s\n" "$1" "$2"
     elif [ "$#" -eq 1 ]; then
-	printf "${info_arrow} ${info_label} ${bold}%s${end_bold}\n" "$1"
+	printf "${info_arrow} ${info_label}${bold}%s${end_bold}\n" "$1"
     fi
 }
 
 function info_checkmark() {
     if [[ "$#" -eq 1 ]]; then
-	printf "${green_checkmark} ${info_label} %s\n" "$1"
+	printf "${green_checkmark} ${info_label}%s\n" "$1"
     elif [[ "$#" -eq 2 ]]; then
-	printf "${green_checkmark} $info_label ${bold}%s:${end_bold} %s\n" "$1" "$2"
+	printf "${green_checkmark} $info_label${bold}%s:${end_bold} %s\n" "$1" "$2"
     fi
 }
 
 function warn() {
        if [[ "$#" -eq 1 ]]; then
-	printf "$warn_triangle $warn_label %s\n" "$1"
+	printf "${warn_triangle} ${warn_label}%s\n" "$1"
        elif [[ "$#" -eq 2 ]]; then
-	   printf "$warn_triangle $warn_label %s: %s\n" "$1" "$2"
+	   printf "${warn_triangle} ${warn_label}%s: %s\n" "$1" "$2"
        elif [[ "$#" -eq 3 ]]; then
-	   printf "$warn_triangle $warn_label %s %s:\n" "$1" "$2" "$3"
+	   printf "${warn_triangle} ${warn_label}%s %s:\n" "$1" "$2" "$3"
       fi
 }
 
