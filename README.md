@@ -8,6 +8,7 @@ unfinished.
 *Subject to breaking changes without warning*
 
 
+
 # TODO
 
 *Roughly* in order of priority.
@@ -22,8 +23,6 @@ unfinished.
    - [ ] Ask whether to proceed if not all sources could be verified
 	   - *With flag; default off?*
 	   - [ ] Add to user settings when that's working
-- [x] Write help string(s)
-	- [**In progress**]
 - [ ] Rename and fork off updater & man generator
 - [ ] Allow error verbosity levels
 	- [ ] Rework after 'proper' arg parsing is implemented
@@ -35,6 +34,13 @@ machine
 - [ ] Do `pushd` & `popd` on start and end of run
 	- Try to find out if it'll ever be necessary first. *Upd.:* Probably not :)
 - [x] Main copy ops
+
+-------------------------------------------------------------------------------
+#### Implemented, needing additions
+
+##### Write help string(s)
+  * [ ] Sort out the 'real' globals in `functions.sh`. Some should be made
+	  _actually_ global to the main runner
 
 # CHANGELOG
 
