@@ -12,8 +12,7 @@ unfinished.
 
 *Roughly* in order of priority.
 
-- [x] Allow output verbosity (bool)
-	- Min. viable implemented
+- [ ] Add a function to check the error arrays at the end of all runs
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Write newer/older check for copy ops
 - [ ] Allow multiple inclusion sources
@@ -28,6 +27,8 @@ unfinished.
 - [ ] Rename and fork off updater & man generator
 - [ ] Allow error verbosity levels
 	- [ ] Rework after 'proper' arg parsing is implemented
+- [ ] Allow saving existing target root as `dir.old/`
+	- Allow setting for gzip if repo is large enough to warrant compression?
 - [ ] Let user keep a machine/account-local ignore file that matches against
 the include list, suppressing warnings about those files not being on the local
 machine
