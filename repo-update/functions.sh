@@ -27,12 +27,10 @@ export flag_verbose=false
 source "./colours_labels_strings.sh"
 
 # ERROR HANDLERS & FLAGS
-source "./errors.sh"
+source "./info_errors.sh"
 
 
 # FUNCTIONS
-
-
 
 # In case it's needed later
 function get_own_dir() {
