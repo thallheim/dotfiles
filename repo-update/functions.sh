@@ -121,7 +121,7 @@ function copy_all() {
                 cp "$src" "$dst"
                 # VERBOSE
 		if [[ $flag_verbose == true ]]; then
-		    printf "$green_checkmark $info_label""  %s ${cyan}->${reset} %s\n" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
+		    info_copied "Copied" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
 		fi
             else
 		warn "Skipped file '%s': Destination directory doesn't exist (%s)" "$src" "$(dirname "$dst")" 
