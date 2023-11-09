@@ -1,6 +1,6 @@
 #+title: thallheim-dotfiles
 #+author: thallheim =thall@thallheim.com=
-#+STARTUP: show2levels
+#+STARTUP: show3levels
 
 dotfiles repo. Also houses its updater script for now.
 
