@@ -1,37 +1,20 @@
 #!/bin/bash
-# shellcheck disable=1001,1091,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
-true
+# shellcheck disable=1001,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
 
-# GLOBALS
-export version="0.0.1"
-input_paths=()
-input_paths_validated=()
-dst_dirs_validated=()
-inc_list="${HOME}/dotfiles/repo-update/inclusions.dat"
-dst_root="${HOME}/dotfiles/temp/"
-# UNUSED: dst_root_emacs="${HOME}/dotfiles/emacs/"
+# GLOBALS & HELPER FUNCTIONS
+. "./globals.sh"; . "./helpers.sh"
 
-# FLAGS
-src_paths_ok=false
-export flag_verbose=false
-
-# HELPERS
-. "./helpers.sh"
-
-# COLOURS (`colours_labels_strings.sh`)
-# Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
-
-
-# "ICONS" & LABELS/MSG/HELP STRINGS
-# [red_cross, green_checkmark, info_arrow]
-# [error_label, info_label, warn_label]
-# [info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg]
+# COLOURS/DECORATION/"ICONS"/LABELS/MSG STRINGS
 . "./colours_labels_strings.sh"
 
 # ERROR HANDLERS & FLAGS
 . "./info_errors.sh"
 
+
+#=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # FUNCTIONS
+#=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 
 # In case it's needed later
 function get_own_dir() {

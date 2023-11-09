@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=1091,2154,2059 # 'source-path=SCRIPTDIR' isn't working
+# shellcheck disable=2154,2059 # 'source-path=SCRIPTDIR' isn't working
 
 function cd_own_dir(){ # In case it's run from somewhere other than its own dir
     local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
