@@ -32,7 +32,10 @@ function parse_args() {
 	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${VERSION}"
 	    exit 0;;
 
-	*)
+	:)
+	    printf "Oi! Arguments, please!\n";;
+
+	?)
 	    unknown="$OPTARG"
 	    show_help
 	    exit_fatal "Unknown option" "${unknown}"
@@ -40,4 +43,3 @@ function parse_args() {
     done
     shift
 }
-
