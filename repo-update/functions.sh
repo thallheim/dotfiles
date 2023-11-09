@@ -16,21 +16,20 @@ src_paths_ok=false
 export flag_verbose=false
 
 # HELPERS
-source "./helpers.sh"
+. "./helpers.sh"
 
-# COLOURS
-# Defined in `colours_labels_strings.sh`
+# COLOURS (`colours_labels_strings.sh`)
 # Defined: [black, red, green, yellow, blue, cyan (plus 'reset')]
 
 
-# "ICONS" (UTF-8) & LABELS/MSG/HELP STRINGS
+# "ICONS" & LABELS/MSG/HELP STRINGS
 # [red_cross, green_checkmark, info_arrow]
 # [error_label, info_label, warn_label]
 # [info_copied_msg, error_target_newer, info_src_trgt_eq, info_diff_eq_msg]
-source "./colours_labels_strings.sh"
+. "./colours_labels_strings.sh"
 
 # ERROR HANDLERS & FLAGS
-source "./info_errors.sh"
+. "./info_errors.sh"
 
 # FUNCTIONS
 
