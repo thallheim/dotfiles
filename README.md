@@ -16,6 +16,7 @@ for a while, if ever.
 
 *Roughly* in order of priority:
 
+- [ ] getopts -> getopt
 - [ ] Add a function to check the error arrays at the end of all runs
 - [ ] (Maybe) Implement a small error stack just in case it becom untrivial
 later
