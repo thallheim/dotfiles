@@ -1,10 +1,7 @@
 #!/bin/bash
-# shellcheck disable=1091,2154
+# shellcheck disable=2154
 
 . "./functions.sh"
-
-
-export flag_status=false
 
 function parse_args() {
     while getopts "vuthsV" FLAG; do
@@ -31,8 +28,7 @@ function parse_args() {
 	    flag_status=true
 	    exit_fatal "TODO: Status not implemented";;
 	V)
-	    # TODO: Flesh out
-	    printf "dotupdate %s\n\nWritten by thallheim.\n" "${version}"
+	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${version}"
 	    exit 0;;
 
 	*)
