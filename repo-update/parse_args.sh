@@ -4,10 +4,10 @@
 . "./functions.sh"
 
 function parse_args() {
-    while getopts "vuthsV" FLAG; do
-	case "$FLAG" in
+    while getopts ':vuthsV' flag; do
+	case "$flag" in
 	v)
-	    FLAG_VERBOSE=true; printf "ARGS: %s\nVerbose mode: %s\n" "${FLAG}" "${FLAG_VERBOSE}";;
+	    FLAG_VERBOSE=true; printf "ARGS: %s\nVerbose mode: %s\n" "${flag}" "${FLAG_VERBOSE}";;
 
 	u)
 	    get_src_paths
@@ -33,8 +33,9 @@ function parse_args() {
 	    exit 0;;
 
 	*)
+	    unknown="$OPTARG"
 	    show_help
-	    exit_fatal "Unknown option" "${FLAG}"
+	    exit_fatal "Unknown option" "${unknown}"
 	esac
     done
     shift
