@@ -18,6 +18,17 @@ function info_checkmark() {
     fi
 }
 
+function info_copied() {
+    if [[ "$#" -eq 2 ]]; then
+	printf "${green_checkmark} ${info_label} %s ${cyan}->${reset} %s\n" "$1" "$2"
+    elif [[ "$#" -eq 3 ]]; then
+	printf "${green_checkmark} ${info_label} ${bold} %s:${end_bold} %s ${cyan}->${reset} %s\n" "$1" "$2" "$3"
+    else
+	printf "TODO: Handle error - wrong num args to info_copied\n"
+	((error_nonfatal++))
+    fi
+}
+
 function warn() {
        if [[ "$#" -eq 1 ]]; then
 	printf "${warn_triangle} ${warn_label}%s\n" "$1"
