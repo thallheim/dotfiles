@@ -1,4 +1,4 @@
-'# thallheim dotfiles
+# thallheim dotfiles
 
 dotfiles repo. Also houses its updater script for now.
 
