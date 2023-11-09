@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=1001,2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
 
 # GLOBALS & HELPER FUNCTIONS
 . "./globals.sh"; . "./helpers.sh"
