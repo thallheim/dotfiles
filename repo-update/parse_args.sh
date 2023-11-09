@@ -7,14 +7,16 @@ function parse_args() {
     while getopts "vuthsV" FLAG; do
 	case "$FLAG" in
 	v)
-	    flag_verbose=true; printf "%s\n" "${flag_verbose}"; shift;;
+	    flag_verbose=true; printf "ARGS: %s\nVerbose mode: %s\n" "${FLAG}" "${flag_verbose}"
+	    ;;
 
 	u)
 	    get_src_paths
 	    verify_src_readable
 	    get_dst_dirs
 	    mk_dst_dirs
-	    copy_all;;
+	    copy_all
+	    ;;
 
 	t)
 	    echo "test :)"
@@ -36,7 +38,7 @@ function parse_args() {
 	    show_help	    
 	    return 1;;
 	esac
-
     done
+    shift
 }
 

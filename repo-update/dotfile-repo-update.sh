@@ -14,7 +14,7 @@ function cd_own_dir(){ # In case it's run from somewhere other than its own dir
 #       
 # "./globals.sh"
 #
-# "./colours_labels_strings.sh"
+#
 #
 # "./inclusions.dat"
 #	Newline-delimited list of files to be pulled into the dst dir

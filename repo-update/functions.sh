@@ -1,21 +1,20 @@
 #!/bin/bash
 
 # GLOBALS & HELPER FUNCTIONS
+# Colours/decoration/"icons"/labels/strings (info, usage/help)
 . "./globals.sh"; . "./helpers.sh"
-
-# COLOURS/DECORATION/"ICONS"/LABELS/MSG STRINGS
-. "./colours_labels_strings.sh"
 
 # ERROR HANDLERS & FLAGS
 . "./info_errors.sh"
+
 
 
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # FUNCTIONS
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
-# In case it's needed later
+# TODO: Remove - very probably entirely unnecessary
+# In case it's needed later 
 function get_own_dir() {
     local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     printf "%s" "$dir"
