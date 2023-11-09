@@ -1,4 +1,4 @@
-# thallheim dotfiles
+'# thallheim dotfiles
 
 dotfiles repo. Also houses its updater script for now.
 
@@ -21,6 +21,10 @@ for a while, if ever.
 later
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Write newer/older check for copy ops
+- [ ] Allow set/unset/get settings through optstrings
+	- *Which?* Verbosity; summary/-ies; ?
+		- [ ] Set defaults for some/all unset?
+- [ ] Write a good-enough menu for 'interactive'-mode
 - [ ] Allow multiple inclusion sources
 	- [ ] Nested list input handling (i.e "per-app" lists and dir trees)
 - [x] Rewrite pre-op file checks
