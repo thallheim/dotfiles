@@ -7,8 +7,7 @@ function parse_args() {
     while getopts "vuthsV" FLAG; do
 	case "$FLAG" in
 	v)
-	    FLAG_VERBOSE=true; printf "ARGS: %s\nVerbose mode: %s\n" "${FLAG}" "${FLAG_VERBOSE}"
-	    ;;
+	    FLAG_VERBOSE=true; printf "ARGS: %s\nVerbose mode: %s\n" "${FLAG}" "${FLAG_VERBOSE}";;
 
 	u)
 	    get_src_paths
@@ -27,16 +26,15 @@ function parse_args() {
 	    return 0;;
 
 	s)
-	    FLAG_STATUS=true
+	    export FLAG_STATUS=true
 	    exit_fatal "TODO: Status not implemented";;
 	V)
 	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${VERSION}"
 	    exit 0;;
 
 	*)
-	    printf "${red_cross} ${error_label} %s\n" "Unknown option: $FLAG"
-	    show_help	    
-	    return 1;;
+	    show_help
+	    exit_fatal "Unknown option" "${FLAG}"
 	esac
     done
     shift
