@@ -5,8 +5,8 @@
 # HELPERS
 
 function show_help() {
-    printf "${usage}"
-    printf "${opts}"
+    printf "${USAGE}"
+    printf "${OPTS}"
 }
 
 function strip_home_slug() {
