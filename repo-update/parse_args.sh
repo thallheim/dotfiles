@@ -27,7 +27,7 @@ function parse_args() {
 	    return 0;;
 
 	s)
-	    flag_status=true
+	    FLAG_STATUS=true
 	    exit_fatal "TODO: Status not implemented";;
 	V)
 	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${VERSION}"
