@@ -68,13 +68,15 @@ function exit_nonfatal() {
 
 function exit_fatal() {
 
-    # Print error, increment error counter (and if it's been called)
-    printf "$red_cross $error_label "
-    printf "%s %s\n" "$1" "$2"
-    ((error_fatal++))
+    # Print error, increment error counter
 
-#    if [[ "$arg1" = "-ec" ]]; then
-#	print_error_count
-#    fi
+    if [[ "$#" -eq 1 ]]; then
+	printf "${red_cross} ${error_label} %s\n" "$1"
+    elif [[ "$#" -eq 2 ]]; then
+	printf "${red_cross} ${error_label} %s: %s\n" "$1" "$2"
+    else
+	printf "That's not right. BYE!\n"
+    fi
+    ((error_fatal++))
     exit 1
 }
