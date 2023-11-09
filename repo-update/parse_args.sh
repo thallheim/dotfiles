@@ -1,13 +1,13 @@
 #!/bin/bash
 # shellcheck disable=1091,2154
 
-source "./functions.sh"
+. "./functions.sh"
 
 
 export flag_status=false
 
 function parse_args() {
-    while getopts "vuths" FLAG; do
+    while getopts "vuthsV" FLAG; do
 	case "$FLAG" in
 	v)
 	    flag_verbose=true; printf "%s\n" "${flag_verbose}"; shift;;
