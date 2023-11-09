@@ -19,7 +19,7 @@ function strip_home_slug() {
 function strip_slug() {
     local input="$1"; local result=""
 
-    if [[ $input == ${HOME}\/* ]]; then
+    if [[ $input == ${HOME}"/" ]]; then
 	local subst="~"
 	sed -r "s#${HOME}#${subst}#" <<< "$input"; fi
 }

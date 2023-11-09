@@ -21,10 +21,10 @@ export flag_status=false
 
 # COLOURS
 # Decl.
-export reset=; export black=; export bold=; export end_bold=; export italic=; export end_italic=; 
-export darkblue=; export blue=; export darkgrey=; export grey=; export darkred=; export red=;
-export darkgreen=; export green=; export darkyellow=; export yellow=; 
-export darkmagenta=; export magenta=; export darkcyan=; export cyan=;
+export reset=""; export black=""; export bold=""; export end_bold=""; export italic=""; export end_italic=""; 
+export darkblue=""; export blue=""; export darkgrey=""; export grey=""; export darkred=""; export red="";
+export darkgreen=""; export green=""; export darkyellow=""; export yellow=""; 
+export darkmagenta=""; export magenta=""; export darkcyan=""; export cyan="";
 
 reset=$(tput sgr0)
 black=$(tput setaf 0)
