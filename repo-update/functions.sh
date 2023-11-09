@@ -22,15 +22,15 @@ function get_own_dir() {
 
 # Verify the inclusion list exists and read it into input_paths[]
 function get_src_paths() {
-    if [ -e "$inc_list" ]; then
+    if [ -e "${inc_list}" ]; then
 	while IFS= read -r line; do
 	    input_paths+=("$(eval echo "$line")")
 	done < "$inc_list"
 	# VERBOSE
-	if [[ $flag_verbose == true ]]; then
+	if [[ ${flag_verbose} == true ]]; then
 	   info_checkmark "Inclusion list OK" "${#input_paths[@]} entries to validate"; fi
     else
-	exit_fatal "Could not read inclusion list: " "$inc_list"
+	exit_fatal "Could not read inclusion list: " "${inc_list}"
     fi
 }
 
@@ -38,7 +38,7 @@ function get_src_paths() {
 function verify_src_readable() {
     info_arrow "Verifying sources"
     for path in "${input_paths[@]}"; do
-	if [[ -r "$path" ]]; then
+	if [[ -r "${path}" ]]; then
 	    input_paths_validated+=("$path")
 	    local path_stripped=""
 	    path_stripped="$(shorten_slug "$path")"
@@ -50,13 +50,13 @@ function verify_src_readable() {
 	    local result=""
 	    notfound="$(shorten_slug "$path")"
 	    result="${notfound/${HOME}/~}"
-	    warn "${bold}Source file not found${end_bold}" "'${result}'"
+	    warn "Source file not found" "'${result}'"
 	fi
 	
 	# Make sure at least one src file is readable, otherwise just exit
 	# TODO: Implement the actual check
 	if [[ ! "${#input_paths_validated[@]}" -gt 0 ]]; then
-	    src_paths_ok=false
+	    ((error_fatal++))
 	    exit_fatal "Failed to read sources. Check permissions if files are known good."; fi
     done
 }
@@ -87,7 +87,7 @@ function get_dst_dirs() {
 
 # Check if dst dirs exist and create as necessary
 function mk_dst_dirs() {
-    if [[ ! -d "$dst_root" ]]; then
+    if [[ ! -d "${dst_root}" ]]; then
 	mkdir -p "${dst_root}"
 	info_arrow "Created destination root directory"
     else

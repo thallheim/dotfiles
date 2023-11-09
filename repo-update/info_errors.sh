@@ -33,9 +33,9 @@ function warn() {
        if [[ "$#" -eq 1 ]]; then
 	printf "${warn_triangle} ${warn_label}%s\n" "$1"
        elif [[ "$#" -eq 2 ]]; then
-	   printf "${warn_triangle} ${warn_label}%s: %s\n" "$1" "$2"
+	   printf "${warn_triangle} ${warn_label}${bold}%s:${end_bold} %s\n" "$1" "$2"
        elif [[ "$#" -eq 3 ]]; then
-	   printf "${warn_triangle} ${warn_label}%s %s:\n" "$1" "$2" "$3"
+	   printf "${warn_triangle} ${warn_label}${bold}%s ${end_bold} %s:\n" "$1" "$2" "$3"
       fi
 }
 
