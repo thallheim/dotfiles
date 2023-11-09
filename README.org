@@ -15,10 +15,8 @@ for a while, if ever.
 
 * TODO
 
-** Main list
-/Roughly/ in order of priority:
-
-- [ ] getopts -> getopt
+** Main list [2/14]
+- [-] getopts -> getopt
 - [ ] Add a function to check the error arrays at the end of all runs
 - [ ] (Maybe) Implement a small error stack just in case it becom
   untrivial later
@@ -27,17 +25,17 @@ for a while, if ever.
 - [ ] Allow set/unset/get settings through optstrings
   - /Which?/ Verbosity; summary/-ies; ?
     - [ ] Set defaults for some/all unset?
-- [ ] Write a good-enough menu for 'interactive'-mode
+- [X] Write a good-enough menu for 'interactive'-mode
 - [ ] Allow multiple inclusion sources
   - [ ] Nested list input handling (i.e "per-app" lists and dir trees)
-- [X] Rewrite pre-op file checks
+- [-] Rewrite pre-op file checks
   - [ ] Time first or diff first?
   - [ ] Ask whether to proceed if not all sources could be verified
     - /With flag; default off?/
     - [ ] Add to user settings when that's working
 - [ ] Rename and fork off updater & man generator
-- [ ] Allow error verbosity levels
-  - [ ] Rework after 'proper' arg parsing is implemented
+- [-] Allow error verbosity levels
+  - Rework after 'proper' arg parsing is implemented
 - [ ] Allow saving existing target root as =dir.old/=
   - Allow setting for gzip if repo is large enough to warrant
     compression?
