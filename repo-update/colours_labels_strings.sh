@@ -1,21 +1,27 @@
 #!/bin/bash
-# shellcheck disable=2059,2155
+
 
 
 # COLOURS
-export reset=$(tput sgr0)
-export black=$(tput setaf 0)
+# Decl.
+export reset=; export black=; export bold=; export end_bold=; export italic=; export end_italic=; 
+export darkblue=; export blue=; export darkgrey=; export grey=; export darkred=; export red=;
+export darkgreen=; export green=; export darkyellow=; export yellow=; 
+export darkmagenta=; export magenta=; export darkcyan=; export cyan=;
 
-export bold=$(tput bold); export end_bold=$(tput sgr0)
-export italic=$(tput sitm); export end_italic=$(tput ritm)
+reset=$(tput sgr0)
+black=$(tput setaf 0)
 
-export darkblue=$(tput setaf 4); export blue=$(tput setaf 12)
-export darkgrey=$(tput setaf 8); export grey=$(tput setaf 7)
-export darkred=$(tput setaf 1); export red=$(tput setaf 9)
-export darkgreen=$(tput setaf 2); export green=$(tput setaf 10)
-export darkyellow=$(tput setaf 3); export yellow=$(tput setaf 11)
-export darkmagenta=$(tput setaf 5); export magenta=$(tput setaf 13)
-export darkcyan=$(tput setaf 6); export cyan=$(tput setaf 14)
+bold=$(tput bold); end_bold=$(tput sgr0)
+italic=$(tput sitm); end_italic=$(tput ritm)
+
+darkblue=$(tput setaf 4); blue=$(tput setaf 12)
+darkgrey=$(tput setaf 8); grey=$(tput setaf 7)
+darkred=$(tput setaf 1); red=$(tput setaf 9)
+darkgreen=$(tput setaf 2); green=$(tput setaf 10)
+darkyellow=$(tput setaf 3); yellow=$(tput setaf 11)
+darkmagenta=$(tput setaf 5); magenta=$(tput setaf 13)
+darkcyan=$(tput setaf 6); cyan=$(tput setaf 14)
 
 
 # "ICONS"
