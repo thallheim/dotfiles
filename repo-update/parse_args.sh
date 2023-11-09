@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=2154
+
 
 . "./functions.sh"
 
