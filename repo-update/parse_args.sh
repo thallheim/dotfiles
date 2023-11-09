@@ -7,7 +7,7 @@ function parse_args() {
     while getopts "vuthsV" FLAG; do
 	case "$FLAG" in
 	v)
-	    flag_verbose=true; printf "ARGS: %s\nVerbose mode: %s\n" "${FLAG}" "${flag_verbose}"
+	    FLAG_VERBOSE=true; printf "ARGS: %s\nVerbose mode: %s\n" "${FLAG}" "${FLAG_VERBOSE}"
 	    ;;
 
 	u)
@@ -30,7 +30,7 @@ function parse_args() {
 	    flag_status=true
 	    exit_fatal "TODO: Status not implemented";;
 	V)
-	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${version}"
+	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${VERSION}"
 	    exit 0;;
 
 	*)

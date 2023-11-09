@@ -22,28 +22,28 @@ function get_own_dir() {
 
 # Verify the inclusion list exists and read it into input_paths[]
 function get_src_paths() {
-    if [ -e "${inc_list}" ]; then
+    if [ -e "${INC_LIST}" ]; then
 	while IFS= read -r line; do
-	    input_paths+=("$(eval echo "$line")")
-	done < "$inc_list"
+	    INPUT_PATHS+=("$(eval echo "$line")")
+	done < "$INC_LIST"
 	# VERBOSE
-	if [[ ${flag_verbose} == true ]]; then
-	   info_checkmark "Inclusion list OK" "${#input_paths[@]} entries to validate"; fi
+	if [[ ${FLAG_VERBOSE} == true ]]; then
+	   info_checkmark "Inclusion list OK" "${#INPUT_PATHS[@]} entries to validate"; fi
     else
-	exit_fatal "Could not read inclusion list: " "${inc_list}"
+	exit_fatal "Could not read inclusion list: " "${INC_LIST}"
     fi
 }
 
 # Verify src files are readable
 function verify_src_readable() {
     info_arrow "Verifying sources"
-    for path in "${input_paths[@]}"; do
+    for path in "${INPUT_PATHS[@]}"; do
 	if [[ -r "${path}" ]]; then
-	    input_paths_validated+=("$path")
+	    INPUT_PATHS_VALIDATED+=("$path")
 	    local path_stripped=""
 	    path_stripped="$(shorten_slug "$path")"
 	    # VERBOSE:
-	    if [[ $flag_verbose == true ]]; then
+	    if [[ $FLAG_VERBOSE == true ]]; then
 		info_checkmark "  Valid" "${path_stripped}"; fi
 	else
 	    local notfound=""
@@ -55,7 +55,7 @@ function verify_src_readable() {
 	
 	# Make sure at least one src file is readable, otherwise just exit
 	# TODO: Implement the actual check
-	if [[ ! "${#input_paths_validated[@]}" -gt 0 ]]; then
+	if [[ ! "${#INPUT_PATHS_VALIDATED[@]}" -gt 0 ]]; then
 	    ((error_fatal++))
 	    exit_fatal "Failed to read sources. Check permissions if files are known good."; fi
     done
@@ -65,7 +65,7 @@ function verify_src_readable() {
 function get_dst_dirs() {
     info_arrow "Validating source dir structures"
 
-    for path in "${input_paths_validated[@]}"; do
+    for path in "${INPUT_PATHS_VALIDATED[@]}"; do
 	#printf "RAW PATH: %s\n" "${path}"
 	local file_stripped=""; local result=""
 	file_stripped="$(dirname "$path")"
@@ -75,10 +75,10 @@ function get_dst_dirs() {
 	    result="$file_stripped"
 	    
 	    # Only add the path if it isn't already in the array
-	    if ! [[ ${dst_dirs_validated[*]} =~ ${result} ]]; then
-		dst_dirs_validated+=("$result")
+	    if ! [[ ${DST_DIRS_VALIDATED[*]} =~ ${result} ]]; then
+		DST_DIRS_VALIDATED+=("$result")
 		# VERBOSE
-		if [[ $flag_verbose == true ]]; then
+		if [[ $FLAG_VERBOSE == true ]]; then
 		    info_checkmark "  Valid" "$(shorten_slug "${result}")"; fi
 	    fi
 	fi
@@ -87,8 +87,8 @@ function get_dst_dirs() {
 
 # Check if dst dirs exist and create as necessary
 function mk_dst_dirs() {
-    if [[ ! -d "${dst_root}" ]]; then
-	mkdir -p "${dst_root}"
+    if [[ ! -d "${DST_ROOT}" ]]; then
+	mkdir -p "${DST_ROOT}"
 	info_arrow "Created destination root directory"
     else
 	info_checkmark "Destination root directory exists"
@@ -97,13 +97,13 @@ function mk_dst_dirs() {
     # Create destination dirs
     info_arrow "Creating destination directories"
 
-    for path in "${dst_dirs_validated[@]}"; do
+    for path in "${DST_DIRS_VALIDATED[@]}"; do
 	local dir=""
 	dir="$(strip_home_slug "$path")"
-	mkdir -p "${dst_root}${dir}"
+	mkdir -p "${DST_ROOT}${dir}"
 	# VERBOSE
-	if [[ $flag_verbose == true ]]; then
-	    info_checkmark "  Created" "${dst_root/${HOME}/\~}${dir}"; fi
+	if [[ $FLAG_VERBOSE == true ]]; then
+	    info_checkmark "  Created" "${DST_ROOT/${HOME}/\~}${dir}"; fi
     done
 }
 
@@ -111,16 +111,16 @@ function copy_all() {
     # VERBOSE
     info_arrow "Copying files"
 
-    for src in "${input_paths_validated[@]}"; do
+    for src in "${INPUT_PATHS_VALIDATED[@]}"; do
         # Double-check src is a file before copying
 	if [[ -f "$src" ]]; then
 	    local dst=""
-            dst="${dst_root}$(strip_home_slug "$src")"
+            dst="${DST_ROOT}$(strip_home_slug "$src")"
 	    # Double-check dst is a dir before copying
             if [[ -d "$(dirname "$dst")" ]]; then
                 cp "$src" "$dst"
                 # VERBOSE
-		if [[ $flag_verbose == true ]]; then
+		if [[ $FLAG_VERBOSE == true ]]; then
 		    info_copied "Copied" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
 		fi
             else

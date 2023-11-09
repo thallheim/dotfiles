@@ -4,9 +4,9 @@ true
 
 function info_arrow() {
     if [ "$#" -gt 1 ]; then
-	printf "${info_arrow} $info_label${bold}%s${end_bold}: %s\n" "$1" "$2"
+	printf "${info_arrow} $info_label${BOLD}%s${END_BOLD}: %s\n" "$1" "$2"
     elif [ "$#" -eq 1 ]; then
-	printf "${info_arrow} ${info_label}${bold}%s${end_bold}\n" "$1"
+	printf "${info_arrow} ${info_label}${BOLD}%s${END_BOLD}\n" "$1"
     fi
 }
 
@@ -14,15 +14,15 @@ function info_checkmark() {
     if [[ "$#" -eq 1 ]]; then
 	printf "${green_checkmark} ${info_label}%s\n" "$1"
     elif [[ "$#" -eq 2 ]]; then
-	printf "${green_checkmark} $info_label${bold}%s:${end_bold} %s\n" "$1" "$2"
+	printf "${green_checkmark} $info_label${BOLD}%s:${END_BOLD} %s\n" "$1" "$2"
     fi
 }
 
 function info_copied() {
     if [[ "$#" -eq 2 ]]; then
-	printf "${green_checkmark} ${info_label} %s ${cyan}->${reset} %s\n" "$1" "$2"
+	printf "${green_checkmark} ${info_label} %s ${CYAN}->${RESET} %s\n" "$1" "$2"
     elif [[ "$#" -eq 3 ]]; then
-	printf "${green_checkmark} ${info_label} ${bold} %s:${end_bold} %s ${cyan}->${reset} %s\n" "$1" "$2" "$3"
+	printf "${green_checkmark} ${info_label} ${BOLD} %s:${END_BOLD} %s ${CYAN}->${RESET} %s\n" "$1" "$2" "$3"
     else
 	printf "TODO: Handle error - wrong num args to info_copied\n"
 	((error_nonfatal++))
@@ -33,9 +33,9 @@ function warn() {
        if [[ "$#" -eq 1 ]]; then
 	printf "${warn_triangle} ${warn_label}%s\n" "$1"
        elif [[ "$#" -eq 2 ]]; then
-	   printf "${warn_triangle} ${warn_label}${bold}%s:${end_bold} %s\n" "$1" "$2"
+	   printf "${warn_triangle} ${warn_label}${BOLD}%s:${END_BOLD} %s\n" "$1" "$2"
        elif [[ "$#" -eq 3 ]]; then
-	   printf "${warn_triangle} ${warn_label}${bold}%s ${end_bold} %s:\n" "$1" "$2" "$3"
+	   printf "${warn_triangle} ${warn_label}${BOLD}%s ${END_BOLD} %s:\n" "$1" "$2" "$3"
       fi
 }
 
@@ -49,14 +49,14 @@ function print_error_count() {
 }
 
 function exit_done() {
-    printf "\n$info_arrow $info_label ${bold}Done. Exiting...\n${end_bold}"
+    printf "\n$info_arrow $info_label ${BOLD}Done. Exiting...\n${END_BOLD}"
     exit 0
 }
 
 function exit_nonfatal() {
 
     ((error_nonfatal++))
-    printf "$warn_triangle $warn_label ${bold}Finished, but encountered non-fatal error(s):\n${end_bold}"
+    printf "$warn_triangle $warn_label ${BOLD}Finished, but encountered non-fatal error(s):\n${END_BOLD}"
     printf "\t%s %s %s\n" "  -" "$1" "$2"
 
     # Check whether to display error counter
