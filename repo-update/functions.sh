@@ -150,7 +150,7 @@ function copy_newer_files() {
 	done
     fi
     
-    if [[ "${#skipped[*]}" > "" && "${FLAG_VERBOSE}" == true ]]; then
+    if [[ -n "${skipped[*]}" && "${FLAG_VERBOSE}" == true ]]; then
 	for skipped_file in "${skipped[@]}"; do
 	    warn "Skipped - source is older" "$(shorten_slug "${skipped_file}")"
 	done
