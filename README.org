@@ -15,44 +15,42 @@ for a while, if ever.
 
 * TODOs
 
-** Main list [1/15]
+** Main list [3/17]
 
+- [ ] Add --force flag to clobber if repo file is newer than src
+- [ ] Rewrite pre-op file checks
+  - [ ] Offer to diff? How to handle multiple files?
+  - [ ] Ask whether to proceed if not all sources could be verified
+    - /With flag; default off?/
+    - [ ] Add to user settings when that's working
+- [ ] Move dir exist check from copy_all() -> mk_dst_dirs()
 - [ ] Add a function to check the error arrays at the end of all runs
-- [ ] (Maybe) Implement a small error stack just in case it becom
-  untrivial later
+- [ ] Automate updating man-page source & generating a new one
 - [ ] Decide what needs refactoring into a settings file
 - [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir-ing
-- [ ] Write newer/older check for copy ops
 - [ ] Allow set/unset/get settings through optstrings
   - /Which?/ Verbosity; summary/-ies; ?
     - [ ] Set defaults for some/all unset?
 - [-] Write a good-enough menu for 'interactive'-mode
 - [ ] Allow multiple inclusion sources
   - [ ] Nested list input handling (i.e "per-app" lists and dir trees)
-- [ ] Rewrite pre-op file checks
-  - [ ] Time first or diff first?
-  - [ ] Ask whether to proceed if not all sources could be verified
-    - /With flag; default off?/
-    - [ ] Add to user settings when that's working
+- [ ] (Maybe) Implement a small error stack just in case it becomes untrivial
+  later
 - [ ] Rename and fork off updater & man generator
-- [-] Allow error verbosity levels
+- [ ] Allow error verbosity levels
   - Rework after 'proper' arg parsing is implemented
 - [ ] Allow saving existing target root as =dir.old/=
-  - Allow setting for gzip if repo is large enough to warrant
-    compression?
+  - Allow setting for gzip if repo is large enough to warrant compression?
 - [ ] Let user keep a machine/account-local ignore file that matches
   against the include list, suppressing warnings about those files not
   being on the local machine
 - [ ] Do =pushd= & =popd= on start and end of run
   - Try to find out if it'll ever be necessary first. /Upd.:/ Probably
     not :)
-- [X] Main copy ops
-
 --------------
-
-** Implemented, needing additions
-**** Write help string(s)
-Update them.
+- [X] Main copy ops
+- [X] Make verbose mode flag order-agnostic
+- [X] Write newer/older check for copy ops
 
 * CHANGELOG
 
