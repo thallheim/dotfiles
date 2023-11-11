@@ -5,7 +5,8 @@
 
 
 # VARIABLES/ARRAYS
-export VERSION="0.0.1"
+export VERSION=""
+VERSION=$(<"./VERSION")
 export INPUT_PATHS=()
 export INPUT_PATHS_VALIDATED=()
 export DST_DIRS_VALIDATED=()
