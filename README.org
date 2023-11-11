@@ -21,6 +21,7 @@ for a while, if ever.
 - [ ] (Maybe) Implement a small error stack just in case it becom
   untrivial later
 - [ ] Decide what needs refactoring into a settings file
+- [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir-ing
 - [ ] Write newer/older check for copy ops
 - [ ] Allow set/unset/get settings through optstrings
   - /Which?/ Verbosity; summary/-ies; ?
@@ -51,11 +52,8 @@ for a while, if ever.
 
 ** Implemented, needing additions
 **** Write help string(s)
-- [X] Sort out the 'real' globals in =functions.sh=. Some should be made
-  /actually/ global to the main runner
+Update them.
 
-**** [X] getopts -> getopt
-Need to make it completely order-agnostic, so verbosity doesn't have to come first.
 * CHANGELOG
 
 *** 0.0.1
