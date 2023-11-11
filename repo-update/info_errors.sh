@@ -39,6 +39,21 @@ function warn() {
       fi
 }
 
+function error() {
+
+    # Print error, increment error counter
+    if [[ "$#" -eq 1 ]]; then
+	printf "${red_cross} ${error_label} %s\n" "$1"
+    elif [[ "$#" -eq 2 ]]; then
+	printf "${red_cross} ${error_label} %s: %s\n" "$1" "$2"
+    elif [[ "$#" -eq 3 ]]; then
+	printf "${red_cross} ${error_label} ${BOLD}%s:${END_BOLD} %s \t %s\n" "$1" "$2" "$3"
+    else
+	printf "You broke the error function. High five! Is nice!\n"
+    fi
+    ((error_nonfatal++))
+}
+
 function print_error_count() {
     local err_count="$((error_fatal + error_nonfatal))"
 
