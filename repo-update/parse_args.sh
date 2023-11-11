@@ -23,7 +23,7 @@ eval set -- "$VALID_OPTS"
 while true; do
      case "$1" in
 	 -v | --verbose)
-	     request_verbose
+	     FLAG_VERBOSE=true
 	     shift;;
 	    
 	 -u | --update)
@@ -32,7 +32,7 @@ while true; do
 	     verify_src_readable
 	     get_dst_dirs
 	     mk_dst_dirs
-	     copy_all
+	     copy_newer_files
 	     exit_done;;
 
 	-t | --test)
@@ -47,7 +47,7 @@ while true; do
 	    return 0;;
 	    
 	-s | --status)
-	    export FLAG_STATUS=true
+	    FLAG_STATUS=true
 	    exit_nonfatal "TODO: Status not implemented";;
 
 	-V | --version)

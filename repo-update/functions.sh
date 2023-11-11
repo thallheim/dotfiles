@@ -97,27 +97,63 @@ function mk_dst_dirs() {
     done
 }
 
-function copy_all() {
-    # VERBOSE
-    info_circle "Copying files"
+# 0 if src is newer, else 1
+function confirm_src_newer() {
+    local src="$1"
+    local dst="$2"
+    
+    if [[ -e $src ]]; then
+	if [[ $src -nt $dst ]]; then
+	    return 0
+	else
+	    return 1
+	fi
+    fi
+}
+
+function copy_newer_files() {
+    info_circle "Start copy operations"
+    local to_copy=()
+    local skipped=()
+
 
     for src in "${INPUT_PATHS_VALIDATED[@]}"; do
-        # Double-check src is a file before copying
-	if [[ -f "$src" ]]; then
-	    local dst=""
-            dst="${DST_ROOT}$(strip_home_slug "$src")"
-	    # Double-check dst is a dir before copying
-            if [[ -d "$(dirname "$dst")" ]]; then
-                cp "$src" "$dst"
-                # VERBOSE
-		if [[ $FLAG_VERBOSE == true ]]; then
-		    info_copied "Copied" "$(shorten_slug "${src}")" "$(shorten_slug "${dst}")"
-		fi
-            else
-		warn "Skipped file '%s': Destination directory doesn't exist (%s)" "$src" "$(dirname "$dst")" 
-            fi
-        else
-            error_fatal "Source file does not exist or is not a regular file" "$src"
-        fi
+	local dst=""
+	dst="${DST_ROOT}$(strip_home_slug "$src")"
+
+	if [[ "${src}" -nt "${dst}" ]]; then
+	    to_copy+=("$src")
+	else
+	    skipped+=("$src")
+	fi
     done
+    
+    # DEBUG TODO: Remove
+    # printf "\nCOPY: %s\n" "${to_copy[*]}"
+    # printf "SKIP: %s\n\n" "${skipped[*]}"
+    # if [[ "${skipped[*]}" > "" ]]; then
+    # 	echo "yah."
+    # else
+    # 	echo "nah."
+    # fi
+
+    for file in "${to_copy[@]}"; do
+	local dst=""
+	dst="${DST_ROOT}$(strip_home_slug "$file")"
+	cp "$file" "$dst"
+    done
+    if [[ $FLAG_VERBOSE == true ]]; then
+	for file in "${to_copy[@]}"; do
+	    local dst=""
+	    dst="${DST_ROOT}$(strip_home_slug "$file")"
+	    info_copied " $(shorten_slug "${file}")" "$(shorten_slug "${dst}")"
+	done
+    fi
+    
+    if [[ "${#skipped[*]}" > "" && "${FLAG_VERBOSE}" == true ]]; then
+	for skipped_file in "${skipped[@]}"; do
+	    warn "Skipped - source is older" "$(shorten_slug "${skipped_file}")"
+	done
+    fi
+    info_checkmark "Copy operations complete"
 }
