@@ -45,6 +45,7 @@ DARKCYAN=$(tput setaf 6); CYAN=$(tput setaf 14)
 export red_cross="$RED""\xE2\x9D\x8C""$RESET"
 export green_checkmark="$GREEN""\xE2\x9C\x93""$RESET"
 export info_arrow="$CYAN""\xE2\x87\xA8""$RESET"
+export info_circle="$CYAN""\xE2\x93\x98""$RESET"
 export warn_triangle="\xE2\x9A\xA0"
 
 

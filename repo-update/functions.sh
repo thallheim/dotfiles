@@ -1,26 +1,15 @@
 #!/bin/bash
 
 # GLOBALS & HELPER FUNCTIONS
-# Colours/decoration/"icons"/labels/strings (info, usage/help)
-. "./globals.sh"; . "./helpers.sh"
-
-# ERROR HANDLERS & FLAGS
-. "./info_errors.sh"
-
+# Colours/decoration/"icons"/labels/strings, usage/help, info, errors
+. "./globals.sh"; . "./helpers.sh"; . "./info_errors.sh"
 
 
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # FUNCTIONS
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-# TODO: Remove - very probably entirely unnecessary
-# In case it's needed later 
-function get_own_dir() {
-    local dir=""; dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    printf "%s" "$dir"
-}
-
-# Verify the inclusion list exists and read it into input_paths[]
+# Verify the inclusion list exists and read it into input_paths()
 function get_src_paths() {
     if [ -e "${INC_LIST}" ]; then
 	while IFS= read -r line; do
@@ -36,7 +25,7 @@ function get_src_paths() {
 
 # Verify src files are readable
 function verify_src_readable() {
-    info_arrow "Verifying sources"
+    info_circle "Verifying sources"
     for path in "${INPUT_PATHS[@]}"; do
 	if [[ -r "${path}" ]]; then
 	    INPUT_PATHS_VALIDATED+=("$path")
@@ -63,7 +52,7 @@ function verify_src_readable() {
 
 # Get folder structure from validated input paths
 function get_dst_dirs() {
-    info_arrow "Validating source dir structures"
+    info_circle "Validating source dir structures"
 
     for path in "${INPUT_PATHS_VALIDATED[@]}"; do
 	#printf "RAW PATH: %s\n" "${path}"
@@ -90,13 +79,13 @@ function get_dst_dirs() {
 function mk_dst_dirs() {
     if [[ ! -d "${DST_ROOT}" ]]; then
 	mkdir -p "${DST_ROOT}"
-	info_arrow "Created destination root directory"
+	info_circle "Created destination root directory"
     else
 	info_checkmark "Destination root directory exists"
     fi
  
     # Create destination dirs
-    info_arrow "Creating destination directories"
+    info_circle "Creating destination directories"
 
     for path in "${DST_DIRS_VALIDATED[@]}"; do
 	local dir=""
@@ -110,7 +99,7 @@ function mk_dst_dirs() {
 
 function copy_all() {
     # VERBOSE
-    info_arrow "Copying files"
+    info_circle "Copying files"
 
     for src in "${INPUT_PATHS_VALIDATED[@]}"; do
         # Double-check src is a file before copying

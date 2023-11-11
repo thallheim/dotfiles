@@ -2,6 +2,14 @@
 # shellcheck disable=2154,2059 # 'shellcheck source-path=SCRIPTDIR' isn't working
 true
 
+function info_circle() {
+    if [ "$#" -gt 1 ]; then
+	printf "${info_circle} $info_label${BOLD}%s${END_BOLD}: %s\n" "$1" "$2"
+    elif [ "$#" -eq 1 ]; then
+	printf "${info_circle} ${info_label}${BOLD}%s${END_BOLD}\n" "$1"
+    fi
+}
+
 function info_arrow() {
     if [ "$#" -gt 1 ]; then
 	printf "${info_arrow} $info_label${BOLD}%s${END_BOLD}: %s\n" "$1" "$2"
@@ -64,7 +72,7 @@ function print_error_count() {
 }
 
 function exit_done() {
-    printf "$info_arrow $info_label ${BOLD}Exiting...\n${END_BOLD}"
+    printf "$info_circle $info_label${BOLD}Exiting...\n${END_BOLD}"
     exit 0
 }
 
