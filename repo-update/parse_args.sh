@@ -1,45 +1,54 @@
 #!/bin/bash
-
+# shellcheck disable=2181
 
 . "./functions.sh"
+VALID_OPTS=""
+VALID_OPTS=$( getopt -o :vuthsV --long verbose,update,test,help,status,version -- "$@" )
 
 function parse_args() {
-    while getopts ':vuthsV' flag; do
-	case "$flag" in
-	v)
-	    FLAG_VERBOSE=true; printf "ARGS: %s\nVerbose mode: %s\n" "${flag}" "${FLAG_VERBOSE}";;
+eval set -- "$VALID_OPTS"
 
-	u)
+    [ $? -eq 0 ] || {
+        exit_fatal "No recognised option provided"
+    }
+
+while true; do
+     case "$1" in
+	 -v | --verbose)
+	     FLAG_VERBOSE=true 
+	     printf "${MAGENTA}Verbose mode:${RESET}\t%s\n \
+${MAGENTA}ARGS:${RESET}\t\t%s\n" \
+"${GREEN}${FLAG_VERBOSE}${RESET}" "${YELLOW}$*${RESET}"
+	     shift;;
+	    
+	-u | --update)
 	    get_src_paths
 	    verify_src_readable
 	    get_dst_dirs
 	    mk_dst_dirs
 	    copy_all
-	    ;;
+	    exit_done;;
 
-	t)
+	-t | --test)
 	    echo "test :)"
 	    exit_done;;
 
-	h)
+	-h | --help)
 	    show_help
 	    return 0;;
-
-	s)
+	    
+	-s | --status)
 	    export FLAG_STATUS=true
-	    exit_fatal "TODO: Status not implemented";;
-	V)
+	    exit_nonfatal "TODO: Status not implemented";;
+
+	-V | --version)
 	    printf "dotupdate %s\n\nLicense: MIT\nWritten by thallheim.\n" "${VERSION}"
 	    exit 0;;
 
-	:)
-	    printf "Oi! Arguments, please!\n";;
-
-	?)
-	    unknown="$OPTARG"
+	--)
 	    show_help
-	    exit_fatal "Unknown option" "${unknown}"
+	    shift
+	    break;;
 	esac
     done
-    shift
 }
