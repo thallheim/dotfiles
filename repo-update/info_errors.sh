@@ -49,7 +49,7 @@ function print_error_count() {
 }
 
 function exit_done() {
-    printf "\n$info_arrow $info_label ${BOLD}Done. Exiting...\n${END_BOLD}"
+    printf "$info_arrow $info_label ${BOLD}Exiting...\n${END_BOLD}"
     exit 0
 }
 
