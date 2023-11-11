@@ -5,20 +5,23 @@
 # HELPERS
 
 function show_help() {
+local line="${DARKGREY}¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨${RESET}"
 cat << EOF
 ${BLUE}Usage:${RESET}
 	dotupdate.sh [OPTION]...
 
 ${BLUE}Options:${RESET}
-  (!) Note: ${DARKGREY}Verbosity flag must be passed first if desired.${RESET}
+  (!) Note: ${DARKGREY}TODO: Remember what I meant to put here.${RESET}
 
 	  Short	    Long	Descr.
-	  ${DARKGREY}¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨${RESET}
+	  ${line}
 	  -h	    --help	Show help.
 	  -v 	    --verbose	Run in verbose mode; always print error summary.
-	  -s	    --status	Show time of last execution; List files that have since changed.
+	  -s	    --status	Show status (not implemented)
+	  -t	    --test	Verify sources and destination paths are valid,
+	  	    		making no filesystem changes. 
 	  -V  	    --version	Show version number.
-
+	  ${line}
 EOF
 }
 
