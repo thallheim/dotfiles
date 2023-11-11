@@ -85,6 +85,7 @@ function get_dst_dirs() {
     done
 }
 
+# TODO: Split dst path verification into new function so the test can run it without creating the folders
 # Check if dst dirs exist and create as necessary
 function mk_dst_dirs() {
     if [[ ! -d "${DST_ROOT}" ]]; then
