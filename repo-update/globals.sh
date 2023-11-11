@@ -60,7 +60,3 @@ export info_src_trgt_eq="$info_label"" Nothing to do: Source and target have ide
 export info_diff_eq_msg="$info_label"" Nothing to do: Files up to date."
 
 
-# HELP/USAGE STRINGS
-export USAGE="${BLUE}Usage:${RESET}\n\t dotupdate.sh [OPTION]...\n\n\t (!)\tNote: ${DARKGREY}Clustered short options ('-xyz') not yet supported; pass\n\t\tas '-x -y -z'${RESET}\n\n"
-
-export OPTS="${BLUE}Options:\n${RESET}\tShort\tLong\t\tDescr.\n\t${DARKGREY}¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨${RESET}\n\t-h\t --help\t\tShow help.\n\t-s\t --status\tShow time of last execution; List files that have since changed.\n\t-v\t --verbose\tVerbose-mode; Always print error summary.\n\t\t --version\tShow version number.\n"

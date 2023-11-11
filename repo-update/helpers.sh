@@ -5,8 +5,21 @@
 # HELPERS
 
 function show_help() {
-    printf "${USAGE}"
-    printf "${OPTS}"
+cat << EOF
+${BLUE}Usage:${RESET}
+	dotupdate.sh [OPTION]...
+
+${BLUE}Options:${RESET}
+  (!) Note: ${DARKGREY}Verbosity flag must be passed first if desired.${RESET}
+
+	  Short	    Long	Descr.
+	  ${DARKGREY}¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨${RESET}
+	  -h	    --help	Show help.
+	  -v 	    --verbose	Run in verbose mode; always print error summary.
+	  -s	    --status	Show time of last execution; List files that have since changed.
+	  -V  	    --version	Show version number.
+
+EOF
 }
 
 function strip_home_slug() {
