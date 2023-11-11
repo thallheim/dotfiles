@@ -13,10 +13,10 @@ yourself in its current form, I'd simply download the whole source tree
 (=repo-update/=) and chuck it wherever, for now. Packaging won't happen
 for a while, if ever.
 
-* TODO
+* TODOs
 
 ** Main list [1/15]
-- [-] getopts -> getopt
+
 - [ ] Add a function to check the error arrays at the end of all runs
 - [ ] (Maybe) Implement a small error stack just in case it becom
   untrivial later
@@ -54,6 +54,8 @@ for a while, if ever.
 - [X] Sort out the 'real' globals in =functions.sh=. Some should be made
   /actually/ global to the main runner
 
+**** [X] getopts -> getopt
+Need to make it completely order-agnostic, so verbosity doesn't have to come first.
 * CHANGELOG
 
 *** 0.0.1
