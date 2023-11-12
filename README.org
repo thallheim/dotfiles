@@ -16,18 +16,17 @@ for a while, if ever.
 * TODOs
 
 ** Main list [3/17]
+*Legend:*
+	*[X]*.....Started/ongoing
+	*[-]*.....On hold
+
+--------------
 
 - [ ] Add --force flag to clobber if repo file is newer than src
-- [ ] Rewrite pre-op file checks
-  - [ ] Offer to diff? How to handle multiple files?
-  - [ ] Ask whether to proceed if not all sources could be verified
-    - /With flag; default off?/
-    - [ ] Add to user settings when that's working
 - [ ] Move dir exist check from copy_all() -> mk_dst_dirs()
+- [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir-ing
 - [ ] Add a function to check the error arrays at the end of all runs
 - [ ] Automate updating man-page source & generating a new one
-- [ ] Decide what needs refactoring into a settings file
-- [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir-ing
 - [ ] Allow set/unset/get settings through optstrings
   - /Which?/ Verbosity; summary/-ies; ?
     - [ ] Set defaults for some/all unset?
@@ -48,6 +47,7 @@ for a while, if ever.
   - Try to find out if it'll ever be necessary first. /Upd.:/ Probably
     not :)
 --------------
+*** Completed
 - [X] Main copy ops
 - [X] Make verbose mode flag order-agnostic
 - [X] Write newer/older check for copy ops
