@@ -16,9 +16,9 @@ for a while, if ever.
 * TODOs
 
 ** Main list [3/17]
-*Legend:*
-	*[X]*.....Started/ongoing
-	*[-]*.....On hold
+*- Legend:*
+  - *[X]*.....Started/ongoing
+  - *[-]*.....On hold
 
 --------------
 
