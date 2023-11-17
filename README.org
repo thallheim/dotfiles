@@ -1,6 +1,6 @@
 #+title: thallheim-dotfiles
 #+author: thallheim =thall@thallheim.com=
-#+STARTUP: show3levels
+#+STARTUP: content
 
 dotfiles repo. Also houses its updater script for now.
 
@@ -9,27 +9,25 @@ until some things I consider essential are in place; ditto the man page
 helper.
 
 *Subject to breaking changes without warning*. If you do want to use it
-yourself in its current form, I'd simply download the whole source tree
-(=repo-update/=) and chuck it wherever, for now. Packaging won't happen
-for a while, if ever.
+in its current form, just download the =repo-update= folder and chuck it
+wherever, for now. Packaging won't happen for a while, if ever.
 
 * TODOs
 
-** Main list [3/17]
+** Main list (active: [1/15])
 *- Legend:*
-  - *[X]*.....Started/ongoing
-  - *[-]*.....On hold
+  *[X]* /Started/ongoing/ | *[-]* /On hold/
 
 --------------
 
+- [ ] Allow set/unset/get settings through flags
+  - [ ] Set any defaults?
+- [ ] Allow globbing in inclusion list?
 - [ ] Add --force flag to clobber if repo file is newer than src
 - [ ] Move dir exist check from copy_all() -> mk_dst_dirs()
 - [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir-ing
 - [ ] Add a function to check the error arrays at the end of all runs
 - [ ] Automate updating man-page source & generating a new one
-- [ ] Allow set/unset/get settings through optstrings
-  - /Which?/ Verbosity; summary/-ies; ?
-    - [ ] Set defaults for some/all unset?
 - [-] Write a good-enough menu for 'interactive'-mode
 - [ ] Allow multiple inclusion sources
   - [ ] Nested list input handling (i.e "per-app" lists and dir trees)
@@ -46,12 +44,14 @@ for a while, if ever.
 - [ ] Do =pushd= & =popd= on start and end of run
   - Try to find out if it'll ever be necessary first. /Upd.:/ Probably
     not :)
---------------
-*** Completed
+*** Completed [4/4]
+- [X] Allow settings file (/basename/.conf)
+    Include: main incl. list, verbosity & warn defaults
 - [X] Main copy ops
 - [X] Make verbose mode flag order-agnostic
 - [X] Write newer/older check for copy ops
 
+--------------
 * CHANGELOG
 
 *** 0.0.1
