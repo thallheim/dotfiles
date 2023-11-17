@@ -8,9 +8,9 @@ The updater script is very unfinished and will not get its own repo
 until some things I consider essential are in place; ditto the man page
 helper.
 
-*Subject to breaking changes without warning*. If you do want to use it
-in its current form, just download the =repo-update= folder and chuck it
-wherever, for now. Packaging won't happen for a while, if ever.
+If you do want to use it in its current form, just download the =repo-update=
+folder and chuck it wherever, for now. Packaging won't happen for a while, if
+ever.
 
 * TODOs
 
@@ -20,6 +20,7 @@ wherever, for now. Packaging won't happen for a while, if ever.
 
 --------------
 
+- [X] Rename, restructure, and fork off updater & man generator
 - [ ] Allow set/unset/get settings through flags
   - [ ] Set any defaults?
 - [ ] Allow globbing in inclusion list?
@@ -33,7 +34,6 @@ wherever, for now. Packaging won't happen for a while, if ever.
   - [ ] Nested list input handling (i.e "per-app" lists and dir trees)
 - [ ] (Maybe) Implement a small error stack just in case it becomes untrivial
   later
-- [ ] Rename and fork off updater & man generator
 - [ ] Allow error verbosity levels
   - Rework after 'proper' arg parsing is implemented
 - [ ] Allow saving existing target root as =dir.old/=
