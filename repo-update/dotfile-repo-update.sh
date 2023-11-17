@@ -13,8 +13,7 @@ function cd_own_dir(){ # In case it's run from somewhere other than its own dir
 # FILE SUMMARIES:
 #       
 # "./globals.sh"
-#
-#
+#       (Most) global vars and arrays
 #
 # "./inclusions.dat"
 #	Newline-delimited list of files to be pulled into the dst dir
@@ -22,9 +21,8 @@ function cd_own_dir(){ # In case it's run from somewhere other than its own dir
 # "./info_errors.sh"
 #	Strings, labels, functions for info and error handling
 #      
-# "./functions.sh"
-#	File and directory handlers, as well as whatever didn't quite
-#	merit factoring out.
+# "./file-ops.sh"
+#	File operations
 #
 # "./helpers.sh"
 #	Helper functions
@@ -32,7 +30,9 @@ function cd_own_dir(){ # In case it's run from somewhere other than its own dir
 . "./parse_args.sh"
 #	Contains the arg parser and related flags
 #
+. "./parse_settings.sh"
+#       Parses user settings
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
+parse_user_settings
 parse_args "$@"

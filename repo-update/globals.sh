@@ -15,7 +15,7 @@ export DST_ROOT="${HOME}/dotfiles/temp/"
 # UNUSED: export DST_ROOT_EMACS="${HOME}/dotfiles/emacs/"
 
 # FLAGS
-export FLAG_VERBOSE=false
+declare -x -g FLAG_VERBOSE=false
 export SRC_PATHS_OK=false
 export FLAG_STATUS=false
 
