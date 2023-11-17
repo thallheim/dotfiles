@@ -1,6 +1,6 @@
 #+title: thallheim-dotfiles
 #+author: thallheim =thall@thallheim.com=
-#+STARTUP: content
+#+STARTUP: showall
 
 dotfiles repo. Also houses its updater script for now.
 
@@ -25,7 +25,7 @@ wherever, for now. Packaging won't happen for a while, if ever.
 - [ ] Allow globbing in inclusion list?
 - [ ] Add --force flag to clobber if repo file is newer than src
 - [ ] Move dir exist check from copy_all() -> mk_dst_dirs()
-- [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir-ing
+- [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir
 - [ ] Add a function to check the error arrays at the end of all runs
 - [ ] Automate updating man-page source & generating a new one
 - [-] Write a good-enough menu for 'interactive'-mode
