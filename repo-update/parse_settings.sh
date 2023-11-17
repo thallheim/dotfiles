@@ -7,7 +7,7 @@ declare -x -A user_settings_array
 function parse_user_settings() {
     while IFS='=' read -r key val; do
 	user_settings_array["${key}"]=${val}
-    done < <(awk -f ./get_overrides ${settings_file})
+    done < <(awk -f ./get_overrides.awk ${settings_file})
 
     if [[ ${user_settings_array["verbose_by_default"]} = "on" ]]; then
 	#printf "%s\n" ${user_settings_array["verbose_by_default"]}
