@@ -17,7 +17,8 @@ function get_src_paths() {
 	done < "$INC_LIST"
 	# VERBOSE
 	if [[ ${FLAG_VERBOSE} == true ]]; then
-	   info_checkmark "Inclusion list OK" "${#INPUT_PATHS[@]} entries to validate"; fi
+	    info_checkmark \
+		"Inclusion list OK" "${#INPUT_PATHS[@]} entries to validate"; fi
     else
 	exit_fatal "Could not read inclusion list: " "${INC_LIST}"
     fi
@@ -41,7 +42,7 @@ function verify_src_readable() {
 	    result="${notfound/${HOME}/~}"
 	    warn "Source file not found" "'${result}'"
 	fi
-	
+
 	# Make sure at least one src file is readable, otherwise just exit
 	# TODO: Implement the actual check
 	if [[ ! "${#INPUT_PATHS_VALIDATED[@]}" -gt 0 ]]; then
@@ -62,7 +63,7 @@ function get_dst_dirs() {
 	# If it's not the home folder itself, process it
 	if [[ ! "$file_stripped" = "${HOME}" ]]; then
 	    result="$file_stripped"
-	    
+
 	    # Only add the path if it isn't already in the array
 	    if ! [[ ${DST_DIRS_VALIDATED[*]} =~ ${result} ]]; then
 		DST_DIRS_VALIDATED+=("$result")
@@ -74,7 +75,8 @@ function get_dst_dirs() {
     done
 }
 
-# TODO: Split dst path verification into new function so the test can run it without creating the folders
+# TODO: Split dst path verification into new function so the test can run it
+#	without creating the folders
 # Check if dst dirs exist and create as necessary
 function mk_dst_dirs() {
     if [[ ! -d "${DST_ROOT}" ]]; then
@@ -83,7 +85,7 @@ function mk_dst_dirs() {
     else
 	info_checkmark "Destination root directory exists"
     fi
- 
+
     # Create destination dirs
     info_circle "Creating destination directories"
 
@@ -101,7 +103,7 @@ function mk_dst_dirs() {
 function confirm_src_newer() {
     local src="$1"
     local dst="$2"
-    
+
     if [[ -e $src ]]; then
 	if [[ $src -nt $dst ]]; then
 	    return 0
@@ -127,14 +129,14 @@ function copy_newer_files() {
 	    skipped+=("$src")
 	fi
     done
-    
+
     # DEBUG TODO: Remove
     # printf "\nCOPY: %s\n" "${to_copy[*]}"
     # printf "SKIP: %s\n\n" "${skipped[*]}"
     # if [[ "${skipped[*]}" > "" ]]; then
-    # 	echo "yah."
+    #	echo "yah."
     # else
-    # 	echo "nah."
+    #	echo "nah."
     # fi
 
     for file in "${to_copy[@]}"; do
@@ -149,7 +151,7 @@ function copy_newer_files() {
 	    info_copied " $(shorten_slug "${file}")" "$(shorten_slug "${dst}")"
 	done
     fi
-    
+
     if [[ -n "${skipped[*]}" && "${FLAG_VERBOSE}" == true ]]; then
 	for skipped_file in "${skipped[@]}"; do
 	    warn "Skipped - source is older" "$(shorten_slug "${skipped_file}")"
