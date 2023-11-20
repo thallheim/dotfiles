@@ -8,6 +8,8 @@
 
 ;;; Code:
 
+(defalias 'cdk 'conditionally-define-key) ; To keep line lengths reasonable
+
 ;;==========================================================================
 ;; MULTIPLE-CURSORS
 ;;==========================================================================
@@ -18,12 +20,12 @@
     (progn (which-key-add-key-based-replacements "C-c M-c" "thall-mc-prefix")
 	   (global-set-key (kbd "C-c M-c") thall-mc-map)))
 
-(conditionally-define-key 'multiple-cursors "e" 'mc/edit-lines thall-mc-map)
-(conditionally-define-key 'multiple-cursors "n" 'mc/mark-next-like-this thall-mc-map)
-(conditionally-define-key 'multiple-cursors "p" 'mc/mark-previous-like-this thall-mc-map)
-(conditionally-define-key 'multiple-cursors "a" 'mc/mark-all-like-this thall-mc-map)
-(conditionally-define-key 'multiple-cursors "w" 'mc/mark-next-like-this-word thall-mc-map)
-(conditionally-define-key 'multiple-cursors "W" 'mc/mark-previous-like-this-word thall-mc-map)
+(cdk 'multiple-cursors "a" 'mc/mark-all-like-this	    thall-mc-map)
+(cdk 'multiple-cursors "e" 'mc/edit-lines		    thall-mc-map)
+(cdk 'multiple-cursors "n" 'mc/mark-next-like-this	    thall-mc-map)
+(cdk 'multiple-cursors "p" 'mc/mark-previous-like-this	    thall-mc-map)
+(cdk 'multiple-cursors "w" 'mc/mark-next-like-this-word	    thall-mc-map)
+(cdk 'multiple-cursors "W" 'mc/mark-previous-like-this-word thall-mc-map)
 
 ;;==========================================================================
 ;; LSP
@@ -34,11 +36,11 @@
     (progn (which-key-add-key-based-replacements "C-<f1>" "thall-lsp-prefix")
 	   (global-set-key (kbd "C-<f1>") thall-lsp-map)))
 
-(conditionally-define-key 'lsp-ui "<f1>" 'lsp-ui-doc-glance thall-lsp-map)
-(conditionally-define-key 'lsp-ui "<f2>" 'lsp-ui-peek-find-definitions thall-lsp-map)
-(conditionally-define-key 'lsp-ui "<f26>" 'lsp-ui-peek-find-references thall-lsp-map)
-(conditionally-define-key 'lsp-ui "<f27>" 'lsp-ui-peek-find-implementation thall-lsp-map)
-(conditionally-define-key 'flycheck "l"   'flycheck-list-errors thall-lsp-map)
+(cdk 'lsp-ui "<f1>"  'lsp-ui-doc-glance		      thall-lsp-map)
+(cdk 'lsp-ui "<f2>"  'lsp-ui-peek-find-definitions    thall-lsp-map)
+(cdk 'lsp-ui "<f26>" 'lsp-ui-peek-find-references     thall-lsp-map)
+(cdk 'lsp-ui "<f27>" 'lsp-ui-peek-find-implementation thall-lsp-map)
+(cdk 'flycheck "l"   'flycheck-list-errors	      thall-lsp-map)
 ;;==========================================================================
 ;; HELM
 ;;==========================================================================
@@ -48,18 +50,21 @@
     (progn (which-key-add-key-based-replacements "C-c h" "thall-helm-prefix")
   (global-set-key (kbd "C-c h") thall-helm-map)))
 
-(conditionally-define-key 'helm "a"   'helm-org-agenda-files-headings thall-helm-map)
-(conditionally-define-key 'helm "b"   'helm-mini thall-helm-map)
-(conditionally-define-key 'helm "t"   'helm-cmd-t thall-helm-map)
-(conditionally-define-key 'helm "f"   'helm-find thall-helm-map)
-(conditionally-define-key 'helm "F"   'helm-find-files thall-helm-map)
-(conditionally-define-key 'helm "g g" 'helm-git-grep thall-helm-map)
-(conditionally-define-key 'helm "g l" 'helm-ls-git-ls thall-helm-map)
-(conditionally-define-key 'helm "i"   'helm-imenu thall-helm-map)
-(conditionally-define-key 'helm "r"   'helm-recentf thall-helm-map)
-(conditionally-define-key 'helm "o"   'helm-occur thall-helm-map)
-(conditionally-define-key 'helm "M-y" 'helm-show-kill-ring thall-helm-map)
-(conditionally-define-key 'helm "x"   'helm-M-x thall-helm-map)
+(cdk 'helm "a"   'helm-apropos			 thall-helm-map)
+(cdk 'helm "b"   'helm-mini			 thall-helm-map)
+(cdk 'helm "d"   'helm-descbinds		 thall-helm-map)
+(cdk 'helm "f"   'helm-find			 thall-helm-map)
+(cdk 'helm "F"   'helm-find-files		 thall-helm-map)
+(cdk 'helm "g g" 'helm-git-grep			 thall-helm-map)
+(cdk 'helm "g l" 'helm-ls-git-ls		 thall-helm-map)
+(cdk 'helm "i"   'helm-imenu			 thall-helm-map)
+(cdk 'helm "o"   'helm-occur			 thall-helm-map)
+(cdk 'helm "M-y" 'helm-show-kill-ring		 thall-helm-map)
+(cdk 'helm "O a" 'helm-org-agenda-files-headings thall-helm-map)
+(cdk 'helm "p"   'helm-ls-git			 thall-helm-map)
+(cdk 'helm "r"   'helm-recentf			 thall-helm-map)
+(cdk 'helm "t"   'helm-cmd-t			 thall-helm-map)
+(cdk 'helm "x"   'helm-M-x			 thall-helm-map)
 ;;==========================================================================
 ;; Commenting
 ;;==========================================================================
