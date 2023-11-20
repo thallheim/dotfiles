@@ -7,7 +7,6 @@
 ;   - Remember why I wanted platform detection in the first place.
 ; - Refactor set-compile-command thing so it's not stupid
 ; - Set up central dir for backup files (currently disabled because rsync)
-; - Add electric-pair hookery
 
 ;;; Code:
 
@@ -118,7 +117,7 @@
     (side . top) (slot . -1) (preserve-size . (nil . t))
     ,window-params)))
 ;;==========================================================================
-;; MISC. KEYBINDS
+;; MISC. GLOBAL KEYBINDS
 ;;==========================================================================
 ;(global-set-key (kbd "C-M-<f9") (lambda () (interactive) (save-buffer) (recompile) ))
 (global-set-key (kbd "C-<f9>") #'compile)
@@ -225,6 +224,12 @@
     (add-hook 'text-mode-hook 'yas-minor-mode))
     (yas-global-mode 1)
 ;;==========================================================================
+;; Electric pairs
+;;==========================================================================
+;(electric-pair-mode 1)
+(add-hook 'prog-mode 'electric-pair-mode)
+(add-hook 'emacs-lisp-mode 'electric-pair-mode)
+;;==========================================================================
 ;; IDO
 ;;==========================================================================
 (use-package ido)
@@ -280,17 +285,6 @@
       (haskell-mode      . lsp-deferred)
       (emacs-lisp-mode   . which-key-mode))
     )
-;;==========================================================================
-;; MULTIPLE-CURSORS
-;;==========================================================================
-(use-package multiple-cursors)
-(global-set-key (kbd "C-c M-c e")   'mc/edit-lines)
-(global-set-key (kbd "C-c M-c n")   'mc/mark-next-like-this)
-(global-set-key (kbd "C-c M-c p")   'mc/mark-previous-like-this)
-(global-set-key (kbd "C-M-<next>")  'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-<prior>") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c M-c a")   'mc/mark-all-like-this)
-(global-set-key (kbd "C-c M-c w")   'mc/mark-next-like-this-word)
 ;;==========================================================================
 ;; MACROS | FUNCTIONS
 ;;==========================================================================
@@ -348,16 +342,15 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
 ;; ONE-LINER LOADS
 ;;==========================================================================
 (use-package magit)
+(use-package multiple-cursors)
 (use-package tuareg)
 ;;==========================================================================
 ;; RAINBOWS
 ;;==========================================================================
-;;; -------------------------------------------- Delimiters
 (use-package rainbow-delimiters
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
-;;; -------------------------------------------- In-line coloured strings
 (use-package rainbow-mode :delight " rnbw")
 (rainbow-mode 1)
 ;;==========================================================================
@@ -384,6 +377,9 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
 ;;==========================================================================
 (thall-load-if-exists (expand-file-name "thall/thall-keymaps.el" user-emacs-directory))
 
+;;==========================================================================
+;; OPAM auto-config
+;;==========================================================================
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line

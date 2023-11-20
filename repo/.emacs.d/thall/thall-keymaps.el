@@ -9,6 +9,23 @@
 ;;; Code:
 
 ;;==========================================================================
+;; MULTIPLE-CURSORS
+;;==========================================================================
+(defvar thall-mc-map (make-sparse-keymap)
+  "Custom multiple-cursors keymap.")
+(set-keymap-parent thall-mc-map mc/keymap)
+(if (fboundp 'multiple-cursors-mode)
+    (progn (which-key-add-key-based-replacements "C-c M-c" "thall-mc-prefix")
+	   (global-set-key (kbd "C-c M-c") thall-mc-map)))
+
+(conditionally-define-key 'multiple-cursors "e" 'mc/edit-lines thall-mc-map)
+(conditionally-define-key 'multiple-cursors "n" 'mc/mark-next-like-this thall-mc-map)
+(conditionally-define-key 'multiple-cursors "p" 'mc/mark-previous-like-this thall-mc-map)
+(conditionally-define-key 'multiple-cursors "a" 'mc/mark-all-like-this thall-mc-map)
+(conditionally-define-key 'multiple-cursors "w" 'mc/mark-next-like-this-word thall-mc-map)
+(conditionally-define-key 'multiple-cursors "W" 'mc/mark-previous-like-this-word thall-mc-map)
+
+;;==========================================================================
 ;; LSP
 ;;==========================================================================
 (defvar thall-lsp-map (make-sparse-keymap)
@@ -30,6 +47,7 @@
 (if (fboundp 'helm-mode)
     (progn (which-key-add-key-based-replacements "C-c h" "thall-helm-prefix")
   (global-set-key (kbd "C-c h") thall-helm-map)))
+
 (conditionally-define-key 'helm "a"   'helm-org-agenda-files-headings thall-helm-map)
 (conditionally-define-key 'helm "b"   'helm-mini thall-helm-map)
 (conditionally-define-key 'helm "t"   'helm-cmd-t thall-helm-map)
@@ -47,10 +65,11 @@
 ;;==========================================================================
 (defvar thall-comment-map (make-sparse-keymap)
   "Keymap for faster commenting.")
+(global-set-key (kbd "C-c C-SPC") thall-comment-map)
+
 (define-key thall-comment-map (kbd "C-SPC") 'comment-line)
 (define-key thall-comment-map (kbd "SPC")   'uncomment-current-line-or-region)
 (define-key thall-comment-map (kbd "r")     'comment-region)
-(global-set-key (kbd "C-c C-SPC") thall-comment-map)
 
 (provide 'thall-keymaps)
 ;;; thall-keymaps.el ends here
