@@ -214,6 +214,9 @@
 (use-package lsp-ui
   :commands
   lsp-ui-mode)
+(use-package helm-lsp
+  :config
+  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
 ;;==========================================================================
 ;; Yasnippet
 ;;==========================================================================
@@ -226,9 +229,7 @@
 ;;==========================================================================
 ;; Electric pairs
 ;;==========================================================================
-;(electric-pair-mode 1)
-(add-hook 'prog-mode 'electric-pair-mode)
-(add-hook 'emacs-lisp-mode 'electric-pair-mode)
+(add-hook 'prog-mode-hook 'electric-pair-local-mode)
 ;;==========================================================================
 ;; IDO
 ;;==========================================================================
@@ -351,8 +352,9 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
-(use-package rainbow-mode :delight " rnbw")
-(rainbow-mode 1)
+(use-package rainbow-mode :delight " rnbw"
+  :hook
+  (prog-mode . rainbow-mode))
 ;;==========================================================================
 ;; DELIGHT
 ;;==========================================================================
