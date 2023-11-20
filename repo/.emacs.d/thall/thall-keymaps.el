@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(defalias 'cdk 'conditionally-define-key) ; To keep line lengths reasonable
+(defalias 'cdk 'conditionally-define-key "Keep line lengths semi-reasonable.")
 
 ;;==========================================================================
 ;; MULTIPLE-CURSORS

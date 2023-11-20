@@ -216,7 +216,19 @@
   (yaml-mode	 . lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
   :commands
-  lsp lsp-deferred)
+  lsp lsp-deferred
+  :custom
+  (lsp-inlay-hint-enable t)
+  (lsp-eldoc-render-all  t)
+;;; -------------------------------------------- rust-analyzer
+(defalias 'lra 'lsp-rust-analyzer "Keep line lengths semi-reasonable.")
+  (lra-display-chaining-hints				   t)
+  (lra-display-closure-return-type-hints		   t)
+  (lra-display-lifetime-elision-hints-enable		   "skip_trivial")
+  (lra-display-lifetime-elision-hints-use-parameter-names  nil)
+  (lra-display-parameter-hints				   t)
+  (lra-display-reborrow-hints				   t)
+) ;; END (user-package lsp-mode)
 ;;; -------------------------------------------- LSP extensions
 (use-package lsp-ui
   :commands
