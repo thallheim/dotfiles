@@ -1,6 +1,15 @@
+;;; gruber-darker-thall.el --- thallheim's version of gruber-darker -*- lexical-binding: t; -*-
+
+;; Author: thall <thall@thallheim.com>
+;; URL: https://github.com/thallheim/dotfiles
+;; Keywords: theme, thall
+
+;;; Commentary:
+
+;;; Code:
+
 (deftheme gruber-darker-thall
-  "
-  Created 2023-04-25. Updated 2023-11-20.
+  "Created 2023-04-25. Updated 2023-11-20.
 
    Colours tweaked from Tsoding's 'gruber-darker' theme:
    https://github.com/rexim/gruber-darker-theme/blob/master/gruber-darker-theme.el
@@ -10,7 +19,7 @@
 
 (defface font-lock-thall-keyword-face
    '((t ( :foreground "#ff0000" :inherit font-lock-warning-face :slant italic)))
-   "thalldo.")
+   "TODO fontification.")
 
 (custom-theme-set-variables
  'gruber-darker-thall
@@ -217,3 +226,4 @@
  ) ;; END (custom-theme-set-faces)
 
 (provide-theme 'gruber-darker-thall)
+;;; gruber-darker-thall-theme.el ends here
