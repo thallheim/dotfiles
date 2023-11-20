@@ -1,6 +1,6 @@
 #+title: thallheim-dotfiles
 #+author: thallheim =<thall@thallheim.com>=
-#+STARTUP: content
+#+STARTUP: show2levels
 
 dotfiles repo :)
 
@@ -15,12 +15,13 @@ dotfiles repo :)
 - [X] Refactor setting default compile commands to something less stupid.
 - [X] Factor out remaining keymap(s) from =.emacs=
 - [X] Add hooks for ~electric-pair-mode~ and ~rainbow-mode~
-
+  
 * Recent changes
 
 /See commit history for details./
 
 *** 2023-11-20
+- Added =helm-ls-git= and =helm-descbinds=
 - Added tmuxp config for =dotupdate= and =dotfiles=.
 - Electric pairs, rainbow mode, and rainbow delimiters hook'd to prog-mode
 - Added ~set-compile-command()~ helper.
@@ -31,3 +32,4 @@ dotfiles repo :)
 - Added ~conditionally-define-key()~ helper.
 - Factored custom keymaps into =thall-keymaps.el=.
   - Only loaded if the packages they bind commands from are installed.
+    
