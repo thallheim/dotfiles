@@ -26,7 +26,14 @@ Usage: (conditionally-define-key
       (define-key keymap (kbd key-binding) command)
     (message "%s not installed - skipped definition" package)))
 
-
+(defun set-compile-command (mode command)
+  "Set buffer-local `compile' command to COMMAND for MODE buffers.
+Only acts on newly-visited files; will not touch the compile command if
+changed by the user in an open buffer."
+  (add-hook (intern (concat (symbol-name mode) "-hook"))
+            (lambda ()
+              (unless (local-variable-p 'compile-command)
+                (setq-local compile-command command)))))
 
 
 (provide 'thall-helpers)

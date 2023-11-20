@@ -327,18 +327,9 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
 ;;==========================================================================
 ;; DEFAULT COMPILE COMMANDS
 ;;==========================================================================
- ;    TODO: Refactor to something less stupid.
- ;          Currently only runs on first load of a given mode.
-
-(defun set-compile-command-ocaml()
-  "Set default compile command for the `dune' build system."
-  (setq compile-command "dune build"))
-(add-hook 'tuareg-mode-hook 'set-compile-command-ocaml)
-
-(defun set-compile-command-haskell()
-  "Set default compile command for the `cabal' build system."
-  (setq compile-command "cabal build"))
-(add-hook 'haskell-mode-hook 'set-compile-command-haskell)
+(set-compile-command 'rust-mode "cargo check")
+(set-compile-command 'haskell-mode "cabal build")
+(set-compile-command 'tuareg-mode "dune build")
 ;;==========================================================================
 ;; ONE-LINER LOADS
 ;;==========================================================================
