@@ -1,7 +1,15 @@
 #+title: thallheim-dotfiles
-#+author: thallheim =thall@thallheim.com=
+#+author: thallheim =<thall@thallheim.com>=
 #+STARTUP: showall
 
 dotfiles repo :)
 
 TODO: Better descr.
+
+* Recent changes
+
+** 2023-11-20
+- Added ~insert-current-date()~ helper.
+- Added ~conditionally-define-key()~ helper.
+- Factored custom keymaps into =thall-keymaps.el=.
+  - Only loaded if the packages they bind commands from are installed.
