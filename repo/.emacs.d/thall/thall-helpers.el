@@ -1,4 +1,7 @@
-;;; package --- Helper functions.
+;;; package --- Helper functions. -*- lexical-binding: t; -*-
+
+;; Author: thall <thall@thallheim.com>
+;; Keywords: library, elisp, emacs
 
 ;;; Commentary:
 ; TODO: Add some
@@ -10,10 +13,21 @@
   (when (file-exists-p file)
     (load file)))
 
-(defun load-externals ()
-  "Load LIST of files, reporting any missing files.
-Uses `mapc' and `file-exists-p'."
-  (mapc #'thall-load-if-exists thall-loadlist))
+(defun insert-current-date()
+  "Insert current date in active buffer."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d")))
+
+(defun conditionally-define-key (package key-binding command keymap)
+  "Conditionally define KEY-BINDING for COMMAND in KEYMAP if PACKAGE is installed.
+Usage: (conditionally-define-key
+\='some-package \"C-c a\" \='some-command some-keymap)"
+  (if (require package nil 'noerror)
+      (define-key keymap (kbd key-binding) command)
+    (message "%s not installed - skipped definition" package)))
+
+
+
 
 (provide 'thall-helpers)
 ;;; thall-helpers.el ends here
