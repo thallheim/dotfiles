@@ -107,7 +107,7 @@
     (side . bottom) (slot . 0) (window-height . fit-window-to-buffer)
     (preserve-size . (nil . t)) ,window-params)
    ("\\*\\(?:help\\|Tags List\\)\\*" display-buffer-in-side-window
-    (side . right) (slot . 0) (window-width . 0.40)
+    (side . right) (slot . 0) (window-width . 0.50)
     (preserve-size . (t . nil)) ,window-params)
    ("\\*\\(grep\\|Completions\\|Flycheck errors\\)\\*"
     display-buffer-in-side-window
@@ -155,10 +155,17 @@
 ;;==========================================================================
 (use-package helm
   :config
-    (setq
-       helm-autoresize-max-height "80"
-       helm-autoresize-min-height "20"
-       helm-visible-mark-prefix   "✓"))
+  (setq
+   helm-candidate-number-limit 500
+   helm-autoresize-max-height 80 ; percentage
+   helm-autoresize-min-height 20 ; percentage
+   helm-visible-mark-prefix   "✓"
+   helm-use-frame-when-more-than-two-windows t
+   helm-use-frame-when-no-suitable-window    t))
+;;; -------------------------------------------- Helm extensions
+(use-package helm-descbinds)
+(helm-descbinds-mode)
+(use-package helm-ls-git)
 ;;==========================================================================
 ;; COMPANY
 ;;==========================================================================
