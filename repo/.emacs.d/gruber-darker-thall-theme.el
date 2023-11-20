@@ -1,6 +1,6 @@
 (deftheme gruber-darker-thall
   "
-  Created 2023-04-25. Updated 2023-11-12.
+  Created 2023-04-25. Updated 2023-11-20.
 
    Colours tweaked from Tsoding's 'gruber-darker' theme:
    https://github.com/rexim/gruber-darker-theme/blob/master/gruber-darker-theme.el
@@ -24,7 +24,7 @@
  '(whitespace-line-column nil)
  '(whitespace-style
    '(face trailing tabs spaces lines-tail newline missing-newline-at-eof
-	  empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
+	  empty indentation space-after-tab space-before-tab space-mark tab-mark )) ; removed newline-mark
 
  ) ;; END (custom-theme-set-variables)
 
