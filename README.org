@@ -1,14 +1,27 @@
 #+title: thallheim-dotfiles
 #+author: thallheim =<thall@thallheim.com>=
-#+STARTUP: showall
+#+STARTUP: content
 
 dotfiles repo :)
 
-TODO: Better descr.
+* TODOs 
+
+** Active: [0/0]
+
+
+** Completed: [2/2]
+
+- [X] Factor out remaining keymap(s) from =.emacs=
+- [X] Add hooks for ~electric-pair-mode~ and ~rainbow-mode~
 
 * Recent changes
 
-** 2023-11-20
+/See commit history for details./
+
+_2023-11-20_
+- Custom keymaps now use the new guarded function for definitions.
+  /To help prevent unnecessarily cluttering up interfaces in case of/
+  /missing packages./
 - Added ~insert-current-date()~ helper.
 - Added ~conditionally-define-key()~ helper.
 - Factored custom keymaps into =thall-keymaps.el=.
