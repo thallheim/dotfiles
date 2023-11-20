@@ -20,7 +20,9 @@ dotfiles repo :)
 
 /See commit history for details./
 
-_2023-11-20_
+*** 2023-11-20
+- Added tmuxp config for =dotupdate= and =dotfiles=.
+- Electric pairs, rainbow mode, and rainbow delimiters hook'd to prog-mode
 - Added ~set-compile-command()~ helper.
 - Custom keymaps now use the new guarded function for definitions.
   /To help prevent unnecessarily cluttering up interfaces in case of/
