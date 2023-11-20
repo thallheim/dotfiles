@@ -6,11 +6,13 @@ dotfiles repo :)
 
 * TODOs 
 
-** Active: [0/0]
+** Started/Planned: [0/0]
 
+- [ ] ?
 
-** Completed: [2/2]
+** Completed: [3/3]
 
+- [X] Refactor setting default compile commands to something less stupid.
 - [X] Factor out remaining keymap(s) from =.emacs=
 - [X] Add hooks for ~electric-pair-mode~ and ~rainbow-mode~
 
@@ -19,6 +21,7 @@ dotfiles repo :)
 /See commit history for details./
 
 _2023-11-20_
+- Added ~set-compile-command()~ helper.
 - Custom keymaps now use the new guarded function for definitions.
   /To help prevent unnecessarily cluttering up interfaces in case of/
   /missing packages./
