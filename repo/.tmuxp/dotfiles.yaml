@@ -1,0 +1,13 @@
+session_name: dotfiles
+start_directory: $HOME/dotfiles/repo-update
+
+windows:
+  - window_name: emacs
+    layout: tiled
+    panes:
+      - emacs ~/dotfiles/repo-update
+
+  - window_name: docs
+    layout: tiled
+    panes:
+      - man bash
