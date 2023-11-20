@@ -5,3 +5,4 @@ ${HOME}/.emacs.d/thall/org.el
 ${HOME}/.emacs.d/thall/thall-helpers.el
 ${HOME}/.emacs.d/thall/thall-keymaps.el
 ${HOME}/.tmuxp/dotfiles.yaml
+${HOME}/.tmuxp/dotupdate.yaml

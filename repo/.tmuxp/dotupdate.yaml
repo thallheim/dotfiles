@@ -1,0 +1,13 @@
+session_name: dotupdate
+start_directory: $HOME/dotfiles/dotupdate
+
+windows:
+  - window_name: emacs
+    layout: tiled
+    panes:
+      - emacs ~/dotfiles/dotupdate
+
+  - window_name: bash ref
+    layout: tiled
+    panes:
+      - man bash
