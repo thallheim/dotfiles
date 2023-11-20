@@ -6,9 +6,9 @@ dotfiles repo :)
 
 * TODOs 
 
-** Started/Planned: [0/0]
+** Started/Planned: [0/1]
 
-- [ ] ?
+- [ ] Add error handling to ~thall-load-if-exists()~
 
 ** Completed: [3/3]
 
