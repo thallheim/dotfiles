@@ -2,57 +2,6 @@
 #+author: thallheim =thall@thallheim.com=
 #+STARTUP: showall
 
-dotfiles repo. Also houses its updater script for now.
+dotfiles repo :)
 
-The updater script is very unfinished and will not get its own repo
-until some things I consider essential are in place; ditto the man page
-helper.
-
-If you do want to use it in its current form, just download the =repo-update=
-folder and chuck it wherever, for now. Packaging won't happen for a while, if
-ever.
-
-* TODOs
-
-** Main list (active: [1/15])
-*- Legend:*
-  *[X]* /Started/ongoing/ | *[-]* /On hold/
-
---------------
-
-- [X] Rename, restructure, and fork off updater & man generator
-- [ ] Allow set/unset/get settings through flags
-  - [ ] Set any defaults?
-- [ ] Allow globbing in inclusion list?
-- [ ] Add --force flag to clobber if repo file is newer than src
-- [ ] Move dir exist check from copy_all() -> mk_dst_dirs()
-- [ ] Split  ~mk_dst_dirs()~ so ~-t~ can check dst paths are valid, sans mkdir
-- [ ] Add a function to check the error arrays at the end of all runs
-- [ ] Automate updating man-page source & generating a new one
-- [-] Write a good-enough menu for 'interactive'-mode
-- [ ] Allow multiple inclusion sources
-  - [ ] Nested list input handling (i.e "per-app" lists and dir trees)
-- [ ] (Maybe) Implement a small error stack just in case it becomes untrivial
-  later
-- [ ] Allow error verbosity levels
-  - Rework after 'proper' arg parsing is implemented
-- [ ] Allow saving existing target root as =dir.old/=
-  - Allow setting for gzip if repo is large enough to warrant compression?
-- [ ] Let user keep a machine/account-local ignore file that matches
-  against the include list, suppressing warnings about those files not
-  being on the local machine
-- [ ] Do =pushd= & =popd= on start and end of run
-  - Try to find out if it'll ever be necessary first. /Upd.:/ Probably
-    not :)
-*** Completed [4/4]
-- [X] Allow settings file (/basename/.conf)
-    Include: main incl. list, verbosity & warn defaults
-- [X] Main copy ops
-- [X] Make verbose mode flag order-agnostic
-- [X] Write newer/older check for copy ops
-
---------------
-* CHANGELOG
-
-*** 0.0.1
-- Init
+TODO: Better descr.
