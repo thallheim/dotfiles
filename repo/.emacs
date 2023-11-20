@@ -9,8 +9,6 @@
 ; - Set up central dir for backup files (currently disabled because rsync)
 ; - Add electric-pair hookery
 
-
-
 ;;; Code:
 
 ;;==========================================================================
@@ -51,8 +49,8 @@
 ;;==========================================================================
 ;; EXEC PATHS
 ;;==========================================================================
-(setenv "PATH" (concat (getenv "PATH") ":/home/robin/.ghcup/bin"))
-(setq lsp-haskell-server-path "/home/robin/.ghcup/bin/haskell-language-server-wrapper")
+(setenv "PATH" (concat (getenv "PATH") ":/home/thall/.ghcup/bin"))
+(setq lsp-haskell-server-path "/home/thall/.ghcup/bin/haskell-language-server-wrapper")
 ;;==========================================================================
 ;; UI/QoL stuff
 ;;==========================================================================
@@ -110,7 +108,7 @@
     (side . bottom) (slot . 0) (window-height . fit-window-to-buffer)
     (preserve-size . (nil . t)) ,window-params)
    ("\\*\\(?:help\\|Tags List\\)\\*" display-buffer-in-side-window
-    (side . right) (slot . 0) (window-width . fit-window-to-buffer)
+    (side . right) (slot . 0) (window-width . 0.40)
     (preserve-size . (t . nil)) ,window-params)
    ("\\*\\(grep\\|Completions\\|Flycheck errors\\)\\*"
     display-buffer-in-side-window
@@ -132,33 +130,14 @@
 (global-set-key (kbd "M-o"   ) 'other-window)
 (global-set-key (kbd "M-p"   ) (lambda () (interactive) (scroll-down 10)))
 (global-set-key (kbd "M-n"   ) (lambda () (interactive) (scroll-up 10)))
-
-;;; -------------------------------------------- Commenting map
-  (defvar commentariat-map (make-sparse-keymap)
-    "Keymap for faster commenting.")
-  (define-key commentariat-map (kbd "C-SPC") 'comment-line)
-  (define-key commentariat-map (kbd "SPC")   'uncomment-current-line-or-region)
-  (define-key commentariat-map (kbd "r")     'comment-region)
-  (global-set-key (kbd "C-c C-SPC") commentariat-map)
-
-;;; -------------------------------------------- Flymake (unused - keymap moved to Flycheck)
-;(global-set-key (kbd "C-c SPC" ) 'cycle-spacing) ; Only needed if SSHing from Win Terminal
-;(global-set-key (kbd "C-c f b" ) 'flymake-show-buffer-diagnostics)
-;(global-set-key (kbd "C-c f P" ) 'flymake-show-project-diagnostics)
-;(global-set-key (kbd "C-c f n" ) 'flymake-goto-next-error)
-;(global-set-key (kbd "C-c f p" ) 'flymake-goto-previous-error)
 ;;==========================================================================
 ;; Whitespace-mode
 ;;==========================================================================
 (defun set-up-whitespace-handling ()
-  "Styling and hooking for `whitespace-mode'."
+  "Hooking for `whitespace-mode'.  Styles and faces defined in theme."
   (interactive)
   (whitespace-mode 1)
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-  '(setq whitespace-style
-	 '(face tabs spaces trailing lines-tail space-before-tab newline
-		indentation empty space-after-tab space-mark tab-mark
-		newline-mark missing-newline-at-eof)))
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
   (add-hook 'c-mode-hook        'set-up-whitespace-handling)
   (add-hook 'c++-mode-hook      'set-up-whitespace-handling)
   (add-hook 'emacs-lisp-mode    'set-up-whitespace-handling)
@@ -167,6 +146,7 @@
   (add-hook 'js2-mode-hook      'set-up-whitespace-handling)
   (add-hook 'lua-mode-hook      'set-up-whitespace-handling)
   (add-hook 'markdown-mode-hook 'set-up-whitespace-handling)
+  (add-hook 'rust-mode-hook     'set-up-whitespace-handling)
   (add-hook 'sh-mode-hook	'set-up-whitespace-handling)
   (add-hook 'tuareg-mode-hook   'set-up-whitespace-handling)
   (add-hook 'yaml-mode-hook     'set-up-whitespace-handling)
@@ -180,18 +160,6 @@
        helm-autoresize-max-height "80"
        helm-autoresize-min-height "20"
        helm-visible-mark-prefix   "✓"))
-;; (global-set-key (kbd "C-c h a")   'helm-org-agenda-files-headings)
-;; (global-set-key (kbd "C-c h b")   'helm-mini)
-;; (global-set-key (kbd "C-c h t")   'helm-cmd-t)
-;; (global-set-key (kbd "C-c h f")   'helm-find)
-;; (global-set-key (kbd "C-c h F")   'helm-find-files)
-;; (global-set-key (kbd "C-c h g g") 'helm-git-grep)
-;; (global-set-key (kbd "C-c h g l") 'helm-ls-git-ls)
-;; (global-set-key (kbd "C-c h i  ") 'helm-imenu)
-;; (global-set-key (kbd "C-c h r")   'helm-recentf)
-;; (global-set-key (kbd "C-c h o")   'helm-occur)
-;; (global-set-key (kbd "C-c h M-y") 'helm-show-kill-ring)
-;; (global-set-key (kbd "C-c h x")   'helm-M-x)
 ;;==========================================================================
 ;; COMPANY
 ;;==========================================================================
