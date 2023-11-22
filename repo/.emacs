@@ -88,6 +88,14 @@
   (with-eval-after-load 'compile
     (fancy-compilation-mode))
 
+;;; -------------------------------------------- Helpful
+(use-package helpful)
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
+(global-set-key (kbd "C-h x") #'helpful-command)
+(global-set-key (kbd "C-c C-d") #'helpful-at-point)
+(global-set-key (kbd "C-h F") #'helpful-function)
 ;;; -------------------------------------------- Beacon
 (use-package beacon
   :config
@@ -145,11 +153,23 @@
   (add-hook 'js2-mode-hook      'set-up-whitespace-handling)
   (add-hook 'lua-mode-hook      'set-up-whitespace-handling)
   (add-hook 'markdown-mode-hook 'set-up-whitespace-handling)
-  (add-hook 'rust-mode-hook     'set-up-whitespace-handling)
-  (add-hook 'sh-mode-hook	'set-up-whitespace-handling)
+;  (add-hook 'rust-mode-hook     'set-up-whitespace-handling)
+  (add-hook 'sh-mode-hook       'set-up-whitespace-handling)
   (add-hook 'tuareg-mode-hook   'set-up-whitespace-handling)
   (add-hook 'yaml-mode-hook     'set-up-whitespace-handling)
 (global-set-key (kbd "<f7>") 'whitespace-mode)
+
+;; (defun suppress-whitespace-mode ()
+;;   "Turn off whitespace-mode per-buffer."
+;;   (add-hook 'after-change-major-mode-hook
+;; 	    (lambda () (whitespace-mode nil))
+;; 	    :append :local))
+;; (defalias 'lui 'lsp-ui)
+;; (defalias 'swm 'suppress-whitespace-mode)
+;; (add-hook 'lui-sideline-mode-hook 'swm)
+;; (add-hook 'lui-mode-hook 'swm)
+;; (add-hook 'lsp-completion-mode-hook 'swm)
+;; (add-hook 'lsp-ui-doc-frame-mode-hook 'swm)
 ;;==========================================================================
 ;; HELM
 ;;==========================================================================
@@ -175,7 +195,7 @@
   :custom
     (company-idle-delay 2) ; how long to wait until popup
     ; (company-begin-commands nil) ; uncomment to disable popup
-    (company-minimum-prefix-length 3)
+    (company-minimum-prefix-length 1)
     (global-company-mode t)
   :config
     (setq company-selection-wrap-around     t)
@@ -187,17 +207,22 @@
     (add-hook 'after-init-hook 'global-company-mode)
 
   :bind
-    (:map company-active-map
-      ("C-n" . company-select-next)
-      ("C-p" . company-select-previous)
-      ("M-<" . company-select-first)
-      ("M->" . company-select-last)
-      ;("C-c C-h" . lsp-ui-doc-toggle)
-      ))
+  (:map company-active-map
+	("<tab>" . company-complete-selection)
+	;; ("<tab>" . company-indent-or-complete-common)
+	("C-n"   . company-select-next)
+	("C-p"   . company-select-previous)
+	("M-<"   . company-select-first)
+	("M->"   . company-select-last)))
+	;("C-c C-h" . lsp-ui-doc-toggle)
+  ;; (:map lsp-mode-map
+  ;; 	("<tab>" . company-indent-or-complete-common)))
 
-  ;; Company front-end                             ; Incompatible with emacs running in TTY
+;; -------------------------------------------- Company front-end
+; (Incompatible with emacs running in TTY)
 ;    (use-package company-box
 ;      :hook (company-mode . company-box-mode))
+
 ;;==========================================================================
 ;; LSP
 ;;==========================================================================
@@ -205,34 +230,50 @@
   :init
   (setq lsp-keymap-prefix "C-c §")
   :hook
-  (c-mode	 . lsp-deferred)
-  (c++-mode	 . lsp-deferred)
-  (haskell-mode	 . lsp-deferred)
-  (js2-mode	 . lsp-deferred)
-  (lua-mode	 . lsp-deferred)
-  (rust-mode	 . lsp-deferred)
-;  (sh-mode	 . lsp-deferred)
-  (tuareg-mode	 . lsp-deferred)
-  (yaml-mode	 . lsp-deferred)
+  (c-mode	. lsp-deferred)
+  (c++-mode	. lsp-deferred)
+  (haskell-mode . lsp-deferred)
+  (js2-mode	. lsp-deferred)
+  (lua-mode	. lsp-deferred)
+  (rust-mode	. lsp-deferred)
+;  (sh-mode	. lsp-deferred)
+  (tuareg-mode	. lsp-deferred)
+  (yaml-mode	. lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration)
   :commands
   lsp lsp-deferred
   :custom
-  (lsp-inlay-hint-enable t)
-  (lsp-eldoc-render-all  t)
+  (lsp-diagnostic-clean-after-change t)
+  (lsp-inlay-hint-enable t) ; (!) NOTE: Bad interaction with lsp-ui-sideline.
+  (lsp-eldoc-render-all nil)
+  (lsp-lens-enable t)
+  
 ;;; -------------------------------------------- rust-analyzer
-(defalias 'lra 'lsp-rust-analyzer "Keep line lengths semi-reasonable.")
-  (lra-display-chaining-hints				   t)
-  (lra-display-closure-return-type-hints		   t)
-  (lra-display-lifetime-elision-hints-enable		   "skip_trivial")
-  (lra-display-lifetime-elision-hints-use-parameter-names  nil)
-  (lra-display-parameter-hints				   t)
-  (lra-display-reborrow-hints				   t)
+  (lsp-rust-analyzer-display-chaining-hints				t)
+  (lsp-rust-analyzer-display-closure-return-type-hints			t)
+  (lsp-rust-analyzer-display-lifetime-elision-hints-enable		"skip_trivial")
+  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names	nil)
+  (lsp-rust-analyzer-display-parameter-hints				nil)
+  (lsp-rust-analyzer-display-reborrow-hints				t)
+  (lsp-rust-analyzer-lens-run-enable					t)
+  (lsp-rust-analyzer-lens-debug-enable					t)
+  (lsp-rust-analyzer-lens-implementations-enable			t)
+  (lsp-rust-analyzer-lens-references-enable				t)
+  (lsp-rust-analyzer-closing-brace-hints-min-lines			15)
+  (lsp-rust-analyzer-max-inlay-hint-length				80)
 ) ;; END (user-package lsp-mode)
 ;;; -------------------------------------------- LSP extensions
 (use-package lsp-ui
   :commands
-  lsp-ui-mode)
+  lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-show-with-cursor nil)
+  (lsp-ui-sideline-enable nil) ; (!) NOTE: Bad interaction with lsp lenses.
+  ;; (lsp-ui-sideline-show-hover t)
+  ;; (lsp-ui-sideline-show-diagnostics nil)
+  ;; (lsp-ui-sideline-show-code-actions t)
+  )
 (use-package helm-lsp
   :config
   (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
