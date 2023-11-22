@@ -53,6 +53,8 @@
 ;;==========================================================================
 ;; UI/QoL stuff
 ;;==========================================================================
+(setq epg-gpg-program "/usr/bin/gpg2")
+(setenv "GPG_AGENT_INFO" nil)
 (load-theme 'gruber-darker-thall t)
 (setq ring-bell-function 'ignore)
 (setq inhibit-startup-message t)
