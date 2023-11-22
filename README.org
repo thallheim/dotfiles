@@ -6,16 +6,21 @@ dotfiles repo :)
 
 * TODOs 
 
-** Started/Planned: [0/2]
+** Started/Planned: [1/3]
 
-- [ ] Look into maybe integrating [[https://github.com/rksm/org-ai][org-ai]]
+- [ ] Refactor theme file:
+  - Move ~custom-set-variables~ to separate file
+- [X] Look into maybe integrating [[https://github.com/rksm/org-ai][org-ai]]
 - [ ] Add error handling to ~thall-load-if-exists()~
 
 * Recent changes
 
 /See commit history for details./
-
-*** 2023-11-20 [12/12]
+*** _2023-11-23_ [2/2]
+- [X] Add [[https://github.com/Wilfred/helpful][helpful]]: (much) better help buffers
+- [X] Add [[https://github.com/rksm/org-ai][org-ai]] for eval
+  
+*** _2023-11-20_ [12/12]
 - [X] Add =rust-analyzer= config.
 - [X] Refactor setting default compile commands to something less stupid.
 - [X] Factor out remaining keymap(s) from =.emacs=
