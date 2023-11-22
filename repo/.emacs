@@ -241,10 +241,12 @@
 ;;==========================================================================
 (use-package yasnippet
   :config
-    (yas-reload-all)
-    (add-hook 'prog-mode-hook 'yas-minor-mode)
-    (add-hook 'text-mode-hook 'yas-minor-mode))
-    (yas-global-mode 1)
+  (yas-reload-all)
+  (yas-global-mode 1)
+  :hook
+  (
+  (prog-mode-hook . yas-minor-mode)
+  (text-mode-hook . yas-minor-mode)))
 ;;==========================================================================
 ;; Electric pairs
 ;;==========================================================================
