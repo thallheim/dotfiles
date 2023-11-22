@@ -383,7 +383,17 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
 	   (whitespace-mode " ws")
 	   (yas-minor-mode nil yasnippet)
 	   ))
-
+;;==========================================================================
+;; ORG-AI
+;;==========================================================================
+(use-package org-ai
+  :commands (org-ai-mode org-ai-global-mode)
+  :init
+  (add-hook 'org-mode-hook #'org-ai-mode)
+  (org-ai-global-mode)
+  :config
+  (setq org-ai-default-chat-model "gpt-3.5-turbo")
+  (org-ai-install-yasnippets))
 ;;==========================================================================
 ;; KEYMAPS
 ;;==========================================================================
