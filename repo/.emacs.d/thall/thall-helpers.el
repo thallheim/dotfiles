@@ -21,7 +21,7 @@
 (defun conditionally-define-key (package key-binding command keymap)
   "Conditionally define KEY-BINDING for COMMAND in KEYMAP if PACKAGE is installed.
 Usage: (conditionally-define-key
-\='some-package \"C-c a\" \='some-command some-keymap)"
+\'some-package \"C-c a\" \'some-command some-keymap)"
   (if (require package nil 'noerror)
       (define-key keymap (kbd key-binding) command)
     (message "%s not installed - skipped definition" package)))
@@ -35,6 +35,19 @@ changed by the user in an open buffer."
               (unless (local-variable-p 'compile-command)
                 (setq-local compile-command command)))))
 
+(defun list-active-modes (&optional return-list)
+  "Display all active modes in new scratch buffer \'*modelist-scratch*'.
+Optionally, if RETURN-LIST is non-nil, return the list of modes instead."
+  (interactive)
+  (let ((modes (mapcar 'symbol-name minor-mode-list)))
+    (if return-list
+      modes)
+    (with-current-buffer (get-buffer-create "*modelist-scratch*")
+	(erase-buffer)
+	(insert "ACTIVE MODES:\n")
+	(dolist (mode (sort modes 'string<))
+	  (insert (format "%s\n" mode)))
+	(pop-to-buffer "*modelist-scratch*") (goto-char (point-min)))))
 
 (provide 'thall-helpers)
 ;;; thall-helpers.el ends here
