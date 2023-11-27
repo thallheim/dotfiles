@@ -246,23 +246,23 @@
   lsp lsp-deferred
   :custom
   (lsp-diagnostic-clean-after-change t)
-  (lsp-inlay-hint-enable t) ; (!) NOTE: Bad interaction with lsp-ui-sideline.
+  (lsp-inlay-hint-enable nil) ; (!) NOTE: Bad interaction with lsp-ui-sideline.
   (lsp-eldoc-render-all nil)
   (lsp-lens-enable t)
   
 ;;; -------------------------------------------- rust-analyzer
-  (lsp-rust-analyzer-display-chaining-hints				t)
+  (lsp-rust-analyzer-display-chaining-hints				nil)
   (lsp-rust-analyzer-display-closure-return-type-hints			t)
   (lsp-rust-analyzer-display-lifetime-elision-hints-enable		"skip_trivial")
   (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names	nil)
   (lsp-rust-analyzer-display-parameter-hints				nil)
-  (lsp-rust-analyzer-display-reborrow-hints				t)
+  (lsp-rust-analyzer-display-reborrow-hints				nil)
   (lsp-rust-analyzer-lens-run-enable					t)
   (lsp-rust-analyzer-lens-debug-enable					t)
   (lsp-rust-analyzer-lens-implementations-enable			t)
   (lsp-rust-analyzer-lens-references-enable				t)
   (lsp-rust-analyzer-closing-brace-hints-min-lines			15)
-  (lsp-rust-analyzer-max-inlay-hint-length				80)
+  (lsp-rust-analyzer-max-inlay-hint-length				30)
 ) ;; END (user-package lsp-mode)
 ;;; -------------------------------------------- LSP extensions
 (use-package lsp-ui
