@@ -39,16 +39,19 @@
 (defvar thall-loadlist nil)
 (let ((thalldir user-emacs-directory))
   (setq thall-loadlist
-	(mapcar (lambda (x) (expand-file-name x thalldir))
-		'("thall/hydra.el" "thall/org.el" "tree-sitter/sources-alist.el"))))
+        (mapcar
+         (lambda (x) (expand-file-name x thalldir))
+         '("thall/hydra.el" "thall/org.el" "tree-sitter/sources-alist.el"))))
 
 ; Load the ones that are listed (and exist)
 (mapc #'thall-load-if-exists thall-loadlist)
 ;;==========================================================================
 ;; EXEC PATHS
 ;;==========================================================================
-(setenv "PATH" (concat (getenv "PATH") ":/home/thall/.ghcup/bin"))
-(setq lsp-haskell-server-path "/home/thall/.ghcup/bin/haskell-language-server-wrapper")
+(setenv "PATH" (concat (getenv "PATH")
+                       ":/home/thall/.ghcup/bin"))
+(setq lsp-haskell-server-path
+      "/home/thall/.ghcup/bin/haskell-language-server-wrapper")
 ;;==========================================================================
 ;; UI/QoL stuff
 ;;==========================================================================
@@ -61,30 +64,32 @@
 (menu-bar-mode     -1)
 (scroll-bar-mode   -1)
 (column-number-mode 1)
+(setq indent-tabs-mode nil)                                 ; Convert tabs to spaces
+(setq tab-width 4)                                          ; Set tab size to 4 spaces
 (setq-default display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 (setq show-paren-mode    1)
 (setq show-paren-delay   0)
-(add-hook 'text-mode-hook 'visual-line-mode)                          ; Sensible line breaking.
-(delete-selection-mode t)                                             ; Overwrite selected text.
-(setq scroll-error-top-bottom t)                                      ; Scroll to the first and last line of buffer.
-(set-language-environment  "UTF-8")
+(add-hook 'text-mode-hook 'visual-line-mode)                ; Sensible line breaking.
+(delete-selection-mode t)                                   ; Overwrite selected text.
+(setq scroll-error-top-bottom t)                            ; Scroll to the first and last line of buffer.
+(set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (put 'upcase-region   'disabled nil)
 (put 'downcase-region 'disabled nil)
 (repeat-mode 1)
 (setq warning-suppress-types '((comp) (comp)))
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq make-backup-files nil)                                          ; Suppress backup file creation.
-(setq gc-cons-threshold most-positive-fixnum)                         ; Minimize garbage collection during startup.
-(add-hook 'emacs-startup-hook                                         ; Lower threshold back to 8 MiB (default is 800kB).
-	  (lambda ()
-	    (setq gc-cons-threshold (expt 2 23))))
+(setq make-backup-files nil)                                ; Suppress backup file creation.
+(setq gc-cons-threshold most-positive-fixnum)               ; Minimize garbage collection during startup.
+(add-hook 'emacs-startup-hook                               ; Lower threshold back to 8 MiB (default is 800kB).
+          (lambda ()
+            (setq gc-cons-threshold (expt 2 23))))
 
 (use-package move-text)
-(move-text-default-bindings)                                          ; Move line/region with M-up/M-down.
+(move-text-default-bindings)                                ; Move line/region with M-up/M-down.
 
-(use-package fancy-compilation                                        ; Fancy-compilation (colourise & scroll output).
+(use-package fancy-compilation                              ; Fancy-compilation (colourise & scroll output).
   :commands (fancy-compilation-mode))
   (with-eval-after-load 'compile
     (fancy-compilation-mode))
@@ -155,23 +160,11 @@
   (add-hook 'js2-mode-hook      'set-up-whitespace-handling)
   (add-hook 'lua-mode-hook      'set-up-whitespace-handling)
   (add-hook 'markdown-mode-hook 'set-up-whitespace-handling)
-;  (add-hook 'rust-mode-hook     'set-up-whitespace-handling)
+  (add-hook 'rust-mode-hook     'set-up-whitespace-handling)
   (add-hook 'sh-mode-hook       'set-up-whitespace-handling)
   (add-hook 'tuareg-mode-hook   'set-up-whitespace-handling)
   (add-hook 'yaml-mode-hook     'set-up-whitespace-handling)
 (global-set-key (kbd "<f7>") 'whitespace-mode)
-
-;; (defun suppress-whitespace-mode ()
-;;   "Turn off whitespace-mode per-buffer."
-;;   (add-hook 'after-change-major-mode-hook
-;; 	    (lambda () (whitespace-mode nil))
-;; 	    :append :local))
-;; (defalias 'lui 'lsp-ui)
-;; (defalias 'swm 'suppress-whitespace-mode)
-;; (add-hook 'lui-sideline-mode-hook 'swm)
-;; (add-hook 'lui-mode-hook 'swm)
-;; (add-hook 'lsp-completion-mode-hook 'swm)
-;; (add-hook 'lsp-ui-doc-frame-mode-hook 'swm)
 ;;==========================================================================
 ;; HELM
 ;;==========================================================================
@@ -249,21 +242,21 @@
   (lsp-inlay-hint-enable nil) ; (!) NOTE: Bad interaction with lsp-ui-sideline.
   (lsp-eldoc-render-all nil)
   (lsp-lens-enable t)
-  
+
 ;;; -------------------------------------------- rust-analyzer
-  (lsp-rust-analyzer-display-chaining-hints				nil)
-  (lsp-rust-analyzer-display-closure-return-type-hints			t)
-  (lsp-rust-analyzer-display-lifetime-elision-hints-enable		"skip_trivial")
-  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names	nil)
-  (lsp-rust-analyzer-display-parameter-hints				nil)
-  (lsp-rust-analyzer-display-reborrow-hints				nil)
-  (lsp-rust-analyzer-lens-run-enable					t)
-  (lsp-rust-analyzer-lens-debug-enable					t)
-  (lsp-rust-analyzer-lens-implementations-enable			t)
-  (lsp-rust-analyzer-lens-references-enable				t)
-  (lsp-rust-analyzer-closing-brace-hints-min-lines			15)
-  (lsp-rust-analyzer-max-inlay-hint-length				30)
-) ;; END (user-package lsp-mode)
+  (lsp-rust-analyzer-display-chaining-hints                             nil)
+  (lsp-rust-analyzer-display-closure-return-type-hints                  t)
+  (lsp-rust-analyzer-display-lifetime-elision-hints-enable              "skip_trivial")
+  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
+  (lsp-rust-analyzer-display-parameter-hints                            nil)
+  (lsp-rust-analyzer-display-reborrow-hints                             nil)
+  (lsp-rust-analyzer-lens-run-enable                                    t)
+  (lsp-rust-analyzer-lens-debug-enable                                  t)
+  (lsp-rust-analyzer-lens-implementations-enable                        t)
+  (lsp-rust-analyzer-lens-references-enable                             t)
+  (lsp-rust-analyzer-closing-brace-hints-min-lines                      15)
+  (lsp-rust-analyzer-max-inlay-hint-length                              30)
+)
 ;;; -------------------------------------------- LSP extensions
 (use-package lsp-ui
   :commands
@@ -278,7 +271,8 @@
   )
 (use-package helm-lsp
   :config
-  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
+  (define-key lsp-mode-map
+              [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
 ;;==========================================================================
 ;; Yasnippet
 ;;==========================================================================
@@ -302,8 +296,6 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 (setq ido-create-new-buffer 'always)
-; Display ido results vertically
-;(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 ;;==========================================================================
 ;; SMEX
 ;;==========================================================================
