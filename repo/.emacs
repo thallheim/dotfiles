@@ -96,7 +96,7 @@
 (global-set-key (kbd "C-h v") #'helpful-variable)
 (global-set-key (kbd "C-h k") #'helpful-key)
 (global-set-key (kbd "C-h x") #'helpful-command)
-(global-set-key (kbd "C-c C-d") #'helpful-at-point)
+(global-set-key (kbd "C-c i") #'helpful-at-point)
 (global-set-key (kbd "C-h F") #'helpful-function)
 ;;; -------------------------------------------- Beacon
 (use-package beacon
