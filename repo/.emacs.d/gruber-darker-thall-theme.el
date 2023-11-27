@@ -9,221 +9,288 @@
 ;;; Code:
 
 (deftheme gruber-darker-thall
-  "Created 2023-04-25. Updated 2023-11-20.
+  "Created 2023-04-25. Updated 2023-11-27.
 
-   Colours tweaked from Tsoding's 'gruber-darker' theme:
-   https://github.com/rexim/gruber-darker-theme/blob/master/gruber-darker-theme.el
+   Colours tweaked from Tsoding's 'gruber-darker' theme and adapted for my
+own setup.  See also Tsoding's source at:
+   github.com/rexim/gruber-darker-theme/blob/master/gruber-darker-theme.el
 
 
    thall.")
 
-(defface font-lock-thall-keyword-face
-   '((t ( :foreground "#ff0000" :inherit font-lock-warning-face :slant italic)))
-   "TODO fontification.")
+(let ()
+;;; -------------------------------------------- Main colours
+  (defvar thall-black0 "#080808")
+  (defvar thall-blue0 "#738ABF")
+  (defvar thall-blue1 "#5772B2")
+  (defvar thall-gold "#FFD60A")
+  (defvar thall-green-1 "#5CA12B")
+  (defvar thall-green0 "#00ff5f")
+  (defvar thall-green1 "#73c936")
+  (defvar thall-green2 "#8FD45E")
+  (defvar thall-grey-2 "#303030")
+  (defvar thall-grey-1 "#383838")
+  (defvar thall-grey0 "#584B52")
+  (defvar thall-grey2 "#8F9B95")
+  (defvar thall-orange0 "#AE5100")
+  (defvar thall-orange1 "#CC5F00")
+  (defvar thall-red0 "#c73c3f")
+  (defvar thall-teal "#005980")
+  (defvar thall-violet1 "#B886BB")
+  (defvar thall-white0 "#d4d4d4")
+  (defvar thall-yellow0 "#FFFF00")
+  (defvar thall-yellow1 "#FFDD33")
+;;; -------------------------------------------- Background colours
+  (defvar thall-background-2 "#080808")
+  (defvar thall-background-1 "#1B1B1B")
+  (defvar thall-background0 "#181818")
+  (defvar thall-background1 "#282828")
+  (defvar thall-background2 "#383838")
+;;; -------------------------------------------- Inheriting colours
+  (defvar thall-comment thall-orange0)
+  (defvar thall-directory thall-blue0)
+  (defvar thall-link thall-blue1)
+  (defvar thall-link-visited thall-violet1)
 
-(custom-theme-set-variables
- 'gruber-darker-thall
- '(fancy-compilation-override-colors t)
- '(frame-brackground-mode ''dark)
- '(lsp-ui-doc-border "#FFFFFF")
- '(org-M-RET-may-split-line '((default . nil)))
- '(org-fontify-quote-and-verse-blocks t)
- '(text-scale-mode-step 1.1)
- '(fill-column 80)
- '(whitespace-line-column nil)
- '(whitespace-style
-   '(face trailing tabs spaces lines-tail newline missing-newline-at-eof
-	  empty indentation space-after-tab space-before-tab space-mark tab-mark )) ; removed newline-mark
+  (custom-theme-set-variables
+   'gruber-darker-thall
+   '(child-frame-border)
+   '(indent-tabs-mode nil)
+   '(tab-width 4)
+   '(fancy-compilation-override-colors nil)
+   '(frame-background-mode 'dark)
+   '(lsp-ui-doc-border "#FFFFFF")
+   '(org-M-RET-may-split-line '((default . nil))) ; move to org-conf
+   '(org-fontify-quote-and-verse-blocks t) ; move to org-conf
+   '(text-scale-mode-step 1.1) ; move to .emacs
+   '(fill-column 80) ; move to .emacs
+   '(whitespace-line-column nil)
+   '(whitespace-style
+     '(face trailing tabs spaces lines-tail newline missing-newline-at-eof
+	        empty indentation space-after-tab space-before-tab space-mark tab-mark )) ; removed newline-mark
+   ) ;; END (custom-theme-set-variables)
 
- ) ;; END (custom-theme-set-variables)
+  (custom-theme-set-faces
+   'gruber-darker-thall
+;;==========================================================================
+;; General/misc. faces
+;;==========================================================================
+   `(default ((t (:family "Iosevka SS05" :height 102 :foreground ,thall-white0 :background ,thall-background0))))
+   ;; '(default ((t (:family "Roboto Mono for Powerline" :height 100 :foreground ,thall-white0 :background ,thall-background0))))
+   `(italic ((t (:slant italic))))
+   `(fixed-pitch ((t (:inherit default :family "Iosevka SS05" :weight normal))))
 
-(custom-theme-set-faces
- 'gruber-darker-thall
-
- ;'(default ((t (:family "Roboto Mono for Powerline" :height 100 :foreground "#d4d4d4" :background "#181818"))))
- '(default ((t (:family "Iosevka SS05" :height 102 :foreground "#d4d4d4" :background "#181818"))))
-; '(default ((t (:family "Roboto Mono for Powerline" :height 100 :foreground "#c3c3d5" :background "#181818"))))
-; '(default ((t (:family "UbuntuMono NFM" :height 100 :foreground "#e4e4ef" :background "#181818"))))
- '(italic ((t (:slant italic))))
- '(fixed-pitch    ((t (:inherit default :family "Iosevka SS05" :weight normal))))
-
- '(font-latex-bold-face ((t (:foreground "#95a99f" :bold t))))
- '(font-latex-italic-face ((t (:foreground "#95a99f" :italic t))))
- '(font-latex-math-face ((t (:foreground "#73c936"))))
- '(font-latex-sectioning-5-face ((t (:foreground "#96a6c8" :bold t))))
- '(font-latex-slide-title-face ((t (:foreground "#96a6c8"))))
- '(font-latex-string-face ((t (:foreground "#73c936"))))
- '(font-latex-warning-face ((t (:foreground "#f43841"))))
- '(border ((t (:background "#101010" :foreground "#453d41"))))
- '(cursor ((t (:foreground nil :background "#ffdd33"))))
- '(fringe ((t (:background nil :foreground "#453d41"))))
- '(vertical-border ((t (:foreground "#453d41"))))
- '(link ((t (:foreground "#96a6c8" :underline t))))
- '(link-visited ((t (:foreground "#9e95c7" :underline t))))
- '(match ((t (:background "#52494e"))))
- '(shadow ((t (:foreground "#52494e"))))
- '(minibuffer-prompt ((t (:foreground "#96a6c8"))))
- '(region ((t (:background "#484848" :foreground nil))))
- '(secondary-selection ((t (:background "#484848" :foreground nil))))
- '(trailing-whitespace ((t (:foreground "#000000" :background "#f43841"))))
- '(tooltip ((t (:background "#52494e" :foreground "#ffffff"))))
- '(compilation-info ((t (:foreground "#73c936" :inherit unspecified))))
- '(compilation-warning ((t (:foreground "#cc8c3c" :bold t :inherit unspecified))))
- '(compilation-error ((t (:foreground "#ff4f58"))))
- '(compilation-mode-line-fail ((t (:foreground "#f43841" :weight bold :inherit unspecified))))
- '(compilation-mode-line-exit ((t (:foreground "#73c936" :weight bold :inherit unspecified))))
- '(custom-state ((t (:foreground "#73c936"))))
- '(diff-removed ((t (:foreground "#ff4f58" :background nil))))
- '(diff-added ((t (:foreground "#73c936" :background nil))))
- '(dired-directory ((t (:foreground "#96a6c8" :weight normal))))
- '(dired-header ((t (:foreground "#00fff0" :weight normal))))
- '(dired-ignored ((t (:foreground "#95a99f" :inherit unspecified))))
- '(ebrowse-root-class ((t (:foreground "#96a6c8" :weight bold))))
- '(ebrowse-progress ((t (:background "#96a6c8"))))
- '(erc-notice-face ((t (:foreground "#9e95c7"))))
- '(erc-timestamp-face ((t (:foreground "#73c936"))))
- '(erc-input-face ((t (:foreground "#ff4f58"))))
- '(erc-my-nick-face ((t (:foreground "#ff4f58"))))
-; '(eshell)
- '(eshell-ls-backup ((t (:foreground "#95a99f"))))
- '(eshell-ls-directory ((t (:foreground "#96a6c8"))))
- '(eshell-ls-executable ((t (:foreground "#73c936"))))
- '(eshell-ls-symlink ((t (:foreground "#ffdd33"))))
- '(fancy-compilation-default-face ((t (:background "#262626"))))
- '(font-lock-builtin-face ((t (:foreground "#ffdd33"))))
- '(font-lock-comment-face ((t (:inherit fixed-pitch :foreground "#8b4500"))))
- '(font-lock-comment-delimiter-face ((t (:foreground "#cc8c3c"))))
- '(font-lock-constant-face ((t (:foreground "#95a99f"))))
- '(font-lock-doc-face ((t (:foreground "#73c936"))))
- '(font-lock-doc-string-face ((t (:foreground "#73c936"))))
- '(font-lock-function-name-face ((t (:foreground "#96a6c8"))))
- '(font-lock-keyword-face ((t (:inherit fixed-pitch :foreground "#ffdd33" :bold t))))
- '(font-lock-preprocessor-face ((t (:inherit fixed-pitch :foreground "#95a99f"))))
- '(font-lock-reference-face ((t (:foreground "#95a99f"))))
- '(font-lock-string-face ((t (:inherit fixed-pitch :foreground "#73c936"))))
- '(font-lock-type-face ((t (:inherit fixed-pitch :foreground "#6a5acd"))))
- '(font-lock-variable-name-face ((t (:foreground "#f15f5f"))))
- '(font-lock-warning-face ((t (:foreground "#f43841"))))
- '(flymake-errline ((((supports :underline (:style wave))) (:underline (:style wave :color "#f43841") :foreground unspecified :background unspecified :inherit unspecified)) (t (:foreground "#f43841" :weight bold :underline t))))
- '(flymake-warnline ((((supports :underline (:style wave))) (:underline (:style wave :color "#ffdd33") :foreground unspecified :background unspecified :inherit unspecified)) (t (:forground "#ffdd33" :weight bold :underline t))))
- '(flymake-infoline ((((supports :underline (:style wave))) (:underline (:style wave :color "#73c936") :foreground unspecified :background unspecified :inherit unspecified)) (t (:forground "#73c936" :weight bold :underline t))))
- '(flyspell-incorrect ((((supports :underline (:style wave))) (:underline (:style wave :color "#f43841") :inherit unspecified)) (t (:foreground "#f43841" :weight bold :underline t))))
- '(flyspell-duplicate ((((supports :underline (:style wave))) (:underline (:style wave :color "#ffdd33") :inherit unspecified)) (t (:foreground "#ffdd33" :weight bold :underline t))))
- '(helm-candidate-number ((t (:background "#453d41" :foreground "#ffdd33" :bold t))))
- '(helm-ff-directory ((t (:foreground "#96a6c8" :background "#181818" :bold t))))
- '(helm-ff-executable ((t (:foreground "#73c936"))))
- '(helm-ff-file ((t (:foreground "#e4e4ef" :inherit unspecified))))
- '(helm-ff-invalid-symlink ((t (:foreground "#181818" :background "#f43841"))))
- '(helm-ff-symlink ((t (:foreground "#ffdd33" :bold t))))
- '(helm-selection-line ((t (:background "#282828"))))
- '(helm-selection ((t (:background "#282828" :underline t))))
- '(helm-source-header ((t (:foreground "#ffdd33" :background "#181818" :box (:line-width -1 :style released-button)))))
- '(ido-first-match ((t (:foreground "#ffdd33" :bold nil))))
- '(ido-only-match ((t (:foreground "#cc8c3c" :weight bold))))
- '(ido-subdir ((t (:foreground "#96a6c8" :weight bold))))
- '(info-xref ((t (:foreground "#96a6c8"))))
- '(info-visited ((t (:foreground "#9e95c7"))))
-; '(highlight ((t (:inherit default :background "#005F00"))))
- '(highlight ((t (:foreground "undefined" :background "#005980"))))
- '(highlight-current-line-face ((t (:background "#282828" :foreground nil))))
- '(line-number ((t (:inherit default :foreground "#52494e"))))
- '(line-number-current-line ((t (:inherit line-number :foreground "#ffdd33"))))
- '(linum ((t `(list :foreground gruber-darker-quartz :background gruber-darker-bg))))
- '(lsp-face-highlight-textual ((t (:inherit highlight :foreground nil))))
- '(lsp-ui-doc-background ((t (:background "#303030"))))
- '(lsp-ui-peek-filename ((t (:foreground "#E4E4EF"))))
- '(lsp-ui-peek-highlight ((t (:foreground "#453d41":background "#73A93C"))))
- '(lsp-ui-peek-peek ((t (:background "#303030"))))
- '(lsp-ui-peek-selection ((t (:foreground "#FFDD33":background "#707070"))))
- '(magit-branch ((t (:foreground "#96a6c8"))))
- '(magit-diff-hunk-header ((t (:background "#453d41"))))
- '(magit-diff-file-header ((t (:background "#52494e"))))
- '(magit-log-sha1 ((t (:foreground "#ff4f58"))))
- '(magit-log-author ((t (:foreground "#cc8c3c"))))
- '(magit-log-head-label-remote ((t (:foreground "#73c936" :background "#282828"))))
- '(magit-log-head-label-local ((t (:foreground "#96a6c8" :background "#282828"))))
- '(magit-log-head-label-tags ((t (:foreground "#ffdd33" :background "#282828"))))
- '(magit-log-head-label-head ((t (:foreground "#e4e4ef" :background "#282828"))))
- '(magit-item-highlight ((t (:background "#282828"))))
- '(magit-tag ((t (:foreground "#ffdd33" :background "#181818"))))
- '(magit-blame-heading ((t (:background "#282828" :foreground "#e4e4ef"))))
- '(message-header-name ((t (:foreground "#73c936"))))
- '(mode-line ((t (:background "#282828" :foreground "#ffffff"))))
- '(mode-line-buffer-id ((t (:background "#282828" :foreground "yellow"))))
- '(mode-line-inactive ((t (:background "#282828" :foreground "#95a99f"))))
- '(org-agenda-structure ((t (:foreground "#96a6c8"))))
- '(org-block-begin-line ((t (:inherit org-meta-line :foreground "#303030" :background "#101010" :extend t))))
-; '(org-block ((t (:inherit fixed-pitch :foreground "#ffffff" :background "#101010" :extend t))))
- '(org-block ((t (:foreground "#ffffff" :background "#101010" :extend t))))
- '(org-code ((t (:box (:line-width (1 . 1) :color "light slate gray" :weight bold) :inherit fixed-pitch :foreground "#ffdd33" :background "#202020" :extend t))))
-; '(org-code ((t (:inherit fixed-pitch :foreground "yellow" :background "#202020")))) ;:bold t))))
- '(org-column ((t (:background "#101010"))))
- '(org-column-title ((t (:background "#101010" :underline t :weight bold))))
- '(org-document-info ((t (:inherit org-meta-line :foreground "#b9b9c0" ))))
- '(org-document-info-keyword ((t (:inherit org-meta-line :foreground "#4f4f4f"))))
- '(org-document-title ((t (:foreground "#00ff00" :height 1.8 :weight bold :underline t))))
- '(org-done ((t (:foreground "#73c936"))))
- '(org-level-1 ((t (:foreground "#9490d3" :height 1.35 :bold t))))
- '(org-level-2 ((t (:inherit org-level-1 :height 0.875 :bold t))))
- '(org-level-3 ((t (:inherit org-level-2 :height 0.875 :bold t))))
- '(org-level-4 ((t (:inherit org-level-3 :height 0.875 :bold t))))
- '(org-level-5 ((t (:inherit org-level-4 :height 0.875 :bold t))))
- '(org-link ((t (:inherit variable-pitch :foreground "royal blue" :underline t))))
- '(org-meta-line ((t (:foreground "#696969" :height 0.9))))
- '(org-todo ((t (:foreground "#c73c3f"))))
- '(org-tag ((t (:inherit org-meta-line))))
- '(org-upcoming-deadline ((t (:foreground "#ffdd33"))))
- '(org-quote ((t (:background "#101010" :slant italic :extend t))))
- '(isearch ((t (:foreground "#ffffff" :background "#ffa500"))))
- '(isearch-fail ((t (:foreground "#000000" :background "#f43841"))))
- '(isearch-lazy-highlight-face ((t (:foreground "#f4f4ff" :background "#ee7600"))))
- '(lazy-highlight-face ((t (:foreground "#f4f4ff" :background "#ee7600"))))
- '(sh-quoted-exec ((t (:foreground "#ff4f58"))))
-; '(show-paren-match ((t (:background "#AAFF00" :foreground "black" :weight bold))))
- '(show-paren-match ((t (:foreground "#292929" :background "#96a6c8" :weight bold))))
- '(show-paren-match-face ((t (:background "#52494e"))))
- '(show-paren-mismatch-face ((t (:background "#c73c3f"))))
- '(speedbar-directory-face ((t (:foreground "#96a6c8" :weight bold))))
- '(speedbar-file-face ((t (:foreground "#e4e4ef"))))
- '(speedbar-highlight-face ((t (:background "#282828"))))
- '(speedbar-selected-face ((t (:foreground "#f43841"))))
- '(speedbar-tag-face ((t (:foreground "#ffdd33"))))
- '(which-func ((t (:foreground "#9e95c7"))))
- '(whitespace-space ((t (:background "#181818" :foreground "#282828"))))
- '(whitespace-tab ((t (:background "#181818" :foreground "#282828"))))
- '(whitespace-hspace ((t (:background "#181818" :foreground "#453d41"))))
- '(whitespace-line ((t (:background "#453d41" :foreground "#ff4f58"))))
- '(whitespace-newline ((t (:background "#181818" :foreground "#453d41"))))
- '(whitespace-trailing ((t (:background "#f43841" :foreground "#f43841"))))
- '(whitespace-empty ((t (:background "#ffdd33" :foreground "#ffdd33"))))
- '(whitespace-indentation ((t (:background "#ffdd33" :foreground "#f43841"))))
- '(whitespace-space-after-tab ((t (:background "#ffdd33" :foreground "#ffdd33"))))
- '(whitespace-space-before-tab ((t (:background "#cc8c3c" :foreground "#cc8c3c"))))
-; '(tab-bar ((t (:background "#282828" :foreground "#52494e"))))
- '(tab-bar ((t (:background "#282828" :foreground "#5a5a5a"))))
- '(tab-bar-tab ((t (:background "#2b2b2b" :foreground "#ffdd33" :weight medium))))
- '(tab-bar-tab-inactive ((t (:background nil :foreground "#6d6d6d" :weight normal))))
- '(term-color-black ((t (:foreground "#484848" :background "#52494e"))))
- '(term-color-red ((t (:foreground "#c73c3f" :background "#c73c3f"))))
- '(term-color-green ((t (:foreground "#73c936" :background "#73c936"))))
- '(term-color-blue ((t (:foreground "#96a6c8" :background "#96a6c8"))))
- '(term-color-yellow ((t (:foreground "#ffdd33" :background "#ffdd33"))))
- '(term-color-magenta ((t (:foreground "#9e95c7" :background "#9e95c7"))))
- '(term-color-cyan ((t (:foreground "#95a99f" :background "#95a99f"))))
- '(term-color-white ((t (:foreground "#e4e4ef" :background "#ffffff"))))
- '(company-tooltip ((t (:foreground "#e4e4ef" :background "#282828"))))
- '(company-tooltip-annotation ((t (:foreground "#cc8c3c" :background "#282828"))))
- '(company-tooltip-annotation-selection ((t (:foreground "#cc8c3c" :background "#101010"))))
- '(company-tooltip-selection ((t (:foreground "#e4e4ef" :background "#101010"))))
- '(company-tooltip-mouse ((t (:background "#101010"))))
- '(company-tooltip-common ((t (:foreground "#73c936"))))
- '(company-tooltip-common-selection ((t (:foreground "#73c936"))))
- '(company-tooltip-scrollbar-thumb ((t (:background "#101010"))))
- '(company-tooltip-scrollbar-track ((t (:background "#453d41"))))
- '(company-preview ((t (:background "#73c936"))))
- '(company-preview-common ((t (:foreground "#73c936" :background "#101010"))))
-
- ) ;; END (custom-theme-set-faces)
+                                        ;`(child-frame-border ((t (:foreground ,thall-grey0 :background ,thall-grey0))))
+   `(border ((t (:background ,thall-background-2 :foreground "#453d41"))))
+   `(cursor ((t (:background ,thall-gold))))
+   `(error ((t (:foreground ,thall-red0))))
+   `(fringe ((t (:background unspecified :foreground "#453d41"))))
+   `(vertical-border ((t (:foreground ,thall-black0))))
+   `(link ((t (:foreground ,thall-blue1 :underline t))))
+   `(link-visited ((t (:foreground ,thall-violet1 :underline t))))
+   `(match ((t (:background ,thall-grey0))))
+   `(shadow ((t (:foreground "#584B52"))))
+   `(minibuffer-prompt ((t (:foreground ,thall-blue0))))
+   `(region ((t (:background "#484848" :foreground unspecified))))
+   `(secondary-selection ((t (:background "#484848" :foreground unspecified))))
+   `(trailing-whitespace ((t (:foreground ,thall-black0 :background ,thall-red0))))
+   `(tooltip ((t (:background "#52494e" :foreground ,thall-white0))))
+   `(highlight ((t (:foreground ,thall-white0 :background ,thall-teal))))
+   `(highlight-current-line-face ((t (:background ,thall-background0 :foreground unspecified))))
+   `(line-number ((t (:inherit default :foreground "#52494e"))))
+   `(line-number-current-line ((t (:inherit line-number :foreground ,thall-gold))))
+   `(info-xref ((t (:foreground ,thall-blue0))))
+   `(info-visited ((t (:foreground ,thall-link-visited))))
+   `(isearch ((t (:foreground ,thall-black0 :background ,thall-blue0))))
+   `(isearch-fail ((t (:foreground ,thall-black0 :background ,thall-red0))))
+   `(isearch-lazy-highlight-face ((t (:foreground ,thall-white0 :background ,thall-blue1))))
+   `(lazy-highlight-face ((t (:foreground ,thall-white0 :background ,thall-blue1))))
+   `(sh-quoted-exec ((t (:foreground ,thall-red0))))
+   `(which-func ((t (:foreground ,thall-violet1))))
+   `(message-header-name ((t (:foreground ,thall-green1))))
+;;==========================================================================
+;; Company faces
+;;==========================================================================
+   `(company-tooltip ((t (:foreground ,thall-grey0 :background ,thall-background1))))
+   `(company-tooltip-annotation ((t (:foreground "#cc8c3c" :background ,thall-background-1))))
+   `(company-tooltip-annotation-selection ((t (:foreground "#cc8c3c" :background ,thall-background-1))))
+   `(company-tooltip-selection ((t (:foreground ,thall-grey-2 :background ,thall-background-1))))
+   `(company-tooltip-mouse ((t (:background ,thall-background-1))))
+   `(company-tooltip-common ((t (:foreground ,thall-green0))))
+   `(company-tooltip-common-selection ((t (:foreground ,thall-green0))))
+   `(company-tooltip-scrollbar-thumb ((t (:background ,thall-background-1))))
+   `(company-tooltip-scrollbar-track ((t (:background ,thall-grey0))))
+   `(company-preview ((t (:background ,thall-green0))))
+   `(company-preview-common ((t (:foreground ,thall-green0 :background ,thall-background-1))))
+;;==========================================================================
+;; Compilation/Fancy compilation faces
+;;==========================================================================
+   `(compilation-info ((t (:foreground ,thall-green1))))
+   `(compilation-warning ((t (:foreground ,thall-orange1 :bold t))))
+   `(compilation-error ((t (:foreground ,thall-red0))))
+   `(compilation-mode-line-fail ((t (:foreground ,thall-red0 :weight bold))))
+   `(compilation-mode-line-exit ((t (:foreground ,thall-green1 :weight bold))))
+   `(custom-state ((t (:foreground ,thall-green1))))
+   `(diff-removed ((t (:foreground ,thall-red0 :background unspecified))))
+   `(diff-added ((t (:foreground ,thall-green1 :background unspecified))))
+   `(fancy-compilation-default-face ((t (:background ,thall-background-1))))
+;;==========================================================================
+;; Dired faces
+;;==========================================================================
+   `(dired-directory ((t (:foreground ,thall-directory :weight normal))))
+   `(dired-header ((t (:foreground ,thall-link :weight normal))))
+   `(dired-ignored ((t (:foreground ,thall-grey0))))
+;;==========================================================================
+;; Eshell faces
+;;==========================================================================
+   '(eshell-ls-backup ((t (:foreground "#95a99f"))))
+   `(eshell-ls-directory ((t (:foreground ,thall-blue0))))
+   `(eshell-ls-executable ((t (:foreground ,thall-green1))))
+   `(eshell-ls-symlink ((t (:foreground ,thall-gold))))
+;;==========================================================================
+;; Font-lock faces
+;;==========================================================================
+   `(font-lock-builtin-face ((t (:foreground ,thall-gold))))
+   `(font-lock-comment-face ((t (:inherit fixed-pitch :foreground ,thall-comment))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,thall-orange0))))
+   `(font-lock-constant-face ((t (:foreground ,thall-grey2))))
+   `(font-lock-doc-face ((t (:foreground ,thall-green2))))
+   `(font-lock-doc-string-face ((t (:foreground ,thall-green1))))
+   `(font-lock-function-name-face ((t (:foreground ,thall-blue0))))
+   `(font-lock-keyword-face ((t (:inherit fixed-pitch :foreground ,thall-gold :bold t))))
+   `(font-lock-preprocessor-face ((t (:inherit fixed-pitch :foreground ,thall-grey2))))
+   `(font-lock-reference-face ((t (:foreground ,thall-grey-1))))
+   `(font-lock-string-face ((t (:inherit fixed-pitch :foreground ,thall-green1))))
+   `(font-lock-type-face ((t (:inherit fixed-pitch :foreground ,thall-blue1))))
+   `(font-lock-variable-name-face ((t (:foreground ,thall-red0))))
+   `(font-lock-warning-face ((t (:foreground ,thall-red0))))
+;;==========================================================================
+;; Flymake/Flycheck faces
+;;==========================================================================
+   `(flymake-errline
+     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-red0) :foreground unspecified :background unspecified :inherit unspecified))
+      (t (:foreground ,thall-red0 :weight bold :underline t))))
+   `(flymake-warnline
+     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-gold) :foreground unspecified :background unspecified :inherit unspecified))
+      (t (:forground ,thall-gold :weight bold :underline t))))
+   `(flymake-infoline
+     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-green1) :foreground unspecified :background unspecified :inherit unspecified))
+      (t (:forground ,thall-green1 :weight bold :underline t))))
+   `(flyspell-incorrect ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-red0) :inherit unspecified)) (t (:foreground ,thall-red0 :weight bold :underline t))))
+   `(flyspell-duplicate ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-gold) :inherit unspecified)) (t (:foreground ,thall-gold :weight bold :underline t))))
+;;==========================================================================
+;; Header-line faces
+;;==========================================================================
+   `(header-line ((t (:background ,thall-background-1))))
+;;==========================================================================
+;; Helm faces
+;;==========================================================================
+   `(helm-candidate-number ((t (:background "#453d41" :foreground ,thall-gold :bold t))))
+   `(helm-ff-directory ((t (:foreground ,thall-blue1 :background ,thall-background0 :bold t))))
+   `(helm-ff-executable ((t (:foreground ,thall-green1))))
+   `(helm-ff-dirs ((t (:foreground ,thall-directory :background ,thall-background0 :bold t))))
+   `(helm-ff-dotted-directory ((t (:foreground unspecified :background ,thall-background0 :bold t))))
+   `(helm-ff-file ((t (:foreground ,thall-white0))))
+   `(helm-ff-invalid-symlink ((t (:foreground ,thall-grey-2 :background ,thall-red0))))
+   `(helm-ff-symlink ((t (:foreground ,thall-gold :bold t))))
+   `(helm-selection-line ((t (:background ,thall-background1))))
+   `(helm-selection ((t (:background ,thall-background1 :underline nil :bold t))))
+   `(helm-source-header ((t (:foreground ,thall-gold :background ,thall-background0 :box (:line-width -1 :style released-button)))))
+;;==========================================================================
+;; Ido faces
+;;==========================================================================
+   `(ido-first-match ((t (:foreground ,thall-yellow1 :bold nil))))
+   `(ido-only-match ((t (:foreground ,thall-gold :weight bold))))
+   `(ido-subdir ((t (:foreground ,thall-directory :weight bold))))
+;;==========================================================================
+;; LSP faces
+;;==========================================================================
+   `(lsp-headerline-breadcrumb-path-face ((t :background ,thall-background1)))
+   `(lsp-face-highlight-textual ((t (:inherit highlight :foreground ,thall-white0))))
+   `(lsp-ui-doc-background ((t (:background ,thall-background1))))
+   `(lsp-ui-peek-filename ((t (:foreground ,thall-white0))))
+   `(lsp-ui-peek-highlight ((t (:foreground "#453d41":background ,thall-green1))))
+   `(lsp-ui-peek-peek ((t (:inherit lsp-ui-doc-background))))
+   `(lsp-ui-peek-selection ((t (:foreground ,thall-gold :background "#606060"))))
+;;==========================================================================
+;; Magit faces
+;;==========================================================================
+   `(magit-branch ((t (:foreground ,thall-blue0))))
+   `(magit-diff-hunk-header ((t (:background "#453d41"))))
+   `(magit-diff-file-header ((t (:background "#52494e"))))
+   `(magit-log-sha1 ((t (:foreground ,thall-red0))))
+   `(magit-log-author ((t (:foreground ,thall-orange1))))
+   `(magit-log-head-label-remote ((t (:foreground ,thall-green1 :background ,thall-background1))))
+   `(magit-log-head-label-local ((t (:foreground ,thall-blue0 :background ,thall-background1))))
+   `(magit-log-head-label-tags ((t (:foreground ,thall-gold :background ,thall-background1))))
+   `(magit-log-head-label-head ((t (:foreground thall-white0 :background ,thall-background1))))
+   `(magit-item-highlight ((t (:background ,thall-background1))))
+   `(magit-tag ((t (:foreground ,thall-gold :background ,thall-background0))))
+   `(magit-blame-heading ((t (:background ,thall-background1 :foreground ,thall-white0))))
+;;==========================================================================
+;; Mode-line faces
+;;==========================================================================
+   `(mode-line ((t (:background ,thall-background2 :foreground ,thall-white0))))
+   `(mode-line-buffer-id ((t (:background ,thall-background2 :foreground ,thall-yellow0))))
+   `(mode-line-inactive ((t (:background ,thall-background2 :foreground ,thall-grey0))))
+;;==========================================================================
+;; Org faces
+;;==========================================================================
+   `(org-agenda-structure ((t (:foreground ,thall-blue0))))
+   `(org-block-begin-line ((t (:inherit org-meta-line :foreground ,thall-grey-2 :background ,thall-background-1 :extend t))))
+   `(org-block ((t (:foreground ,thall-white0 :background ,thall-background0 :extend t))))
+   `(org-code ((t (:box (:line-width (1 . 1) :color "light slate gray" :weight bold) :inherit fixed-pitch :foreground ,thall-gold :background ,thall-background1 :extend t))))
+   `(org-column ((t (:background ,thall-background-2))))
+   `(org-column-title ((t (:background ,thall-background-2 :underline t :weight bold))))
+   `(org-document-info ((t (:inherit org-meta-line :foreground ,thall-grey2 ))))
+   `(org-document-info-keyword ((t (:inherit org-meta-line))))
+   `(org-document-title ((t (:foreground ,thall-green0 :height 1.8 :weight bold :underline t))))
+   `(org-done ((t (:foreground ,thall-green1))))
+   `(org-level-1 ((t (:foreground ,thall-violet1 :height 1.35 :bold t))))
+   '(org-level-2 ((t (:inherit org-level-1 :height 0.875 :bold t))))
+   '(org-level-3 ((t (:inherit org-level-2 :height 0.875 :bold t))))
+   '(org-level-4 ((t (:inherit org-level-3 :height 0.875 :bold t))))
+   '(org-level-5 ((t (:inherit org-level-4 :height 0.875 :bold t))))
+   `(org-link ((t (:inherit variable-pitch :foreground ,thall-link :underline t))))
+   `(org-meta-line ((t (:foreground ,thall-grey0 :height 0.9))))
+   `(org-todo ((t (:foreground ,thall-red0))))
+   '(org-tag ((t (:inherit org-meta-line))))
+   `(org-upcoming-deadline ((t (:foreground ,thall-gold))))
+   `(org-quote ((t (:background ,thall-background1 :slant italic :extend t))))
+;;==========================================================================
+;; Parentheses faces
+;;==========================================================================
+   `(show-paren-match ((t (:foreground ,thall-grey0 :background ,thall-blue0 :weight bold))))
+   `(show-paren-mismatch-face ((t (:background ,thall-red0))))
+;;==========================================================================
+;; Speedbar faces
+;;==========================================================================
+   `(speedbar-directory-face ((t (:foreground ,thall-blue0 :weight bold))))
+   `(speedbar-file-face ((t (:foreground ,thall-white0))))
+   `(speedbar-highlight-face ((t (:background ,thall-background0))))
+   `(speedbar-selected-face ((t (:foreground ,thall-red0))))
+   `(speedbar-tag-face ((t (:foreground ,thall-gold))))
+;;==========================================================================
+;; Tab bar faces
+;;==========================================================================
+   `(tab-bar ((t (:background ,thall-background2 :foreground ,thall-grey-2))))
+   `(tab-bar-tab ((t (:background ,thall-background1 :foreground ,thall-green2 :weight heavy))))
+   `(tab-bar-tab-inactive ((t (:background unspecified :foreground "#567A3C" :weight normal :italic t))))
+;;==========================================================================
+;; Whitespace faces
+;;==========================================================================
+   `(whitespace-space ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
+   `(whitespace-tab ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
+   `(whitespace-hspace ((t (:background ,thall-background0 :foreground ,thall-grey0))))
+   `(whitespace-line ((t (:background ,thall-background0 :foreground ,thall-red0))))
+   `(whitespace-newline ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
+   `(whitespace-trailing ((t (:background ,thall-red0 :foreground ,thall-red0))))
+   `(whitespace-empty ((t (:background ,thall-gold :foreground ,thall-gold))))
+   `(whitespace-indentation ((t (:background ,thall-gold :foreground ,thall-red0))))
+   `(whitespace-space-after-tab ((t (:background ,thall-gold :foreground ,thall-gold))))
+   `(whitespace-space-before-tab ((t (:background ,thall-orange0 :foreground ,thall-orange0))))
+ 
+   )) ;; END (custom-theme-set-faces)
 
 (provide-theme 'gruber-darker-thall)
 ;;; gruber-darker-thall-theme.el ends here
