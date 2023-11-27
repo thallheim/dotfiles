@@ -49,5 +49,24 @@ Optionally, if RETURN-LIST is non-nil, return the list of modes instead."
 	  (insert (format "%s\n" mode)))
 	(pop-to-buffer "*modelist-scratch*") (goto-char (point-min)))))
 
+(defun reload-emacs-config ()
+  "Check if theme buffer has changed and save it; then reload `.emacs'."
+  (interactive)
+  ;; Check if theme has unsaved changes
+  (let ((theme-buffer (cl-find-if (lambda (buf)
+                                     (and (buffer-file-name buf)
+                                          (string-suffix-p "-theme.el" (buffer-file-name buf))))
+                                   (buffer-list))))
+    (if theme-buffer
+        ;; Found buffer; check if modified
+        (if (buffer-modified-p theme-buffer)
+            (progn
+              (save-buffer theme-buffer)
+              (message "Saved modified theme file: %s" (buffer-file-name theme-buffer))))
+
+      ;; Reload .emacs
+      (load-file "~/.emacs")
+      (message "Reloaded .emacs"))))
+
 (provide 'thall-helpers)
 ;;; thall-helpers.el ends here
