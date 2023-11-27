@@ -6,34 +6,38 @@ dotfiles repo :)
 
 * TODOs 
 
-** Started/Planned: [1/3]
+** Started/Planned: [2/3]
 
-- [ ] Refactor theme file:
-  - Move ~custom-set-variables~ to separate file
+- [X] Refactor theme file:
+  - Move ~custom-set-variables~ to separate file?
+  - [X] Refactor colour handling 
 - [X] Look into maybe integrating [[https://github.com/rksm/org-ai][org-ai]]
 - [ ] Add error handling to ~thall-load-if-exists()~
 
 * Recent changes
 
 /See commit history for details./
-*** _2023-11-23_ [2/2]
-- [X] Add [[https://github.com/Wilfred/helpful][helpful]]: (much) better help buffers
-- [X] Add [[https://github.com/rksm/org-ai][org-ai]] for eval
+
+*** 2023-11-27
+- Reworked theme file colour handling
+*** _2023-11-23_
+- Add [[https://github.com/Wilfred/helpful][helpful]]: (much) better help buffers
+- Add [[https://github.com/rksm/org-ai][org-ai]] for eval
   
-*** _2023-11-20_ [12/12]
-- [X] Add =rust-analyzer= config.
-- [X] Refactor setting default compile commands to something less stupid.
-- [X] Factor out remaining keymap(s) from =.emacs=
-- [X] Add hooks for ~electric-pair-mode~ and ~rainbow-mode~
-- [X] Added =helm-ls-git= and =helm-descbinds=
-- [X] Added tmuxp config for =dotupdate= and =dotfiles=.
-- [X] Electric pairs, =rainbow-mode=, and =rainbow-delimiters= hook'd to prog-mode
-- [X] Added ~set-compile-command()~ helper.
-- [X] Custom keymaps now use the new guarded function for definitions.
+*** _2023-11-20_
+- Add =rust-analyzer= config.
+- Refactor setting default compile commands to something less stupid.
+- Factor out remaining keymap(s) from =.emacs=
+- Add hooks for ~electric-pair-mode~ and ~rainbow-mode~
+- Added =helm-ls-git= and =helm-descbinds=
+- Added tmuxp config for =dotupdate= and =dotfiles=.
+- Electric pairs, =rainbow-mode=, and =rainbow-delimiters= hook'd to prog-mode
+- Added ~set-compile-command()~ helper.
+- Custom keymaps now use the new guarded function for definitions.
   - /To help prevent unnecessarily cluttering up interfaces in case of/
     /missing packages./
-- [X] Added ~insert-current-date()~ helper.
-- [X] Added ~conditionally-define-key()~ helper.
-- [X] Factored custom keymaps into =thall-keymaps.el=.
+- Added ~insert-current-date()~ helper.
+- Added ~conditionally-define-key()~ helper.
+- Factored custom keymaps into =thall-keymaps.el=.
   - Only loaded if the packages they bind commands from are installed.
     
