@@ -5,7 +5,6 @@
 ; - TODOS:
 ; - Suss out proper platform detection
 ;   - Remember why I wanted platform detection in the first place.
-; - Refactor set-compile-command thing so it's not stupid
 ; - Set up central dir for backup files (currently disabled because rsync)
 
 ;;; Code:
