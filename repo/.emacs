@@ -130,15 +130,17 @@
 ;; MISC. GLOBAL KEYBINDS
 ;;==========================================================================
 ;(global-set-key (kbd "C-M-<f9") (lambda () (interactive) (save-buffer) (recompile) ))
-(global-set-key (kbd "C-<f9>") #'compile)
-(global-set-key (kbd "<f9>"  ) 'window-toggle-side-windows)
-(global-set-key (kbd "M-\""  ) 'mark-word)
-(global-set-key (kbd "M-#"   ) 'mc/mark-pop)
-(global-set-key (kbd "C-<f5>") 'mc/mark-next-like-this)
-(global-set-key (kbd "M-<f5>") 'mc/mark-previous-like-this)
-(global-set-key (kbd "M-o"   ) 'other-window)
-(global-set-key (kbd "M-p"   ) (lambda () (interactive) (scroll-down 10)))
-(global-set-key (kbd "M-n"   ) (lambda () (interactive) (scroll-up 10)))
+(global-set-key (kbd "C-<f9>" ) #'compile)
+(global-set-key (kbd "<f9>"   ) 'window-toggle-side-windows)
+(global-set-key (kbd "M-\""   ) 'mark-word)
+(global-set-key (kbd "M-#"    ) 'mc/mark-pop)
+(global-set-key (kbd "C-<f4>" ) 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<f5>" ) 'mc/mark-previous-like-this)
+(global-set-key (kbd "M-o"    ) 'other-window)
+;(global-set-key (kbd "C-x M-b") 'dired-find-file-other-window)
+(global-set-key (kbd "C-x M-b") 'bookmark-jump-other-window)
+(global-set-key (kbd "M-p"    ) (lambda () (interactive) (scroll-down 10)))
+(global-set-key (kbd "M-n"    ) (lambda () (interactive) (scroll-up 10)))
 ;;==========================================================================
 ;; Whitespace-mode
 ;;==========================================================================
