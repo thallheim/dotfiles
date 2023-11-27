@@ -415,19 +415,19 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
 ;;==========================================================================
 (use-package delight)
 (delight '(
-	   (abbrev-mode " Abv" abbrev)
-	   (company-mode)
-	   (company-box-mode)
-	   (eldoc-mode nil t)
-	   (lsp-lens-mode nil lsp-mode)
-	   (merlin-mode nil)
-	   (tuareg-mode " Trg" :major)     ;TODO: Why u no work
-	   (utop-minor-mode)
-	   (markdown-mode " md")
-	   (which-key-mode)
-	   (whitespace-mode " ws")
-	   (yas-minor-mode nil yasnippet)
-	   ))
+           (abbrev-mode " Abv" abbrev)
+           (company-mode)
+           (company-box-mode)
+           (eldoc-mode nil t)
+           (lsp-lens-mode nil lsp-mode)
+           (merlin-mode nil)
+           (tuareg-mode " Trg" :major)     ;TODO: Why u no work
+           (utop-minor-mode)
+           (markdown-mode " md")
+           (which-key-mode)
+           (whitespace-mode " ws")
+           (yas-minor-mode nil yasnippet)
+           ))
 ;;==========================================================================
 ;; ORG-AI
 ;;==========================================================================
