@@ -199,26 +199,44 @@
     (setq company-tooltip-offset-display    'lines)
     (setq company-text-icons-add-background t)
     (setq company-global-modes
-	  '(not erc-mode message-mode eshell-mode company-mode tuareg-mode))
+          '(not erc-mode message-mode eshell-mode company-mode tuareg-mode))
     (add-hook 'after-init-hook 'global-company-mode)
 
   :bind
   (:map company-active-map
-	("<tab>" . company-complete-selection)
-	;; ("<tab>" . company-indent-or-complete-common)
-	("C-n"   . company-select-next)
-	("C-p"   . company-select-previous)
-	("M-<"   . company-select-first)
-	("M->"   . company-select-last)))
-	;("C-c C-h" . lsp-ui-doc-toggle)
-  ;; (:map lsp-mode-map
-  ;; 	("<tab>" . company-indent-or-complete-common)))
+        ("<tab>" . company-complete-selection)
+        ;; ("<tab>" . company-indent-or-complete-common)
+        ("C-n"   . company-select-next)
+        ("C-p"   . company-select-previous)
+        ("M-<"   . company-select-first)
+        ("M->"   . company-select-last)))
+        ;("C-c C-h" . lsp-ui-doc-toggle)
+;; (:map lsp-mode-map
+;; ("<tab>" . company-indent-or-complete-common)))
 
-;; -------------------------------------------- Company front-end
+;;; -------------------------------------------- Company front-end
 ; (Incompatible with emacs running in TTY)
 ;    (use-package company-box
 ;      :hook (company-mode . company-box-mode))
+;;; -------------------------------------------- Handle whitespace in company overlay
+(defvar wsm-initially-on nil
+  "Stores whether `whitespace-mode' was initially on.
+Used by `wsm-off' and `wsm-on'.")
 
+(defun wsm-off (&rest _)
+  "Temporarily deactivate `whitespace-mode' if company completion is active."
+  (setq wsm-initially-on whitespace-mode)
+  (when whitespace-mode
+    (whitespace-mode -1)))
+
+(defun wsm-on (&rest _)
+  "Re-activate `whitespace-mode' when company completion overlay closes."
+  (when wsm-initially-on
+    (whitespace-mode 1)))
+
+(add-hook 'company-completion-started-hook 'wsm-off)
+(add-hook 'company-completion-cancelled-hook 'wsm-on)
+(add-hook 'company-completion-finished-hook 'wsm-on)
 ;;==========================================================================
 ;; LSP
 ;;==========================================================================
