@@ -150,7 +150,6 @@
   (add-hook 'c-mode-hook        'set-up-whitespace-handling)
   (add-hook 'c++-mode-hook      'set-up-whitespace-handling)
   (add-hook 'emacs-lisp-mode    'set-up-whitespace-handling)
-  (add-hook 'erlang-mode-hook   'set-up-whitespace-handling)
   (add-hook 'haskell-mode-hook  'set-up-whitespace-handling)
   (add-hook 'js2-mode-hook      'set-up-whitespace-handling)
   (add-hook 'lua-mode-hook      'set-up-whitespace-handling)
