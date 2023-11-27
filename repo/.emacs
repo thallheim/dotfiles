@@ -408,7 +408,7 @@ Does *not* prompt for confirmation.  Reports in minibuffer when reverting."
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
-(use-package rainbow-mode :delight " rnbw"
+(use-package rainbow-mode :delight
   :hook
   (prog-mode . rainbow-mode))
 ;;==========================================================================
