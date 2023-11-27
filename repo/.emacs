@@ -143,6 +143,7 @@
 (global-set-key (kbd "M-o"    ) 'other-window)
 ;(global-set-key (kbd "C-x M-b") 'dired-find-file-other-window)
 (global-set-key (kbd "C-x M-b") 'bookmark-jump-other-window)
+(global-set-key (kbd "C-x j"  ) 'duplicate-dwim)
 (global-set-key (kbd "M-p"    ) (lambda () (interactive) (scroll-down 10)))
 (global-set-key (kbd "M-n"    ) (lambda () (interactive) (scroll-up 10)))
 ;;==========================================================================
