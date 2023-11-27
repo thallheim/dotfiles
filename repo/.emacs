@@ -178,7 +178,7 @@
 (use-package helm
   :config
   (setq
-   helm-candidate-number-limit 500
+   helm-candidate-number-limit 1500
    helm-autoresize-max-height 80 ; percentage
    helm-autoresize-min-height 20 ; percentage
    helm-visible-mark-prefix   "✓"
