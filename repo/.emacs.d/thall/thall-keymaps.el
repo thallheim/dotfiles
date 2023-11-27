@@ -36,14 +36,17 @@
     (progn (which-key-add-key-based-replacements "C-<f1>" "thall-lsp-prefix")
 	   (global-set-key (kbd "C-<f1>") thall-lsp-map)))
 ;;; -------------------------------------------- General
-(cdk 'lsp-ui "<f1>"  'lsp-ui-doc-glance			thall-lsp-map)
-(cdk 'lsp-ui "<f2>"  'lsp-ui-peek-find-definitions	thall-lsp-map)
-(cdk 'lsp-ui "<f26>" 'lsp-ui-peek-find-references	thall-lsp-map)
-(cdk 'lsp-ui "<f27>" 'lsp-ui-peek-find-implementation	thall-lsp-map)
-(cdk 'flycheck "l"   'flycheck-list-errors		thall-lsp-map)
+(cdk 'lsp-ui "<f1>"	'lsp-ui-doc-glance		  thall-lsp-map)
+(cdk 'lsp-ui "C-d"	'lsp-ui-peek-find-definitions	  thall-lsp-map)
+(cdk 'lsp-ui "D"	'lsp-ui-doc-toggle		  thall-lsp-map)
+(cdk 'lsp-ui "d"	'lsp-describe-thing-at-point	  thall-lsp-map)
+(cdk 'lsp-ui "f"	'lsp-ui-doc-focus-frame		  thall-lsp-map)
+(cdk 'lsp-ui "r"	'lsp-ui-peek-find-references	  thall-lsp-map)
+(cdk 'lsp-ui "i"	'lsp-ui-peek-find-implementation  thall-lsp-map)
+(cdk 'flycheck "l"	'flycheck-list-errors		  thall-lsp-map)
 ;;; -------------------------------------------- rust-analyzer
 (with-eval-after-load 'rust-mode
-  (cdk 'rust-mode "M-¨" 'lsp-rust-analyzer-join-lines	rust-mode-map))
+  (cdk 'rust-mode "C-c M-j" 'lsp-rust-analyzer-join-lines	rust-mode-map))
 ;;==========================================================================
 ;; HELM
 ;;==========================================================================
