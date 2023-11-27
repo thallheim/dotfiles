@@ -353,10 +353,6 @@
 ;;==========================================================================
 ;; MACROS | FUNCTIONS
 ;;==========================================================================
-(fset 'copy-line-to-new-line
-      (kmacro-lambda-form [?\C-a ?\C-  ?\C-e ?\M-w return ?\C-y] 0 "%d"))
-(global-set-key (kbd "C-c C-S-l") 'copy-line-to-new-line)
-
 (defun add-todo-highlighting ()
   "Extra highlighting for keywords in comment lines (\"TODO\", \"FIXME\", etc.)."
   (font-lock-add-keywords nil
