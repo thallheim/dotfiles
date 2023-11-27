@@ -57,17 +57,21 @@ own setup.  See also Tsoding's source at:
    '(child-frame-border)
    '(indent-tabs-mode nil)
    '(tab-width 4)
-   '(fancy-compilation-override-colors nil)
+   '(fancy-compilation-override-colors t)
    '(frame-background-mode 'dark)
    '(lsp-ui-doc-border "#FFFFFF")
    '(org-M-RET-may-split-line '((default . nil))) ; move to org-conf
    '(org-fontify-quote-and-verse-blocks t) ; move to org-conf
    '(text-scale-mode-step 1.1) ; move to .emacs
    '(fill-column 80) ; move to .emacs
+   ;; '(whitespace-global-modes (not
+   ;;                            '(company-mode-major-mode)
+   ;;                            ))
    '(whitespace-line-column nil)
    '(whitespace-style
      '(face trailing tabs spaces lines-tail newline missing-newline-at-eof
-	        empty indentation space-after-tab space-before-tab space-mark tab-mark )) ; removed newline-mark
+            empty indentation space-after-tab space-before-tab space-mark
+            tab-mark )) ; removed newline-mark
    ) ;; END (custom-theme-set-variables)
 
   (custom-theme-set-faces
@@ -75,15 +79,17 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; General/misc. faces
 ;;==========================================================================
-   `(default ((t (:family "Iosevka SS05" :height 102 :foreground ,thall-white0 :background ,thall-background0))))
-   ;; '(default ((t (:family "Roboto Mono for Powerline" :height 100 :foreground ,thall-white0 :background ,thall-background0))))
+   `(default ((t (:family "Iosevka SS05" :height 102
+                          :foreground ,thall-white0 :background ,thall-background0))))
+   ;; '(default ((t (:family "Roboto Mono for Powerline" :height 100
+   ;;                        :foreground ,thall-white0 :background ,thall-background0))))
    `(italic ((t (:slant italic))))
    `(fixed-pitch ((t (:inherit default :family "Iosevka SS05" :weight normal))))
 
-                                        ;`(child-frame-border ((t (:foreground ,thall-grey0 :background ,thall-grey0))))
+;`(child-frame-border ((t (:foreground ,thall-grey0 :background ,thall-grey0))))
    `(border ((t (:background ,thall-background-2 :foreground "#453d41"))))
    `(cursor ((t (:background ,thall-gold))))
-   `(error ((t (:foreground ,thall-red0))))
+   `(error ((t (:foreground ,thall-red0 :weight heavy))))
    `(fringe ((t (:background unspecified :foreground "#453d41"))))
    `(vertical-border ((t (:foreground ,thall-black0))))
    `(link ((t (:foreground ,thall-blue1 :underline t))))
@@ -111,17 +117,28 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; Company faces
 ;;==========================================================================
-   `(company-tooltip ((t (:foreground ,thall-grey0 :background ,thall-background1))))
-   `(company-tooltip-annotation ((t (:foreground "#cc8c3c" :background ,thall-background-1))))
-   `(company-tooltip-annotation-selection ((t (:foreground "#cc8c3c" :background ,thall-background-1))))
-   `(company-tooltip-selection ((t (:foreground ,thall-grey-2 :background ,thall-background-1))))
-   `(company-tooltip-mouse ((t (:background ,thall-background-1))))
-   `(company-tooltip-common ((t (:foreground ,thall-green0))))
-   `(company-tooltip-common-selection ((t (:foreground ,thall-green0))))
-   `(company-tooltip-scrollbar-thumb ((t (:background ,thall-background-1))))
-   `(company-tooltip-scrollbar-track ((t (:background ,thall-grey0))))
-   `(company-preview ((t (:background ,thall-green0))))
-   `(company-preview-common ((t (:foreground ,thall-green0 :background ,thall-background-1))))
+   `(company-tooltip
+     ((t (:foreground ,thall-grey2 :background ,thall-background-2))))
+   `(company-tooltip-selection
+     ((t (:foreground ,thall-white0 :background ,thall-background-1))))
+   `(company-tooltip-annotation
+     ((t (:inherit company-tooltip :foreground ,thall-orange0))))
+   `(company-tooltip-annotation-selection
+     ((t (:inherit company-selection :foreground ,thall-orange1))))
+   `(company-tooltip-mouse
+     ((t (:background ,thall-background-1))))
+   `(company-tooltip-common
+     ((t (:foreground ,thall-green2))))
+   `(company-tooltip-common-selection
+     ((t (:foreground ,thall-green0))))
+   `(company-tooltip-scrollbar-thumb
+     ((t (:foreground ,thall-violet1))))
+   `(company-tooltip-scrollbar-track
+     ((t (:background ,thall-grey0))))
+   `(company-preview
+     ((t (:background ,thall-green0))))
+   `(company-preview-common
+     ((t (:foreground ,thall-green0 :background ,thall-background-1))))
 ;;==========================================================================
 ;; Compilation/Fancy compilation faces
 ;;==========================================================================
@@ -133,7 +150,12 @@ own setup.  See also Tsoding's source at:
    `(custom-state ((t (:foreground ,thall-green1))))
    `(diff-removed ((t (:foreground ,thall-red0 :background unspecified))))
    `(diff-added ((t (:foreground ,thall-green1 :background unspecified))))
-   `(fancy-compilation-default-face ((t (:background ,thall-background-1))))
+   `(fancy-compilation-default-face
+     ((t (:background ,thall-background-1))))
+   `(fancy-compilation-complete-success-face
+     ((t :foreground ,thall-black0 :background ,thall-green1 :extend t)))
+   `(fancy-compilation-complete-error-face
+     ((t :foreground ,thall-black0 :background ,thall-red0 :weight bold :extend t)))
 ;;==========================================================================
 ;; Dired faces
 ;;==========================================================================
@@ -168,16 +190,14 @@ own setup.  See also Tsoding's source at:
 ;; Flymake/Flycheck faces
 ;;==========================================================================
    `(flymake-errline
-     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-red0) :foreground unspecified :background unspecified :inherit unspecified))
+     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-red0)))
       (t (:foreground ,thall-red0 :weight bold :underline t))))
    `(flymake-warnline
-     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-gold) :foreground unspecified :background unspecified :inherit unspecified))
+     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-gold)))
       (t (:forground ,thall-gold :weight bold :underline t))))
    `(flymake-infoline
-     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-green1) :foreground unspecified :background unspecified :inherit unspecified))
+     ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-green1)))
       (t (:forground ,thall-green1 :weight bold :underline t))))
-   `(flyspell-incorrect ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-red0) :inherit unspecified)) (t (:foreground ,thall-red0 :weight bold :underline t))))
-   `(flyspell-duplicate ((((supports :underline (:style wave))) (:underline (:style wave :color ,thall-gold) :inherit unspecified)) (t (:foreground ,thall-gold :weight bold :underline t))))
 ;;==========================================================================
 ;; Header-line faces
 ;;==========================================================================
@@ -205,7 +225,7 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; LSP faces
 ;;==========================================================================
-   `(lsp-headerline-breadcrumb-path-face ((t :background ,thall-background1)))
+   `(lsp-headerline-breadcrumb-path-face ((t :background ,thall-background-1)))
    `(lsp-face-highlight-textual ((t (:inherit highlight :foreground ,thall-white0))))
    `(lsp-ui-doc-background ((t (:background ,thall-background1))))
    `(lsp-ui-peek-filename ((t (:foreground ,thall-white0))))
@@ -239,7 +259,9 @@ own setup.  See also Tsoding's source at:
    `(org-agenda-structure ((t (:foreground ,thall-blue0))))
    `(org-block-begin-line ((t (:inherit org-meta-line :foreground ,thall-grey-2 :background ,thall-background-1 :extend t))))
    `(org-block ((t (:foreground ,thall-white0 :background ,thall-background0 :extend t))))
-   `(org-code ((t (:box (:line-width (1 . 1) :color "light slate gray" :weight bold) :inherit fixed-pitch :foreground ,thall-gold :background ,thall-background1 :extend t))))
+   `(org-code ((t (:box (:line-width (1 . 1)
+                                     :color "light slate gray" :weight bold)
+                        :inherit fixed-pitch :foreground ,thall-gold :background ,thall-background1 :extend t))))
    `(org-column ((t (:background ,thall-background-2))))
    `(org-column-title ((t (:background ,thall-background-2 :underline t :weight bold))))
    `(org-document-info ((t (:inherit org-meta-line :foreground ,thall-grey2 ))))
@@ -279,7 +301,7 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; Whitespace faces
 ;;==========================================================================
-   `(whitespace-space ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
+   `(whitespace-space ((t (:background ,thall-background0 :foreground ,thall-grey-2))))
    `(whitespace-tab ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
    `(whitespace-hspace ((t (:background ,thall-background0 :foreground ,thall-grey0))))
    `(whitespace-line ((t (:background ,thall-background0 :foreground ,thall-red0))))
@@ -289,7 +311,7 @@ own setup.  See also Tsoding's source at:
    `(whitespace-indentation ((t (:background ,thall-gold :foreground ,thall-red0))))
    `(whitespace-space-after-tab ((t (:background ,thall-gold :foreground ,thall-gold))))
    `(whitespace-space-before-tab ((t (:background ,thall-orange0 :foreground ,thall-orange0))))
- 
+
    )) ;; END (custom-theme-set-faces)
 
 (provide-theme 'gruber-darker-thall)
