@@ -9,7 +9,7 @@
 ;;; Code:
 
 (deftheme gruber-darker-thall
-  "Created 2023-04-25. Updated 2023-11-27.
+  "Created 2023-04-25. Updated 2023-11-29.
 
    Colours tweaked from Tsoding's 'gruber-darker' theme and adapted for my
 own setup.  See also Tsoding's source at:
@@ -24,33 +24,40 @@ own setup.  See also Tsoding's source at:
   (defvar thall-blue0 "#738ABF")
   (defvar thall-blue1 "#5772B2")
   (defvar thall-gold "#FFD60A")
-  (defvar thall-green-1 "#5CA12B")
-  (defvar thall-green0 "#00ff5f")
-  (defvar thall-green1 "#73c936")
-  (defvar thall-green2 "#8FD45E")
+  (defvar thall-green-2 "#5CA12B")
+  (defvar thall-green-1 "#8FD45E")
+  (defvar thall-green0 "#73c936")
+  (defvar thall-green1 "#00ff5f")
   (defvar thall-grey-2 "#303030")
   (defvar thall-grey-1 "#383838")
   (defvar thall-grey0 "#584B52")
   (defvar thall-grey2 "#8F9B95")
-  (defvar thall-orange0 "#AE5100")
-  (defvar thall-orange1 "#CC5F00")
-  (defvar thall-red0 "#c73c3f")
+  (defvar thall-orange-1 "#CC5F00")
+  ;(defvar thall-orange0 "#AE5100")
+  (defvar thall-orange0 "#D78700")
+  (defvar thall-orange1 "#F78700")
+  (defvar thall-red0 "#C73C3F")
+  (defvar thall-red1 "#FF9CBD")
   (defvar thall-teal "#005980")
+  (defvar thall-violet-1 "#5F005F")
+  (defvar thall-violet "#5F0087")
   (defvar thall-violet1 "#B886BB")
-  (defvar thall-white0 "#d4d4d4")
+  (defvar thall-white0 "#D4D4D4")
   (defvar thall-yellow0 "#FFFF00")
   (defvar thall-yellow1 "#FFDD33")
 ;;; -------------------------------------------- Background colours
   (defvar thall-background-2 "#080808")
-  (defvar thall-background-1 "#1B1B1B")
+  (defvar thall-background-1 "#121212")
   (defvar thall-background0 "#181818")
   (defvar thall-background1 "#282828")
   (defvar thall-background2 "#383838")
-;;; -------------------------------------------- Inheriting colours
+;;; -------------------------------------------- "Types", colours
   (defvar thall-comment thall-orange0)
   (defvar thall-directory thall-blue0)
   (defvar thall-link thall-blue1)
   (defvar thall-link-visited thall-violet1)
+  (defvar thall-operator "#E1E1E1")
+  (defvar thall-var "#D5896F")
 
   (custom-theme-set-variables
    'gruber-darker-thall
@@ -62,11 +69,6 @@ own setup.  See also Tsoding's source at:
    '(lsp-ui-doc-border "#FFFFFF")
    '(org-M-RET-may-split-line '((default . nil))) ; move to org-conf
    '(org-fontify-quote-and-verse-blocks t) ; move to org-conf
-   '(text-scale-mode-step 1.1) ; move to .emacs
-   '(fill-column 80) ; move to .emacs
-   ;; '(whitespace-global-modes (not
-   ;;                            '(company-mode-major-mode)
-   ;;                            ))
    '(whitespace-line-column nil)
    '(whitespace-style
      '(face trailing tabs spaces lines-tail newline missing-newline-at-eof
@@ -98,10 +100,9 @@ own setup.  See also Tsoding's source at:
    `(shadow ((t (:foreground "#584B52"))))
    `(minibuffer-prompt ((t (:foreground ,thall-blue0))))
    `(region ((t (:background "#484848" :foreground unspecified))))
-   `(secondary-selection ((t (:background "#484848" :foreground unspecified))))
-   `(trailing-whitespace ((t (:foreground ,thall-black0 :background ,thall-red0))))
+   `(secondary-selection ((t (:foreground ,thall-grey-2 :background "#484848"))))
    `(tooltip ((t (:background "#52494e" :foreground ,thall-white0))))
-   `(highlight ((t (:foreground ,thall-white0 :background ,thall-teal))))
+   `(highlight ((t (:foreground ,thall-grey-2 :background ,thall-teal))))
    `(highlight-current-line-face ((t (:background ,thall-background0 :foreground unspecified))))
    `(line-number ((t (:inherit default :foreground "#52494e"))))
    `(line-number-current-line ((t (:inherit line-number :foreground ,thall-gold))))
@@ -109,8 +110,8 @@ own setup.  See also Tsoding's source at:
    `(info-visited ((t (:foreground ,thall-link-visited))))
    `(isearch ((t (:foreground ,thall-black0 :background ,thall-blue0))))
    `(isearch-fail ((t (:foreground ,thall-black0 :background ,thall-red0))))
-   `(isearch-lazy-highlight-face ((t (:foreground ,thall-white0 :background ,thall-blue1))))
-   `(lazy-highlight-face ((t (:foreground ,thall-white0 :background ,thall-blue1))))
+   `(isearch-lazy-highlight-face ((t (:foreground ,thall-grey-2 :background ,thall-blue1))))
+   `(lazy-highlight-face ((t (:foreground ,thall-grey-2 :background ,thall-blue1))))
    `(sh-quoted-exec ((t (:foreground ,thall-red0))))
    `(which-func ((t (:foreground ,thall-violet1))))
    `(message-header-name ((t (:foreground ,thall-green1))))
@@ -118,9 +119,9 @@ own setup.  See also Tsoding's source at:
 ;; Company faces
 ;;==========================================================================
    `(company-tooltip
-     ((t (:foreground ,thall-grey2 :background ,thall-background-2))))
+     ((t (:foreground ,thall-grey2 :background ,thall-background1))))
    `(company-tooltip-selection
-     ((t (:foreground ,thall-white0 :background ,thall-background-1))))
+     ((t (:foreground "#FFF" :background ,thall-background-1 :bold t))))
    `(company-tooltip-annotation
      ((t (:inherit company-tooltip :foreground ,thall-orange0))))
    `(company-tooltip-annotation-selection
@@ -128,7 +129,7 @@ own setup.  See also Tsoding's source at:
    `(company-tooltip-mouse
      ((t (:background ,thall-background-1))))
    `(company-tooltip-common
-     ((t (:foreground ,thall-green2))))
+     ((t (:foreground ,thall-green1))))
    `(company-tooltip-common-selection
      ((t (:foreground ,thall-green0))))
    `(company-tooltip-scrollbar-thumb
@@ -176,15 +177,16 @@ own setup.  See also Tsoding's source at:
    `(font-lock-comment-face ((t (:inherit fixed-pitch :foreground ,thall-comment))))
    `(font-lock-comment-delimiter-face ((t (:foreground ,thall-orange0))))
    `(font-lock-constant-face ((t (:foreground ,thall-grey2))))
-   `(font-lock-doc-face ((t (:foreground ,thall-green2))))
-   `(font-lock-doc-string-face ((t (:foreground ,thall-green1))))
+   `(font-lock-doc-face ((t (:foreground ,thall-green0))))
+   `(font-lock-doc-string-face ((t (:foreground ,thall-green0))))
    `(font-lock-function-name-face ((t (:foreground ,thall-blue0))))
    `(font-lock-keyword-face ((t (:inherit fixed-pitch :foreground ,thall-gold :bold t))))
+   `(font-lock-operator-face ((t (:inherit fixed-pitch :foreground ,thall-operator :bold t))))
    `(font-lock-preprocessor-face ((t (:inherit fixed-pitch :foreground ,thall-grey2))))
    `(font-lock-reference-face ((t (:foreground ,thall-grey-1))))
-   `(font-lock-string-face ((t (:inherit fixed-pitch :foreground ,thall-green1))))
+   `(font-lock-string-face ((t (:inherit fixed-pitch :foreground ,thall-green0))))
    `(font-lock-type-face ((t (:inherit fixed-pitch :foreground ,thall-blue1))))
-   `(font-lock-variable-name-face ((t (:foreground ,thall-red0))))
+   `(font-lock-variable-name-face ((t (:foreground ,thall-var))))
    `(font-lock-warning-face ((t (:foreground ,thall-red0))))
 ;;==========================================================================
 ;; Flymake/Flycheck faces
@@ -201,7 +203,7 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; Header-line faces
 ;;==========================================================================
-   `(header-line ((t (:background ,thall-background-1))))
+   `(header-line ((t (:background ,thall-background2))))
 ;;==========================================================================
 ;; Helm faces
 ;;==========================================================================
@@ -225,9 +227,11 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; LSP faces
 ;;==========================================================================
-   `(lsp-headerline-breadcrumb-path-face ((t :background ,thall-background-1)))
+   `(lsp-headerline-breadcrumb-path-face ((t :background ,thall-background2)))
    `(lsp-face-highlight-textual ((t (:inherit highlight :foreground ,thall-white0))))
    `(lsp-ui-doc-background ((t (:background ,thall-background1))))
+   `(lsp-ui-sideline-global ((t (:background ,thall-background1 :extend t))))
+   `(lsp-ui-sideline-code-action ((t (:inherit default :foreground ,thall-grey0))))
    `(lsp-ui-peek-filename ((t (:foreground ,thall-white0))))
    `(lsp-ui-peek-highlight ((t (:foreground "#453d41":background ,thall-green1))))
    `(lsp-ui-peek-peek ((t (:inherit lsp-ui-doc-background))))
@@ -282,7 +286,7 @@ own setup.  See also Tsoding's source at:
 ;;==========================================================================
 ;; Parentheses faces
 ;;==========================================================================
-   `(show-paren-match ((t (:foreground ,thall-grey0 :background ,thall-blue0 :weight bold))))
+   `(show-paren-match ((t (:foreground ,thall-grey0 :background ,thall-white0 :weight bold))))
    `(show-paren-mismatch-face ((t (:background ,thall-red0))))
 ;;==========================================================================
 ;; Speedbar faces
@@ -296,7 +300,7 @@ own setup.  See also Tsoding's source at:
 ;; Tab bar faces
 ;;==========================================================================
    `(tab-bar ((t (:background ,thall-background2 :foreground ,thall-grey-2))))
-   `(tab-bar-tab ((t (:background ,thall-background1 :foreground ,thall-green2 :weight heavy))))
+   `(tab-bar-tab ((t (:background ,thall-background1 :foreground ,thall-green1 :weight heavy))))
    `(tab-bar-tab-inactive ((t (:background unspecified :foreground "#567A3C" :weight normal :italic t))))
 ;;==========================================================================
 ;; Whitespace faces
@@ -304,7 +308,8 @@ own setup.  See also Tsoding's source at:
    `(whitespace-space ((t (:background ,thall-background0 :foreground ,thall-grey-2))))
    `(whitespace-tab ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
    `(whitespace-hspace ((t (:background ,thall-background0 :foreground ,thall-grey0))))
-   `(whitespace-line ((t (:background ,thall-background0 :foreground ,thall-red0))))
+   `(whitespace-line ((t (:background ,thall-background1 :foreground ,thall-red0))))
+   `(trailing-whitespace ((t (:foreground ,thall-black0 :background ,thall-red0))))
    `(whitespace-newline ((t (:background ,thall-background0 :foreground ,thall-grey-1))))
    `(whitespace-trailing ((t (:background ,thall-red0 :foreground ,thall-red0))))
    `(whitespace-empty ((t (:background ,thall-gold :foreground ,thall-gold))))
