@@ -105,7 +105,6 @@
 (global-set-key (kbd "C-h x") #'helpful-command)
 (global-set-key (kbd "C-c i") #'helpful-at-point)
 (global-set-key (kbd "C-h F") #'helpful-function)
-;;; -------------------------------------------- Beacon
 (use-package beacon
   :config
   (setq beacon-blink-duration 0.10)
@@ -168,7 +167,7 @@
   (add-hook 'sh-mode-hook       'set-up-whitespace-handling)
   (add-hook 'tuareg-mode-hook   'set-up-whitespace-handling)
   (add-hook 'yaml-mode-hook     'set-up-whitespace-handling)
-(global-set-key (kbd "<f7>") 'whitespace-mode)
+(global-set-key (kbd "<f7>") (lambda () (interactive) (whitespace-mode 'toggle)))
 ;;==========================================================================
 ;; HELM
 ;;==========================================================================
@@ -192,23 +191,25 @@
   :delight
   :bind ("M-§" . 'company-complete)
   :custom
-    (company-idle-delay 2) ; how long to wait until popup
+    (company-idle-delay 3) ; how long to wait until popup
     ; (company-begin-commands nil) ; uncomment to disable popup
     (company-minimum-prefix-length 1)
     (global-company-mode t)
   :config
-    (setq company-selection-wrap-around     t)
-    (setq company-tooltip-align-annotations t)
-    (setq company-tooltip-offset-display    'lines)
-    (setq company-text-icons-add-background t)
-    (setq company-global-modes
-          '(not erc-mode message-mode eshell-mode company-mode tuareg-mode))
-    (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-selection-wrap-around       t
+        company-tooltip-limit               10
+        company-tooltip-align-annotations   t
+        company-tooltip-offset-display      'lines
+        company-text-icons-add-background   t
+        company-tooltip-width-grow-only     t
+        company-global-modes
+        '(not erc-mode message-mode eshell-mode company-mode tuareg-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
 
   :bind
   (:map company-active-map
-        ("<tab>" . company-complete-selection)
-        ;; ("<tab>" . company-indent-or-complete-common)
+        ;("<tab>" . company-complete-selection)
+        ("<tab>" .  #'company-indent-or-complete-common)
         ("C-n"   . company-select-next)
         ("C-p"   . company-select-previous)
         ("M-<"   . company-select-first)
@@ -263,7 +264,7 @@ Used by `wsm-off' and `wsm-on'.")
   (lsp-diagnostic-clean-after-change t)
   (lsp-inlay-hint-enable nil) ; (!) NOTE: Bad interaction with lsp-ui-sideline.
   (lsp-eldoc-render-all nil)
-  (lsp-lens-enable t)
+  (lsp-lens-enable nil)
 
 ;;; -------------------------------------------- rust-analyzer
   (lsp-rust-analyzer-display-chaining-hints                             nil)
@@ -284,12 +285,19 @@ Used by `wsm-off' and `wsm-on'.")
   :commands
   lsp-ui-mode
   :custom
-  (lsp-ui-doc-enable t)
-  (lsp-ui-doc-show-with-cursor nil)
-  (lsp-ui-sideline-enable nil) ; (!) NOTE: Bad interaction with lsp lenses.
-  ;; (lsp-ui-sideline-show-hover t)
-  ;; (lsp-ui-sideline-show-diagnostics nil)
-  ;; (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-doc-enable                    t)
+  (lsp-ui-doc-show-with-cursor          nil)
+  (lsp-ui-sideline-enable               t) ; (!) Bad interaction w/ lsp lenses.
+  (lsp-ui-sideline-show-hover           nil)
+  (lsp-ui-sideline-show-diagnostics     t)
+  (lsp-ui-sideline-show-code-actions    t)
+  (setq lsp-ui-sideline-diagnostic-max-line-length  40 ; Default 100
+        lsp-ui-sideline-diagnostic-max-lines        10)
+
+  :config
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
   )
 (use-package helm-lsp
   :config
