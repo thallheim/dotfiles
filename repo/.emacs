@@ -46,55 +46,58 @@
 ; Load the ones that are listed (and exist)
 (mapc #'thall-load-if-exists thall-loadlist)
 ;;==========================================================================
-;; EXEC PATHS
+;; Env. settings
 ;;==========================================================================
 (setenv "PATH" (concat (getenv "PATH")
                        ":/home/thall/.ghcup/bin"))
 (setq lsp-haskell-server-path
       "/home/thall/.ghcup/bin/haskell-language-server-wrapper")
-;;==========================================================================
-;; UI/QoL stuff
-;;==========================================================================
 (setq epg-gpg-program "/usr/bin/gpg2")
 (setenv "GPG_AGENT_INFO" nil)
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+;;==========================================================================
+;; UI/QoL settings
+;;==========================================================================
 (load-theme 'gruber-darker-thall t)
-(setq ring-bell-function 'ignore)
-(setq inhibit-startup-message t)
 (tool-bar-mode     -1)
 (menu-bar-mode     -1)
 (scroll-bar-mode   -1)
 (column-number-mode 1)
-(setq indent-tabs-mode nil)                                 ; Convert tabs to spaces
-(setq tab-width 4)                                          ; Set tab size to 4 spaces
-(setq-default display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
-(setq show-paren-mode    1)
-(setq show-paren-delay   0)
 (add-hook 'text-mode-hook 'visual-line-mode)                ; Sensible line breaking.
 (delete-selection-mode t)                                   ; Overwrite selected text.
-(setq scroll-error-top-bottom t)                            ; Scroll to the first and last line of buffer.
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
 (put 'upcase-region   'disabled nil)
 (put 'downcase-region 'disabled nil)
 (repeat-mode 1)
-(setq warning-suppress-types '((comp) (comp)))
-(defalias 'yes-or-no-p 'y-or-n-p)
-(setq make-backup-files nil)                                ; Suppress backup file creation.
-(setq gc-cons-threshold most-positive-fixnum)               ; Minimize garbage collection during startup.
-(add-hook 'emacs-startup-hook                               ; Lower threshold back to 8 MiB (default is 800kB).
+(add-hook 'emacs-startup-hook                               ; GC threshold (default 800kB).
           (lambda ()
             (setq gc-cons-threshold (expt 2 23))))
+(defalias 'yes-or-no-p 'y-or-n-p)
+(setq-default display-line-numbers-type 'relative)
+(setq
+ ring-bell-function 'ignore
+ inhibit-startup-message t
+ fill-column 80
+ indent-tabs-mode nil                    ; Convert tabs to spaces
+ tab-width 4                             ; Set tab size to 4 spaces
+ show-paren-mode    1
+ show-paren-delay   0
+ scroll-error-top-bottom t               ; Scroll to the first and last line of buffer.
+ warning-suppress-types '((comp) (comp))
+ make-backup-files nil                   ; Suppress backup file creation.
+ gc-cons-threshold most-positive-fixnum  ; Minimize garbage collection during startup.
+ text-scale-mode-step 1.1)
 
+;;==========================================================================
+;; UI/QoL packages
+;;==========================================================================
 (use-package move-text)
-(move-text-default-bindings)                                ; Move line/region with M-up/M-down.
-
-(use-package fancy-compilation                              ; Fancy-compilation (colourise & scroll output).
+(move-text-default-bindings)
+(use-package fancy-compilation
   :commands (fancy-compilation-mode))
   (with-eval-after-load 'compile
     (fancy-compilation-mode))
-
-;;; -------------------------------------------- Helpful
 (use-package helpful)
 (global-set-key (kbd "C-h f") #'helpful-callable)
 (global-set-key (kbd "C-h v") #'helpful-variable)
